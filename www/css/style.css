@@ -1,1 +1,12 @@
 /* Empty. Add your own CSS if you like */
+
+.frontpagecontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+  .frontpagecomponent {
+    height: 25vh;
+    flex: 1 0;
+  }
