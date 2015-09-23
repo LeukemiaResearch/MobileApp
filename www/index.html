@@ -24,71 +24,18 @@
     <script src="js/services.js"></script>
   </head>
   <body ng-app="starter">
+  <!--
+    The nav bar that will be updated as we navigate between views.
+  -->
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
 
-
-    <ion-content class="frontpagecontainer">
-      <div class="row responsive-sm">
-        <div class="col">
-          <div class="card frontpagecomponent">
-            <div class="item item-text-wrap">
-              Calendar2
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card frontpagecomponent">
-            <div class="item item-text-wrap">
-              Notes <br>
-              line 2
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row responsive-sm ">
-        <div class="col">
-          <div class="card frontpagecomponent">
-            <div class="item item-divider">
-              Medicin
-            </div>
-            <div class="item item-text-wrap">
-              This is a basic Card with some text.
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card frontpagecomponent">
-            <div class="item item-divider">
-              Smerte
-            </div>
-            <div class="item item-text-wrap">
-              This is a basic Card with some text.
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row responsive-sm ">
-        <div class="col">
-          <div class="card frontpagecomponent">
-            <div class="item item-divider">
-              Blodprøver
-            </div>
-            <div class="item item-text-wrap">
-              This is a basic Card with some text.
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card frontpagecomponent">
-            <div class="item item-divider">
-              Mucositis
-            </div>
-            <div class="item item-text-wrap">
-              This is a basic Card with some text.
-            </div>
-          </div>
-        </div>
-      </div>
-    </ion-content>
+  <!--
+    View content.
+  -->
+  <ion-nav-view></ion-nav-view>
 
   </body>
 </html>
