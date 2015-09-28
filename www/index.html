@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <head>>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="lib/angular-wizard/dist/angular-wizard.min.css">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -26,8 +27,17 @@
     <link rel="stylesheet" href="lib/flex-calendar/src/flex-calendar.css">
     <script type="text/javascript" src="lib/angular-translate/angular-translate.min.js"></script>
     <script type="text/javascript" src="lib/flex-calendar/src/flex-calendar.js"></script>
+    <script type="text/javascript" src="lib/lodash/dist/lodash.js"></script>
+    <script type="text/javascript" src="lib/angular-wizard/dist/angular-wizard.min.js"></script>
   </head>
-  <div ng-app="starter">
+  <body ng-app="starter">
+  <!--
+    The nav bar that will be updated as we navigate between views.
+  -->
+  <ion-nav-bar class="bar-stable bar-royal">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
 
     <ion-content class="frontpagecontainer">
       <div class="row responsive-sm">
@@ -97,5 +107,10 @@
       </div>
     </ion-content>
     </div>
+  <!--
+    View content.
+  -->
+  <ion-nav-view></ion-nav-view>
+
   </body>
 </html>

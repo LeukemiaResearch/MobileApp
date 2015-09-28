@@ -29,13 +29,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
-  $stateProvider
+    $stateProvider
 
-  // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html'
-  })
+      // setup frontpage
+      .state('frontpage', {
+        url: '/frontpage',
+        templateUrl: 'templates/frontpage.html'
+      })
 
-});
+      // setup frontpage
+      .state('questionwizardpage', {
+        url: '/questionwizardpage',
+        templateUrl: 'templates/questionwizard.html'
+      })
+
+      // setup frontpage
+      .state('dataoverviewpage', {
+        url: '/dataoverviewpage',
+        templateUrl: 'templates/dataoverview.html'
+      })
+
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/frontpage');
+
+})
+  .directive('frontpagebutton', function() {
+    return {
+      templateUrl: 'my-customer.html'
+    };
+  });

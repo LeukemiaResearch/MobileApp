@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['mgo-angular-wizard'])
 
 .controller('MainController', ['$scope', function($scope) {
   "use strict";
@@ -31,3 +31,4 @@ angular.module('starter.controllers', [])
     {foo: 'bar', date: "2015-08-20"}
   ];
 }]);
+angular.module('starter.controllers', ['mgo-angular-wizard']);
