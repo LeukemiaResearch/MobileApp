@@ -5,14 +5,12 @@
     "ionic": "driftyco/ionic-bower#1.1.0"
   },
   "dependencies": {
-    "flex-calendar": "*"
-  },
-  "resolutions": {
-    "angular-translate": "~2.8.0"
-    "ionic": "driftyco/ionic-bower#1.1.0",
+    "flex-calendar": "*",
     "angular-wizard": "~0.5.5"
   },
-  "dependencies": {
+  "resolutions": {
+    "angular-translate": "~2.8.0",
+    "ionic": "driftyco/ionic-bower#1.1.0",
     "angular-wizard": "~0.5.5"
   }
 }
