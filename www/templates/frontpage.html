@@ -4,7 +4,9 @@
       <div class="col">
         <div class="card frontpagecomponent">
           <div class="item item-text-wrap">
-            Calendar2
+            <div ng-controller="calendarController" class="wrapp">
+              <flex-calendar options="options" events="events"></flex-calendar>
+            </div>
           </div>
         </div>
       </div>
@@ -75,4 +77,3 @@
     </div>
   </ion-content>
 </ion-view>
-

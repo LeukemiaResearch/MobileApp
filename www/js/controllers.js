@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['mgo-angular-wizard'])
 
-.controller('MainController', ['$scope', function($scope) {
+.controller('calendarController', ['$scope', function($scope) {
   "use strict";
   // With "use strict", Dates can be passed ONLY as strings (ISO format: YYYY-MM-DD)
   $scope.options = {
@@ -23,7 +23,7 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
     },
     changeMonth: function(month, year) {
       console.log(month, year);
-    },
+    }
   };
 
   $scope.events = [
@@ -31,4 +31,3 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
     {foo: 'bar', date: "2015-08-20"}
   ];
 }]);
-angular.module('starter.controllers', ['mgo-angular-wizard']);
