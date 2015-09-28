@@ -7,6 +7,21 @@
 }
 
   .frontpagecomponent {
-    height: 25vh;
+    height: 65vh;
     flex: 1 0;
   }
+
+.wrapp {
+  width: 300px;
+  height: 10%;
+  margin: 0 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+flex-calendar {
+
+}

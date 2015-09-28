@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  <head>>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
@@ -22,16 +22,23 @@
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
-  </head>
-  <body ng-app="starter">
 
+    <link rel="stylesheet" href="lib/flex-calendar/src/flex-calendar.css">
+    <script type="text/javascript" src="lib/angular-translate/angular-translate.min.js"></script>
+    <script type="text/javascript" src="lib/flex-calendar/src/flex-calendar.js"></script>
+  </head>
+  <div ng-app="starter">
 
     <ion-content class="frontpagecontainer">
       <div class="row responsive-sm">
         <div class="col">
           <div class="card frontpagecomponent">
             <div class="item item-text-wrap">
-              Calendar2
+              <div ng-controller="MainController">
+                <div class="wrapp">
+                  <flex-calendar options="options" events="events"></flex-calendar>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -89,6 +96,6 @@
         </div>
       </div>
     </ion-content>
-
+    </div>
   </body>
 </html>
