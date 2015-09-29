@@ -1,4 +1,4 @@
-<ion-view view-title="Front page">
+<ion-view view-title="Front page" ng-controller="frontpageController">
   <ion-content class="frontpagecontainer">
     <div class="row responsive-sm">
       <div class="col">
@@ -35,7 +35,7 @@
         <div class="card frontpagecomponent">
           <div class="item item-divider bar bar-calm">
             <strong>Smerte</strong>
-            <a style="float: right" class="button button-icon ion-compose" href="#/questionwizardpage"></a>
+            <button style="float: right" class="button button-icon ion-compose"  ng-click="openQuestionWizardPage('Smerte')"></button>
             <span style="padding-left: 50px; float: right;"></span>
             <a style="float: right" class="button button-icon ion-stats-bars" href="#/dataoverviewpage"></a>
           </div>
@@ -50,7 +50,7 @@
         <div class="card frontpagecomponent">
           <div class="item item-divider bar bar-assertive">
             <strong>Blodprøver</strong>
-            <a style="float: right" class="button button-icon ion-compose" href="#/questionwizardpage"></a>
+            <button style="float: right" class="button button-icon ion-compose"  ng-click="openQuestionWizardPage('Blodprøve')"></button>
             <span style="padding-left: 50px; float: right;"></span>
             <a style="float: right" class="button button-icon ion-stats-bars" href="#/dataoverviewpage"></a>
           </div>
@@ -63,7 +63,7 @@
         <div class="card frontpagecomponent">
           <div class="item item-divider bar bar-energized">
             <strong>Mucositis</strong>
-            <a style="float: right" class="button button-icon ion-compose" href="#/questionwizardpage"></a>
+            <button style="float: right" class="button button-icon ion-compose"  ng-click="openQuestionWizardPage('Mucositis')"></button>
             <span style="padding-left: 50px; float: right;"></span>
             <a style="float: right" class="button button-icon ion-stats-bars" href="#/dataoverviewpage"></a>
           </div>
