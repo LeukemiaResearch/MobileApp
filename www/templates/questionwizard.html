@@ -14,14 +14,10 @@
 
     </ion-content>
 
-    <ion-footer-bar class="bar-light thick-footer">
+    <ion-footer-bar class="bar thick-footer">
       <wizard style="width: 100%" on-finish="finishedWizard()" current-step="template" ng-attr-hide-indicators="hideIndicators">
         <div ng-repeat="(label,template) in questions[type]">
           <wz-step ng-attr-title="{{label}}">
-
-            <br>
-            <br>
-            <br>
             <section style="width: 100%">
               <span ng-if="$first">
                 <a style="float:left" class="button ion-chevron-left button-royal icon-left" wz-cancel value="Cancel">Fortryd</a>
