@@ -123,8 +123,10 @@ angular.module('starter',
     $urlRouterProvider.otherwise('/frontpage');
 
   })
+
   .directive('frontpagebutton', function() {
     return {
       templateUrl: 'my-customer.html'
     };
   });
+
