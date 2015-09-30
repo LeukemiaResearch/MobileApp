@@ -18,7 +18,8 @@
       <wizard style="width: 100%" on-finish="finishedWizard()" current-step="template" ng-attr-hide-indicators="hideIndicators">
         <div ng-repeat="(label,template) in questions[type]">
           <wz-step ng-attr-title="{{label}}">
-            <section style="width: 100%">
+            <ion-footer-bar class="bar">
+              <section style=" width: 100%">
               <span ng-if="$first">
                 <a style="float:left" class="button ion-chevron-left button-royal icon-left" wz-cancel value="Cancel">Fortryd</a>
               </span>
@@ -31,11 +32,8 @@
               <span ng-if="$last">
                 <a style="float:Right" class="button ion-chevron-right button-royal icon-right" wz-finish value="Finish">Gem</a>
               </span>
-            </section>
-            <br>
-            <br>
-            <br>
-
+              </section>
+            </ion-footer-bar>
           </wz-step>
         </div>
       </wizard>
