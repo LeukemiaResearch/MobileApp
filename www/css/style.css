@@ -34,3 +34,12 @@ flex-calendar {
   width: 100%;
   height: 25%!important;
 }
+
+.calendar-date {
+  font-size: 3em;
+  padding-bottom: 20px;
+}
+
+.calendar-month {
+  color: #afb8bc
+}

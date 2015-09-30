@@ -1,12 +1,14 @@
 angular.module('starter.controllers', ['mgo-angular-wizard'])
 
-.controller('calendarController', ['$scope', function($scope) {
+.controller('calendarController', ['$scope', 'calendarFactory', function($scope, calendarFactory) {
   "use strict";
+  $scope.calendarFactory = calendarFactory;
+
   // With "use strict", Dates can be passed ONLY as strings (ISO format: YYYY-MM-DD)
   $scope.options = {
-    defaultDate: "2015-08-06",
+    defaultDate: new Date(),
     minDate: "2015-01-01",
-    maxDate: "2015-12-31",
+    maxDate: "2020-12-31",
     disabledDates: [
       "2015-06-22",
       "2015-07-27",
@@ -19,7 +21,7 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
       console.log(date);
     },
     dateClick: function(date) {
-      console.log(date);
+      calendarFactory.setSelectedDate(date.date);
     },
     changeMonth: function(month, year) {
       console.log(month, year);
@@ -30,6 +32,8 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
     {foo: 'bar', date: "2015-08-18"},
     {foo: 'bar', date: "2015-08-20"}
   ];
+
+
 }])
 
   .controller('questionsController', ['$scope', 'questionState', function($scope, questionState ) {
@@ -60,10 +64,5 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
     };
   }])
 
-  .factory('questionState', function($timeout) {
-    var obj = {
-      type: undefined, //e.g. pain for pain questions
-    };
-    return {data: obj};
-  });
+
 
