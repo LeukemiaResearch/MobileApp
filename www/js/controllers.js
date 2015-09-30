@@ -32,8 +32,6 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
     {foo: 'bar', date: "2015-08-18"},
     {foo: 'bar', date: "2015-08-20"}
   ];
-
-
 }])
 
   .controller('questionsController', ['$scope', 'questionState', function($scope, questionState ) {
@@ -63,6 +61,3 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
       $location.path("questionwizardpage");
     };
   }])
-
-
-
