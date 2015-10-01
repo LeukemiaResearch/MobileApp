@@ -1,5 +1,5 @@
-<div ng-controller="questionsController">
-  <ion-view ng-attr-view-title="{{type}}">
+<ion-view ng-attr-view-title="{{type}}">
+  <div ng-controller="questionsController">
     <ion-content class="questionwizardpage">
       <!--      <h1>Question wizard page</h1>
 
@@ -9,8 +9,6 @@
             template: <code>*{{template}}*</code> -->
 
       <div ng-include="questions[type][template]"></div>
-
-
 
     </ion-content>
 
@@ -38,5 +36,6 @@
         </div>
       </wizard>
     </ion-footer-bar>
-  </ion-view>
-</div>
+
+  </div>
+</ion-view>

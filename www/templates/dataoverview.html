@@ -1,5 +1,14 @@
 <ion-view view-title="Data overview page">
   <ion-content class="dataoverviewpage">
     <h1>Data overview page</h1>
+    <div ng-controller="dataoverviewController">
+      <nvd3-line-chart
+        data="exampleData"
+        showXAxis="true"
+        showYAxis="true"
+        tooltips="true"
+        interactive="true">
+      </nvd3-line-chart>
+    </div>
   </ion-content>
 </ion-view>
