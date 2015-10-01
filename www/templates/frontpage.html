@@ -1,10 +1,10 @@
 <ion-view view-title="Leukæmi App" ng-controller="frontpageController">
   <ion-content class="frontpagecontainer">
-    <div class="row responsive-sm">
+    <div class="row responsive-sm" ng-controller="calendarController">
       <div class="col">
         <div class="card frontpagecomponent">
           <div class="item item-text-wrap">
-            <div ng-controller="calendarController" class="wrapp">
+            <div class="wrapp">
               <flex-calendar options="options" events="events"></flex-calendar>
             </div>
           </div>
@@ -13,8 +13,15 @@
       <div class="col">
         <div class="card frontpagecomponent">
           <div class="item item-text-wrap">
-            Notes <br>
-            line 2
+            <div class="calendar-date">
+              {{ calendarFactory.selectedDate.getDate() }} <br>
+            </div>
+            <div class="calendar-day">
+              {{ calendarFactory.getSelectedDayOfTheWeek() }} <br>
+            </div>
+            <div class="calendar-month">
+              {{ calendarFactory.getSelectedMonth() }} <br>
+            </div>
           </div>
         </div>
       </div>
