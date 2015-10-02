@@ -1,45 +1,48 @@
-<ion-view view-title="Data overview page">
+<div ng-controller="dataoverviewController">
 
-  <ion-content class="dataoverviewpage" ng-controller="dataoverviewController">
+  <ion-view view-title="{{datatype}}">
 
-
-    <div class="button-bar">
-      <button ng-class="chartbuttonclass" class="button" ng-click="changeDisplayType('chart')">Graf</button>
-      <button ng-class="tablebuttonclass" class="button" ng-click="changeDisplayType('table')">Tabel</button>
-    </div>
-
-    <div id="dataoverviewpagechart" ng-if="displaytype=='chart'" style="margin:2%; height: 50%; width: 96%" ng-controller="dataoverviewController">
-      <nvd3-line-chart
-        data="exampleData"
-        showXAxis="true"
-        showYAxis="true"
-        tooltips="true"
-        interactive="true">
-      </nvd3-line-chart>
-    </div>
+    <ion-content class="dataoverviewpage">
 
 
-    <div id="dataoverviewpagechart" ng-if="displaytype=='table'" style="margin:2%; height: 50%; width: 96%" ng-controller="dataoverviewController">
-      <div class="row">
-        <div class="col">.col</div>
-        <div class="col">.col</div>
-        <div class="col">.col</div>
-        <div class="col">.col</div>
-        <div class="col">.col</div>
+      <div class="button-bar">
+        <button ng-class="chartbuttonclass" class="button" ng-click="changeDisplayType('chart')">Graf</button>
+        <button ng-class="tablebuttonclass" class="button" ng-click="changeDisplayType('table')">Tabel</button>
       </div>
-      <div class="row">
-        <div class="col">.col</div>
-        <div class="col">.col</div>
-        <div class="col">.col</div>
-        <div class="col">.col</div>
-        <div class="col">.col</div>
+
+      <div id="dataoverviewpagechart" ng-if="displaytype=='chart'" style="margin:2%; height: 50%; width: 96%" ng-controller="dataoverviewController">
+        <nvd3-line-chart
+          data="exampleData"
+          showXAxis="true"
+          showYAxis="true"
+          tooltips="true"
+          interactive="true">
+        </nvd3-line-chart>
       </div>
-    </div>
 
-  </ion-content>
 
-  <ion-footer-bar class="toogle-footer">
+      <div id="dataoverviewpagechart" ng-if="displaytype=='table'" style="margin:2%; height: 50%; width: 96%" ng-controller="dataoverviewController">
+        <div class="row">
+          <div class="col">.col</div>
+          <div class="col">.col</div>
+          <div class="col">.col</div>
+          <div class="col">.col</div>
+          <div class="col">.col</div>
+        </div>
+        <div class="row">
+          <div class="col">.col</div>
+          <div class="col">.col</div>
+          <div class="col">.col</div>
+          <div class="col">.col</div>
+          <div class="col">.col</div>
+        </div>
+      </div>
 
-  </ion-footer-bar>
+    </ion-content>
 
-</ion-view>
+    <ion-footer-bar class="toogle-footer">
+
+    </ion-footer-bar>
+
+  </ion-view>
+</div>
