@@ -10,9 +10,13 @@
     "flex-calendar": "*",
     "d3": "~3.5.6",
     "nvd3": "~1.8.1",
-    "angularjs-nvd3-directives": "~0.0.7"
+    "angularjs-nvd3-directives": "~0.0.7",
+    "angular-bootstrap-datetimepicker": "latest"
   },
   "resolutions": {
-    "angular-translate": "~2.8.0"
+    "angular-translate": "~2.8.0",
+    "nvd3": "~1.8.1",
+    "d3": "~3.5.6",
+    "angular": "1.4.7"
   }
 }

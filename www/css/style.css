@@ -21,6 +21,9 @@
   align-content: center;
   align-items: center;
 }
+.scroll-content > .scroll {
+  height: 100%;
+}
 
 flex-calendar {
 
@@ -33,6 +36,11 @@ flex-calendar {
 .thick-footer {
   width: 100%;
   height: 25%!important;
+}
+
+.toogle-footer {
+  width: 100%;
+  height: 75px!important;
 }
 
 .calendar-date {

@@ -1,7 +1,14 @@
 <ion-view view-title="Data overview page">
-  <ion-content class="dataoverviewpage">
-    <h1>Data overview page</h1>
-    <div ng-controller="dataoverviewController">
+
+  <ion-content class="dataoverviewpage" ng-controller="dataoverviewController">
+
+
+    <div class="button-bar">
+      <button ng-class="chartbuttonclass" class="button" ng-click="changeDisplayType('chart')">Graf</button>
+      <button ng-class="tablebuttonclass" class="button" ng-click="changeDisplayType('table')">Tabel</button>
+    </div>
+
+    <div id="dataoverviewpagechart" ng-if="displaytype=='chart'" style="margin:2%; height: 50%; width: 96%" ng-controller="dataoverviewController">
       <nvd3-line-chart
         data="exampleData"
         showXAxis="true"
@@ -10,5 +17,29 @@
         interactive="true">
       </nvd3-line-chart>
     </div>
+
+
+    <div id="dataoverviewpagechart" ng-if="displaytype=='table'" style="margin:2%; height: 50%; width: 96%" ng-controller="dataoverviewController">
+      <div class="row">
+        <div class="col">.col</div>
+        <div class="col">.col</div>
+        <div class="col">.col</div>
+        <div class="col">.col</div>
+        <div class="col">.col</div>
+      </div>
+      <div class="row">
+        <div class="col">.col</div>
+        <div class="col">.col</div>
+        <div class="col">.col</div>
+        <div class="col">.col</div>
+        <div class="col">.col</div>
+      </div>
+    </div>
+
   </ion-content>
+
+  <ion-footer-bar class="toogle-footer">
+
+  </ion-footer-bar>
+
 </ion-view>
