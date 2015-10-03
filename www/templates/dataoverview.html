@@ -4,7 +4,6 @@
 
     <ion-content class="dataoverviewpage">
 
-
       <div class="button-bar">
         <button ng-class="chartbuttonclass" class="button" ng-click="changeDisplayType('chart')">Graf</button>
         <button ng-class="tablebuttonclass" class="button" ng-click="changeDisplayType('table')">Tabel</button>
@@ -20,8 +19,7 @@
         </nvd3-line-chart>
       </div>
 
-
-      <div id="dataoverviewpagechart" ng-if="displaytype=='table'" style="margin:2%; height: 50%; width: 96%" ng-controller="dataoverviewController">
+      <div id="dataoverviewpagetable" ng-if="displaytype=='table'" style="margin:2%; min-height: 50%; width: 96%" ng-controller="dataoverviewController">
         <div class="row">
           <div class="col">.col</div>
           <div class="col">.col</div>
@@ -38,11 +36,32 @@
         </div>
       </div>
 
+      <div>
+        <label style="float: left; width: 50%" class="item item-input">
+          <span class="input-label">Fra</span>
+          <input type="datetime-local">
+        </label>
+        <label  style="float: right; width: 50%" class="item item-input">
+          <span class="input-label">Til</span>
+          <input type="datetime-local">
+        </label>
+      </div>
+
+
+      <div style="float: none; width: 100%">
+      <ul class="list">
+        <div ng-repeat="dataserie in dataseries">
+          <li class="item item-checkbox">
+            <label class="checkbox">
+              <input type="checkbox">
+            </label>
+            {{dataserie.key}}
+          </li>
+        </div>
+      </ul>
+      </div>
+
     </ion-content>
-
-    <ion-footer-bar class="toogle-footer">
-
-    </ion-footer-bar>
 
   </ion-view>
 </div>

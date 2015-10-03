@@ -1,13 +1,14 @@
 angular.module('starter.services', [])
 
-.factory('questionState', function() {
-  var obj = {
-    type: undefined, //e.g. pain for pain questions
-  };
-  return {data: obj};
-})
 
-.factory('calendarFactory', function() {
+  .factory('questionState', function($timeout) {
+    var obj = {
+      type: undefined, //e.g. pain for pain questions
+    };
+    return {data: obj};
+  })
+
+  .factory('calendarFactory', function() {
 
     var obj = {};
 
@@ -27,7 +28,7 @@ angular.module('starter.services', [])
 
     obj.getSelectedDayOfTheWeek = function() {
       var dayOfWeekNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
-        ];
+      ];
 
       return dayOfWeekNames[obj.selectedDate.getDay()];
     }
