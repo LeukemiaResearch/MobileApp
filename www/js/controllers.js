@@ -71,6 +71,8 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
   }])
 
   .controller('dataoverviewController', ['$scope', 'questionState', function($scope, questionState){
+
+
     $scope.exampleData = [
       {
         "key": "Dataserie 1",
@@ -102,6 +104,12 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
       }];
 
     $scope.dataseries = $scope.exampleData;
+    $scope.enabled = {};
+    $scope.dataseries.forEach(function(obj){
+      $scope.enabled[obj.key] = false;
+      console.log("Enable:"+obj.key);
+    });
+    $scope.enabled[$scope.dataseries[0].key] = true;
 
     $scope.data = questionState.data;
     $scope.datatype = questionState.data.type; //e.g. Smerte
