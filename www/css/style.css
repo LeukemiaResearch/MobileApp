@@ -51,3 +51,13 @@ flex-calendar {
 .calendar-month {
   color: #afb8bc
 }
+
+.dataseriesflexparent {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.dataseriesflexchild {
+  flex:1 1 1;
+}

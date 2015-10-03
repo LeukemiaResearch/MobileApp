@@ -9,6 +9,21 @@
         <button ng-class="tablebuttonclass" class="button" ng-click="changeDisplayType('table')">Tabel</button>
       </div>
 
+      <div class="dataseriesflexparent" style="margin-top:2%; justify-content: center">
+        <div class="dataseriesflexchild">
+          <label class="item item-input">
+            <span class="input-label">Fra</span>
+            <input type="datetime-local">
+          </label>
+        </div>
+        <div class="dataseriesflexchild">
+          <label class="item item-input">
+            <span class="input-label">Til</span>
+            <input type="datetime-local">
+          </label>
+        </div>
+      </div>
+
       <div id="dataoverviewpagechart" ng-if="displaytype=='chart'" style="margin:2%; height: 65%; width: 96%"
            ng-controller="dataoverviewController">
         <nvd3-line-chart
@@ -38,25 +53,20 @@
         </div>
       </div>
 
-      <div>
-        <label style="float: left; width: 50%" class="item item-input">
-          <span class="input-label">Fra</span>
-          <input type="datetime-local">
-        </label>
-        <label style="float: right; width: 50%" class="item item-input">
-          <span class="input-label">Til</span>
-          <input type="datetime-local">
-        </label>
+
+      <div class="dataseriesflexparent">
+      <span ng-repeat="dataserie in dataseries">
+        <div class="dataseriesflexchild">
+          <label class="item item-checkbox">
+            <label class="checkbox">
+              <input type="checkbox" ng-model="enabled[dataserie.key]">
+            </label>
+            {{dataserie.key}}
+          </label>
+        </div>
+      </span>
       </div>
 
-      <div ng-repeat="dataserie in dataseries">
-        <label class="item item-checkbox">
-          <label class="checkbox">
-            <input type="checkbox" ng-model="enabled[dataserie.key]">
-          </label>
-          {{dataserie.key}}
-        </label>
-      </div>
 
     </ion-content>
 
