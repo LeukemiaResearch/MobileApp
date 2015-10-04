@@ -2,14 +2,14 @@
 
   <ion-view view-title="{{datatype}}">
 
-    <ion-content class="dataoverviewpage">
+    <ion-content class="dataoverviewpage" style="dataoverviewflexparent">
 
       <div class="button-bar">
         <button ng-class="chartbuttonclass" class="button" ng-click="changeDisplayType('chart')">Graf</button>
         <button ng-class="tablebuttonclass" class="button" ng-click="changeDisplayType('table')">Tabel</button>
       </div>
 
-      <div class="dataseriesflexparent" style="margin-top:2%; justify-content: center">
+      <div class="dataseriesflexparent dataoverviewflexchild" style="margin-top: 3%%">
         <div class="dataseriesflexchild">
           <label class="item item-input">
             <span class="input-label">Fra</span>
@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <div id="dataoverviewpagechart" ng-if="displaytype=='chart'" style="margin:2%; height: 65%; width: 96%">
+      <div id="dataoverviewpagechart" ng-if="displaytype=='chart'" style="min-height: 50%; margin-left:2%; margin-right:2%; width: 96%">
           <nvd3 options="options"
                 data="dataseries"
                 config="config"
@@ -33,7 +33,7 @@
 
       </div>
 
-      <div id="dataoverviewpagetable" ng-if="displaytype=='table'" style="margin:2%; min-height: 65%; width: 96%"
+      <div id="dataoverviewpagetable" class="dataoverviewflexchild" ng-if="displaytype=='table'" style="min-height: 50%; margin-left:2%; margin-right:2%; width: 96%"
            ng-controller="dataoverviewController">
         <div class="row">
           <div class="col">.col</div>
@@ -54,7 +54,7 @@
  <!--     {{"storeddata="+storeddata[0].visible+" "+storeddata[1].visible}}
             {{"dataseries="+""+dataseries[0].visible+" "+dataseries[1].visible}}
 -->
-      <div class="dataseriesflexparent">
+      <div class="dataseriesflexparent dataoverviewflexchild">
       <span ng-repeat="dataserie in storeddata">
         <div class="dataseriesflexchild">
           <label class="item item-checkbox">

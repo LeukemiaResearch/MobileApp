@@ -99,12 +99,12 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
     $scope.options = {
       chart: {
         type: 'multiChart',
-        height: 450,
+        height: window.innerHeight / 2,
         margin : {
           top: 30,
-          right: 60,
-          bottom: 0,
-          left: 70
+          right: 30,
+          bottom: 30,
+          left: 30
         },
         "color": [
           "#1f77b4",
