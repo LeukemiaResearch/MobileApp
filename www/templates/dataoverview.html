@@ -24,15 +24,13 @@
         </div>
       </div>
 
-      <div id="dataoverviewpagechart" ng-if="displaytype=='chart'" style="margin:2%; height: 65%; width: 96%"
-           ng-controller="dataoverviewController">
-        <nvd3-line-chart
-          data="exampleData"
-          showXAxis="true"
-          showYAxis="true"
-          tooltips="true"
-          interactive="true">
-        </nvd3-line-chart>
+      <div id="dataoverviewpagechart" ng-if="displaytype=='chart'" style="margin:2%; height: 65%; width: 96%">
+          <nvd3 options="options"
+                data="dataseries"
+                config="config"
+                events="events"
+                api="api"></nvd3>
+
       </div>
 
       <div id="dataoverviewpagetable" ng-if="displaytype=='table'" style="margin:2%; min-height: 65%; width: 96%"
@@ -53,15 +51,17 @@
         </div>
       </div>
 
-
+ <!--     {{"storeddata="+storeddata[0].visible+" "+storeddata[1].visible}}
+            {{"dataseries="+""+dataseries[0].visible+" "+dataseries[1].visible}}
+-->
       <div class="dataseriesflexparent">
-      <span ng-repeat="dataserie in dataseries">
+      <span ng-repeat="dataserie in storeddata">
         <div class="dataseriesflexchild">
           <label class="item item-checkbox">
             <label class="checkbox">
-              <input type="checkbox" ng-model="enabled[dataserie.key]">
+              <input type="checkbox" ng-model="dataserie.visible">
             </label>
-            {{dataserie.key}}
+            {{dataserie.label}}
           </label>
         </div>
       </span>
