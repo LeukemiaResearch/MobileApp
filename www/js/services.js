@@ -9,21 +9,41 @@ angular.module('starter.services', [])
 
     var dataservice = {};
 
+    /*TODO - Create testdata
     Data.inject([
-      {
-        /*TODO - Inject testdata*/
-      }
+      {id: 1, date: 1440647647000, note: '', treatmentDay: '',
+        medicine:[], pain:[], bloodsample:[], mucositis:[]},
+      {id: 2, date: 1441192892000, note: '', treatmentDay: '',
+        medicine:[], pain:[], bloodsample:[], mucositis:[]},
+      {id: 3, date: 1442430454000, note: '', treatmentDay: '',
+        medicine:[], pain:[], bloodsample:[], mucositis:[]},
+      {id: 4, date: 1442468058000, note: '', treatmentDay: '',
+        medicine:[], pain:[], bloodsample:[], mucositis:[]},
+      {id: 5, date: 1443725400000, note: '', treatmentDay: '',
+        medicine:[], pain:[], bloodsample:[], mucositis:[]},
+      {id: 6, date: 1444212958000, note: '', treatmentDay: '',
+        medicine:[], pain:[], bloodsample:[], mucositis:[]}
     ]);
+    */
 
     dataservice.createNewData = function () {
-      var id = '_' + Math.random().toString(36).substr(2, 9);
+      var id;
+      id = function () {
+        return '_' + Math.random().toString(36).substr(2, 9);
+      };
 
-      Data.create({id: id,/*TODO - Create new dataobject*/});
-        DS.digest();
+      var date;
+      date = function(){
+         return Date.now();
+       };
+
+      Data.create({id: id, date: date, note: '', treatmentDay: '',
+        medicine:[], pain:[], bloodsample:[], mucositis:[]});
+      DS.digest();
       };
 
     dataservice.deleteData = function (id) {
-      /*TODO - delete dataobject*/
+      Data.destroy(id);
     };
 
     dataservice.getAllData = function () {
@@ -32,6 +52,22 @@ angular.module('starter.services', [])
 
     dataservice.getData = function (id) {
       return Data.get(id);
+    };
+
+    dataservice.insertPain = function (id){
+    /*TODO*/
+    };
+
+    dataservice.insertMedicine = function (id){
+    /*TODO*/
+    };
+
+    dataservice.insertBloodsample = function (id){
+    /*TODO*/
+    };
+
+    dataservice.insertMucositis = function (id){
+    /*TODO*/
     };
 
     return dataservice;
