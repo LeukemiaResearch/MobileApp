@@ -2,14 +2,14 @@
 
   <ion-view view-title="{{datatype}}">
 
-    <ion-content class="dataoverviewpage" style="dataoverviewflexparent">
+    <ion-content class="dataoverviewpage dataoverviewflexparent">
 
       <div class="button-bar">
         <button ng-class="chartbuttonclass" class="button" ng-click="changeDisplayType('chart')">Graf</button>
         <button ng-class="tablebuttonclass" class="button" ng-click="changeDisplayType('table')">Tabel</button>
       </div>
 
-      <div class="dataseriesflexparent dataoverviewflexchild" style="margin-top: 3%%">
+      <div class="dataseriesflexparent dataoverviewflexchild" style="margin-top: 3%">
         <div class="dataseriesflexchild">
           <label class="item item-input">
             <span class="input-label">Fra</span>
@@ -58,7 +58,7 @@
       <span ng-repeat="dataserie in storeddata">
         <div class="dataseriesflexchild">
           <label class="item item-checkbox">
-            <label class="checkbox">
+            <label class="checkbox checkbox-assertive">
               <input type="checkbox" ng-model="dataserie.visible">
             </label>
             {{dataserie.label}}
