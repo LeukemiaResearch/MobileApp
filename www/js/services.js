@@ -9,37 +9,40 @@ angular.module('starter.services', [])
 
     var dataservice = {};
 
-    /*TODO - Create testdata
+    //Create testdata
     Data.inject([
-      {id: 1, date: 1440647647000, note: '', treatmentDay: '',
-        medicine:[], pain:[], bloodsample:[], mucositis:[]},
-      {id: 2, date: 1441192892000, note: '', treatmentDay: '',
-        medicine:[], pain:[], bloodsample:[], mucositis:[]},
-      {id: 3, date: 1442430454000, note: '', treatmentDay: '',
-        medicine:[], pain:[], bloodsample:[], mucositis:[]},
-      {id: 4, date: 1442468058000, note: '', treatmentDay: '',
-        medicine:[], pain:[], bloodsample:[], mucositis:[]},
-      {id: 5, date: 1443725400000, note: '', treatmentDay: '',
-        medicine:[], pain:[], bloodsample:[], mucositis:[]},
-      {id: 6, date: 1444212958000, note: '', treatmentDay: '',
-        medicine:[], pain:[], bloodsample:[], mucositis:[]}
+      {id: 1, date: new Date(2015, 8, 27, 0, 0, 0, 0), note: '', treatmentDay: '1',
+        medicine:[{sixmp:0,mtx:0}], pain:[{time:new Date(2015, 8, 27, 10, 0, 0, 0),painType:'stomach', painScore: 6,morphine:false,morphineType:'',morphineDose:''},{time:new Date(2015, 8, 27, 17, 23, 22, 0),painType:'stomach', painScore: 8,morphine:true,morphineType:'oral',morphineDose:10.0}], bloodsample:[], mucositis:[]},
+      {id: 2, date: new Date(2015, 9, 2, 0, 0, 0, 0), note: '', treatmentDay: '2',
+        medicine:[{sixmp:0,mtx:0}], pain:[], bloodsample:[{time:new Date(2015, 9, 2, 15, 15, 0, 0),leucocytes:4.5,neutrofile:7.8,thrombocytes:45.2,hemoglobin:3.7,alat:3465,crp:453}], mucositis:[]},
+      {id: 3, date: new Date(2015, 9, 16, 0, 0, 0, 0), note: '', treatmentDay: '3',
+        medicine:[{sixmp:10.0,mtx:10.0}], pain:[{time:new Date(2015, 9, 16, 19, 7, 34, 0),painType:'stomach', painScore: 2,morphine:false,morphineType:'',morphineDose:''}], bloodsample:[], mucositis:[{time:new Date(2015, 9, 16, 19, 14, 22, 0),mucositisScore:7,nauseaScore:6,imageFile:''}]},
+      {id: 4, date: new Date(2015, 9, 17, 0, 0, 0, 0), note: 'Fin dag, ingen bivirkninger', treatmentDay: '4',
+        medicine:[{sixmp:0,mtx:0}], pain:[], bloodsample:[], mucositis:[]},
+      {id: 5, date: new Date(2015, 10, 1, 0, 0, 0, 0), note: '', treatmentDay: '5',
+        medicine:[{sixmp:0,mtx:0}], pain:[{time:new Date(2015, 10, 1, 18, 53, 17, 0),painType:'stomach', painScore: 4,morphine:false,morphineType:'',morphineDose:''},{time:new Date(2015, 10, 1, 22, 18, 56, 0),painType:'stomach', painScore: 8,morphine:true,morphineType:'oral',morphineDose:7.5}], bloodsample:[], mucositis:[]},
+      {id: 6, date: new Date(2015, 10, 7, 0, 0, 0, 0), note: '', treatmentDay: '6',
+        medicine:[{sixmp:25.0,mtx:10.0}], pain:[], bloodsample:[{time:new Date(2015, 10, 7, 12, 2, 34, 0),leucocytes:78.5,neutrofile:12.3,thrombocytes:15.0,hemoglobin:4.1,alat:2635,crp:251}], mucositis:[{time:new Date(2015, 10, 7, 19, 46, 0, 0),mucositisScore:9,nauseaScore:8,imageFile:''}]}
     ]);
-    */
 
-    dataservice.createNewData = function () {
+    dataservice.dataOnDate = function(date){
+      return Data.filter({
+        where: {
+          date: {
+            '==': date.setHours(0,0,0,0)
+          }
+        }
+      });
+    };
+
+    dataservice.createNewData = function (date, note, treatmentDay) {
       var id;
       id = function () {
         return '_' + Math.random().toString(36).substr(2, 9);
       };
 
-      var date;
-      date = function(){
-         return Date.now();
-       };
-
-      Data.create({id: id, date: date, note: '', treatmentDay: '',
+      return Data.create({id: id, date: date.setHours(0,0,0,0), note: note, treatmentDay: treatmentDay,
         medicine:[], pain:[], bloodsample:[], mucositis:[]});
-      DS.digest();
       };
 
     dataservice.deleteData = function (id) {
@@ -47,27 +50,47 @@ angular.module('starter.services', [])
     };
 
     dataservice.getAllData = function () {
-      return Data.getAll();
+      return Data.findAll();
     };
 
     dataservice.getData = function (id) {
-      return Data.get(id);
+      return Data.find(id);
     };
 
-    dataservice.insertPain = function (id){
-    /*TODO*/
+    dataservice.insertPainData = function (painType, painScore, morphine, morphineType, morphineDose){
+      var data = this.dataOnDate(new Date());
+      if(!data){
+        data = this.createNewData(new Date());
+      }
+      data.pain.push({time: new Date(), painType: painType, painScore: painScore, morphine: morphine, morphineType: morphineType, morphineDose: morphineDose});
+      Data.update(data.id, {pain: data.pain});
     };
 
-    dataservice.insertMedicine = function (id){
-    /*TODO*/
+    dataservice.insertMedicineData = function (sixmp, mtx){
+      var data = this.dataOnDate(new Date());
+      if(!data){
+        data = this.createNewData(new Date());
+      }
+      data.medicine.push({sixmp: sixmp, mtx: mtx});
+      Data.update(data.id, {medicine: data.medicine});
     };
 
-    dataservice.insertBloodsample = function (id){
-    /*TODO*/
+    dataservice.insertBloodsampleData = function (leucocytes, neutrofile, thrombocytes, hemoglobin, alat, crp){
+      var data = this.dataOnDate(new Date());
+      if(!data){
+        data = this.createNewData(new Date());
+      }
+      data.bloodsample.push({time:new Date(),leucocytes: leucocytes,neutrofile: neutrofile,thrombocytes: thrombocytes,hemoglobin: hemoglobin,alat: alat,crp: crp});
+      Data.update(data.id, {bloodsample: data.bloodsample});
     };
 
-    dataservice.insertMucositis = function (id){
-    /*TODO*/
+    dataservice.insertMucositisData = function (mucositisScore, nauseaScore, imageFile){
+      var data = this.dataOnDate(new Date());
+      if(!data){
+        data = this.createNewData(new Date());
+      }
+    data.mucositis.push({time:new Date(),mucositisScore: mucositisScore, nauseaScore: nauseaScore, imageFile: imageFile});
+    Data.update(data.id, {mucositis: data.mucositis});
     };
 
     return dataservice;
