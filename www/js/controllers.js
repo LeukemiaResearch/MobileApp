@@ -3,6 +3,11 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
   .controller('calendarController', ['$scope', 'calendarFactory', function($scope, calendarFactory) {
     "use strict";
     $scope.calendarFactory = calendarFactory;
+    $scope.events = calendarFactory.events;
+    $scope.checkBoxModel = {
+      bloodsample: false,
+      highdose: false
+    };
 
     // With "use strict", Dates can be passed ONLY as strings (ISO format: YYYY-MM-DD)
     $scope.options = {
@@ -10,28 +15,54 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
       minDate: "2015-01-01",
       maxDate: "2020-12-31",
       disabledDates: [
-        "2015-06-22",
-        "2015-07-27",
-        "2015-08-13",
-        "2015-08-15"
+
       ],
       dayNamesLength: 1, // 1 for "M", 2 for "Mo", 3 for "Mon"; 9 will show full day names. Default is 1.
       mondayIsFirstDay: true,//set monday as first day of week. Default is false
       eventClick: function(date) {
+        calendarFactory.setSelectedDate(date.date);
+        $scope.checkBoxModel.bloodsample = false;
+        $scope.checkBoxModel.highdose = false;
+
+        date.event.forEach(function(event) {
+          if (event.foo == 'bloodsample')
+            $scope.checkBoxModel.bloodsample = true;
+          if (event.foo == 'highdose')
+            $scope.checkBoxModel.highdose = true;
+        });
+
         console.log(date);
       },
       dateClick: function(date) {
         calendarFactory.setSelectedDate(date.date);
+        $scope.checkBoxModel.bloodsample = false;
+        $scope.checkBoxModel.highdose = false;
       },
       changeMonth: function(month, year) {
         console.log(month, year);
       }
     };
 
-    $scope.events = [
-      {foo: 'bar', date: "2015-08-18"},
-      {foo: 'bar', date: "2015-08-20"}
-    ];
+    $scope.updateBloodSampleEvent = function() {
+      if ($scope.checkBoxModel.bloodsample == true) {
+        calendarFactory.addEvent('bloodsample');
+      }
+
+      if ($scope.checkBoxModel.bloodsample == false) {
+        calendarFactory.removeEvent('bloodsample');
+      }
+    }
+
+    $scope.updateHighDoseEvent = function() {
+      if ($scope.checkBoxModel.highdose == true) {
+        calendarFactory.addEvent('highdose');
+      }
+
+      if ($scope.checkBoxModel.highdose == false) {
+        calendarFactory.removeEvent('highdose');
+      }
+    }
+
   }])
 
   .controller('questionsController', ['$scope', 'questionState', function($scope, questionState ) {

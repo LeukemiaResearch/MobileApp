@@ -22,6 +22,18 @@
             <div class="calendar-month">
               {{ calendarFactory.getSelectedMonth() }} <br>
             </div>
+            <li class="item item-checkbox">
+              <label class="checkbox">
+                <input type="checkbox" ng-model="checkBoxModel.bloodsample" ng-change="updateBloodSampleEvent()">
+              </label>
+              Bloodprøver
+            </li>
+            <li class="item item-checkbox">
+              <label class="checkbox">
+                <input type="checkbox" ng-model="checkBoxModel.highdose" ng-change="updateHighDoseEvent()">
+              </label>
+              Højdosis
+            </li>
           </div>
         </div>
       </div>
