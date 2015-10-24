@@ -1,1 +1,39 @@
-Mucositis type
+
+<div id="MucositisType" ng-controller="mucositisController">
+
+  <div>
+    <h4>Smerte</h4>
+    <div name="Smerte" class="row responsive-md">
+      <div class="col"><button ng-click="select(0,0)" ng-class="{'button-dark':groupvalue[0]===0, 'button-stable':groupvalue[0]!==0, 'button button-block mucositis-button': true}">Ingen</button></div>
+      <div class="col"><button ng-click="select(0,1)" ng-class="{'button-dark':groupvalue[0]===1, 'button-stable':groupvalue[0]!==1, 'button button-block mucositis-button': true}">Let smerte</button></div>
+      <div class="col"><button ng-click="select(0,2)" ng-class="{'button-dark':groupvalue[0]===2, 'button-stable':groupvalue[0]!==2, 'button button-block mucositis-button': true}">Moderat smerte</button></div>
+      <div class="col"><button ng-click="select(0,3)" ng-class="{'button-dark':groupvalue[0]===3, 'button-stable':groupvalue[0]!==3, 'button button-block mucositis-button': true}">Kraftige smerter med behov for morfin</button></div>
+      <div class="col"><button ng-click="select(0,4)" ng-class="{'button-dark':groupvalue[0]===4, 'button-stable':groupvalue[0]!==4, 'button button-block mucositis-button': true}">Kraftige smerter og behov for store mængder morfin</button></div
+    </div>
+  </div>
+
+  <div>
+    <h4>Sår og rødme</h4>
+    <div name="Smerte" class="row responsive-md">
+      <div class="col"><button ng-click="select(1,0)" ng-class="{'button-dark':groupvalue[1]===0, 'button-stable':groupvalue[1]!==0, 'button button-block mucositis-button': true}">Ingen</button></div>
+      <div class="col"><button ng-click="select(1,1)" ng-class="{'button-dark':groupvalue[1]===1, 'button-stable':groupvalue[1]!==1, 'button button-block mucositis-button': true}">Rødme (ingen sår)</button></div>
+      <div class="col"><button ng-click="select(1,2)" ng-class="{'button-dark':groupvalue[1]===2, 'button-stable':groupvalue[1]!==2, 'button button-block mucositis-button': true}">Enkelte eller flere mindre sår</button></div>
+      <div class="col"><button ng-click="select(1,3)" ng-class="{'button-dark':groupvalue[1]===3, 'button-stable':groupvalue[1]!==3, 'button button-block mucositis-button': true}">Udtalt rødme, store eller mange sår</button></div>
+      <div class="col"><button ng-click="select(1,4)" ng-class="{'button-dark':groupvalue[1]===4, 'button-stable':groupvalue[1]!==4, 'button button-block mucositis-button': true}">Størstedelen af munden er påvirket af rødme eller sår</button></div
+    </div>
+  </div>
+
+  <div>
+    <h4>Påvirkning af fødeindtag</h4>
+    <div name="Smerte" class="row responsive-md">
+      <div class="col"><button ng-click="select(2,0)" ng-class="{'button-dark':groupvalue[2]===0, 'button-stable':groupvalue[2]!==0, 'button button-block mucositis-button': true}">Ingen</button></div>
+      <div class="col"><button ng-click="select(2,1)" ng-class="{'button-dark':groupvalue[2]===1, 'button-stable':groupvalue[2]!==1, 'button button-block mucositis-button': true}">Spiser næsten normalt</button></div>
+      <div class="col"><button ng-click="select(2,2)" ng-class="{'button-dark':groupvalue[2]===2, 'button-stable':groupvalue[2]!==2, 'button button-block mucositis-button': true}">Spiser enkelte typer af fast føde</button></div>
+      <div class="col"><button ng-click="select(2,3)" ng-class="{'button-dark':groupvalue[2]===3, 'button-stable':groupvalue[2]!==3, 'button button-block mucositis-button': true}">Drikker og spiser flydende</button></div>
+      <div class="col"><button ng-click="select(2,4)" ng-class="{'button-dark':groupvalue[2]===4, 'button-stable':groupvalue[2]!==4, 'button button-block mucositis-button': true}">Drikker minimalt og har behov for iv, væske, sondemad eller TPN</button></div
+    </div>
+  </div>
+
+<div style="min-height: 150px; height: 25%; width: 100%"></div>
+
+</div>
