@@ -129,10 +129,6 @@ angular.module('starter.services', [])
     };
 
     obj.events = [
-      {foo: 'bar', date: "2015-08-18"},
-      {foo: 'bar', date: "2015-08-20"},
-      {foo: 'bloodsample', date: "2015-10-10"},
-      {foo: 'highdose', date: "2015-10-20"}
     ];
 
     obj.addEvent = function(foo) {
