@@ -259,5 +259,14 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
 
   }])
 
-;
+  .controller('mucositisController', ['$scope', function($scope) {
 
+    //Initialize group values and classes
+    $scope.groupvalue = [undefined, undefined, undefined];
+
+    //Change selection
+    $scope.select = function(groupnumber, newvalue) {
+      $scope.groupvalue[groupnumber] = newvalue;
+    }
+  }])
+;
