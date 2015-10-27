@@ -261,6 +261,9 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
 
   .controller('mucositisController', ['$scope', function($scope) {
 
+    //Intialize nauseaScore
+    $scope.nauseaScore = 5;
+
     //Initialize group values and classes
     $scope.groupvalue = [undefined, undefined, undefined];
 
