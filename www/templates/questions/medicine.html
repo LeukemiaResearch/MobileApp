@@ -1,1 +1,32 @@
-Test medicin
+<div style="width: 100%" class="centervertically" ng-controller="medicineController">
+
+  <div class="dataseriesflexparent dataoverviewflexchild" style="margin-top: 3%">
+    <div class="dataseriesflexchild">
+      <label class="item item-input">
+        <span class="input-label">Fra</span>
+        <input type="date" ng-model="Medicine.From">
+      </label>
+    </div>
+    <div class="dataseriesflexchild">
+      <label class="item item-input">
+        <span class="input-label">Til</span>
+        <input type="date" ng-model="Medicine.To">
+      </label>
+    </div>
+  </div>
+
+  <div class="list">
+    <label class="item item-input">
+      <span class="input-label">Tablet 6 MP</span>
+      <input type="number" style="direction: rtl;" placeholder="....." ng-model="Medicine.SixMP">
+      <span class="input-label">mg/dag</span>
+    </label>
+
+    <label class="item item-input">
+      <span class="input-label">Tablet MTX</span>
+      <input type="number" style="direction: rtl;" placeholder="....." ng-model="Medicine.MTX">
+      <span class="input-label">mg/uge</span>
+    </label>
+  </div>
+
+</div>

@@ -272,7 +272,7 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
     }
   }])
 
-  .controller('mucositisController', ['$scope', function($scope) {
+  .controller('blodsampleController', ['$scope', function($scope) {
     $scope.Blodsamples = {
       "Leukocytter": undefined,
       "Neutrofile": undefined,
@@ -280,6 +280,15 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
       "Hemoglobin": undefined,
       "Alat": undefined,
       "CRP": undefined
+    };
+  }])
+
+  .controller('medicineController', ['$scope', function($scope) {
+    $scope.Medicine = {
+      "From": undefined,
+      "To": undefined,
+      "MP": undefined,
+      "MTX": undefined
     };
   }])
 ;
