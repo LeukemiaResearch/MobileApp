@@ -260,7 +260,6 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
   }])
 
   .controller('mucositisController', ['$scope', function($scope) {
-
     //Intialize nauseaScore
     $scope.nauseaScore = 5;
 
@@ -271,5 +270,16 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
     $scope.select = function(groupnumber, newvalue) {
       $scope.groupvalue[groupnumber] = newvalue;
     }
+  }])
+
+  .controller('mucositisController', ['$scope', function($scope) {
+    $scope.Blodsamples = {
+      "Leukocytter": undefined,
+      "Neutrofile": undefined,
+      "Thombocytter": undefined,
+      "Hemoglobin": undefined,
+      "Alat": undefined,
+      "CRP": undefined
+    };
   }])
 ;
