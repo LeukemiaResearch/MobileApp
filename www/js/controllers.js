@@ -65,7 +65,10 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
 
   }])
 
-  .controller('questionsController', ['$scope', 'questionState', function($scope, questionState ) {
+
+  .controller('questionsController', ['$scope', 'questionState','MucositisDataService', function($scope, questionState, MucositisDataService) {
+
+
     $scope.questions = {
       "Blodprøve": {
         "Blodprøve": "templates/questions/blodsample.html"
@@ -83,10 +86,17 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
         "Kvalme":"templates/questions/nausea.html"
       }
     };
+
     $scope.data = questionState.data;
     $scope.datatype = questionState.data.type;
     $scope.template = "fff";
     $scope.hideIndicators = Object.keys($scope.questions[$scope.datatype]).length<=1;
+
+    $scope.finishedWizard = function(){
+      MucositisDataService.finishedWizard();
+      console.log("WIZARD SLUT!!!");
+    }
+
   }])
 
   .controller('frontpageController', ['$scope', '$location', 'questionState', function($scope, $location, questionState) {
@@ -259,7 +269,7 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
 
   }])
 
-  .controller('mucositisController', ['$scope', function($scope) {
+  .controller('mucositisController', function($scope, MucositisDataService) {
     //Intialize nauseaScore
     $scope.nauseaScore = 5;
 
@@ -269,8 +279,20 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
     //Change selection
     $scope.select = function(groupnumber, newvalue) {
       $scope.groupvalue[groupnumber] = newvalue;
-    }
-  }])
+    };
+
+    //Create new Mucositisdata instance
+    MucositisDataService.finishedWizard = function(){
+      console.log("Påbegynder oprettelse af mucositisdata!");
+      var mucositisScore = 0;
+      for (var i = 0; i < $scope.groupvalue.length; i++) {
+        mucositisScore += $scope.groupvalue[i];
+      }
+      console.log("MucositisScore: " + mucositisScore + " , NauseaScore: " + $scope.nauseaScore);
+      MucositisDataService.createMucositisData(mucositisScore,$scope.nauseaScore);
+    };
+
+  })
 
   .controller('blodsampleController', ['$scope', function($scope) {
     $scope.Blodsamples = {
