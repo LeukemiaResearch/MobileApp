@@ -1,1 +1,30 @@
-Morphine content
+<div style="width: 100%" class="centervertically" ng-controller="painController">
+
+  <h3 class="centerhorizontal">Hvor meget morfin er givet?</h3>
+  <br>
+
+  <div class="centerhorizontalpain">
+    <label class="item item-input item-select">
+      <span class="input-label">
+        Administration type:
+      </span>
+      <select data-ng-model="painData.morphineType">
+        <option selected value='oral'>Tablet</option>
+        <option value='intravenous'>Intravenous</option>
+      </select>
+    </label>
+
+    <div class="item item-input">
+      <span class="input-label">Dosage:</span>
+      <input type="number" style="direction: rtl;" placeholder="0" ng-model="painData.morphineDose">
+
+      <span ng-if="painData.morphineType == 'oral'">mg/dag</span>
+      <select ng-if="painData.morphineType == 'intravenous'" class="item item-input item-select"
+              data-ng-model="painData.morphineMeasureUnit">
+        <option selected value='mg/t'>mg/t</option>
+        <option value='mg'>mg</option>
+      </select>
+    </div>
+  </div>
+
+</div>
