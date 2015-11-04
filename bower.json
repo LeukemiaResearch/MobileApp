@@ -14,7 +14,9 @@
     "js-data-angular": "~3.1.0",
     "js-data": "~2.5.0",
     "localforage": "~1.2.10",
-    "js-data-localforage": "~2.1.1"
+    "js-data-localforage": "~2.1.1",
+    "ionic-timepicker": "~0.4.0",
+    "ionic-datepicker": "~0.9.0"
   },
   "resolutions": {
     "angular-translate": "~2.8.0",
