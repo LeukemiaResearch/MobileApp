@@ -363,4 +363,21 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
       "MTX": undefined
     };
   }])
+
+  .controller('painController', ['$scope', function($scope) {
+
+    $scope.painData = {
+      "painType": undefined,
+      "painScore": undefined,
+      "morphine": true,
+      "morphineType": 'oral',
+      "morphineDose": undefined,
+      "morphineMeasureUnit": 'mg'
+    };
+
+    $scope.selectPainType = function(painType) {
+      $scope.painData.painType = painType;
+    }
+
+  }])
 ;

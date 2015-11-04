@@ -1,1 +1,28 @@
-Pain position content
+<div style="width: 100%" class="centervertically" ng-controller="painController">
+
+  <h3 class="centerhorizontal">Hvor er smerten?</h3>
+  <br><br>
+
+  <div class="centerhorizontalpain">
+    <button ng-click="selectPainType('mave')"
+            ng-class="{'button-dark':painData.painType == 'mave', 'button-stable':painData.painType != 'mave', 'button button-block': true}">
+      Mave
+    </button>
+    <button ng-click="selectPainType('ben')"
+            ng-class="{'button-dark':painData.painType == 'ben', 'button-stable':painData.painType != 'ben', 'button button-block': true}">
+      Ben
+    </button>
+    <button ng-click="selectPainType('arme')"
+            ng-class="{'button-dark':painData.painType == 'arme', 'button-stable':painData.painType != 'arme', 'button button-block': true}">
+      Arme
+    </button>
+    <button ng-click="selectPainType('hoved')"
+            ng-class="{'button-dark':painData.painType == 'hoved', 'button-stable':painData.painType != 'hoved', 'button button-block': true}">
+      Hoved
+    </button>
+    <button ng-click="selectPainType('andet')"
+            ng-class="{'button-dark':painData.painType == 'andet', 'button-stable':painData.painType != 'andet', 'button button-block': true}">
+      Andet
+    </button>
+  </div>
+</div>
