@@ -68,52 +68,56 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
 
   .controller('questionsController', ['$scope', 'questionState','MucositisDataService', function($scope, questionState, MucositisDataService) {
 
-    $scope.timePickerObject = {
-      timeDisplayValue: undefined,
-      displayValue: function() {
-        var selectedTime = new Date($scope.timePickerObject.inputEpochTime * 1000);
-        return selectedTime.getUTCHours().toLocaleString('da-DK', {minimumIntegerDigits: 2, useGrouping:false})
-          + ' : '
-          + selectedTime.getUTCMinutes().toLocaleString('da-DK', {minimumIntegerDigits: 2, useGrouping:false});
-      },
-      inputEpochTime: (new Date().getHours() * 60 * 60 + Math.floor(new Date().getMinutes()/5) * 5 * 60),  //Optional
-      step: 5,  //Optional
-      format: 24,  //Optional
-      titleLabel: 'Tidspunkt',  //Optional
-      setLabel: 'Vælg',  //Optional
-      closeLabel: 'Anuller',  //Optional
-      setButtonType: 'button-positive',  //Optional
-      closeButtonType: 'button-stable',  //Optional
-      callback: function (val) {    //Mandatory
-        $scope.timePickerObject.inputEpochTime = val;
-      }
-    };
+    $scope.questionState = questionState;
 
-    $scope.datepickerObject = {
-      titleLabel: 'Dato',  //Optional
-      todayLabel: 'I dag',  //Optional
-      closeLabel: 'Luk',  //Optional
-      setLabel: 'Vælg',  //Optional
-      setButtonType : 'button-assertive',  //Optional
-      todayButtonType : 'button-assertive',  //Optional
-      closeButtonType : 'button-assertive',  //Optional
-      inputDate: new Date(),  //Optional
-      mondayFirst: true,  //Optional
-      //disabledDates: disabledDates, //Optional
-      weekDaysList: ["Sø", "Ma", "Ti", "On", "To", "Fr", "Lø"], //Optional
-      monthList:  ["Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December"], //Optional
-      templateType: 'popup', //Optional
-      showTodayButton: 'true', //Optional
-      modalHeaderColor: 'bar-positive', //Optional
-      modalFooterColor: 'bar-positive', //Optional
-      //from: new Date(2012, 8, 2), //Optional
-      //to: new Date(2018, 8, 25),  //Optional
-      callback: function (val) {  //Mandatory
-        $scope.datepickerObject.inputDate = val;
-      },
-      dateFormat: 'dd-MM-yyyy', //Optional
-      closeOnSelect: false, //Optional
-    };
+    if (questionState.timePickerObject === undefined)
+      questionState.timePickerObject = {
+        timeDisplayValue: undefined,
+        displayValue: function () {
+          var selectedTime = new Date(questionState.timePickerObject.inputEpochTime * 1000);
+          return selectedTime.getUTCHours().toLocaleString('da-DK', {minimumIntegerDigits: 2, useGrouping: false})
+            + ' : '
+            + selectedTime.getUTCMinutes().toLocaleString('da-DK', {minimumIntegerDigits: 2, useGrouping: false});
+        },
+        inputEpochTime: (new Date().getHours() * 60 * 60 + Math.floor(new Date().getMinutes() / 5) * 5 * 60),  //Optional
+        step: 5,  //Optional
+        format: 24,  //Optional
+        titleLabel: 'Tidspunkt',  //Optional
+        setLabel: 'Vælg',  //Optional
+        closeLabel: 'Anuller',  //Optional
+        setButtonType: 'button-positive',  //Optional
+        closeButtonType: 'button-stable',  //Optional
+        callback: function (val) {    //Mandatory
+          questionState.timePickerObject.inputEpochTime = val;
+        }
+      };
+
+    if (questionState.datepickerObject === undefined)
+      questionState.datepickerObject = {
+        titleLabel: 'Dato',  //Optional
+        todayLabel: 'I dag',  //Optional
+        closeLabel: 'Luk',  //Optional
+        setLabel: 'Vælg',  //Optional
+        setButtonType: 'button-assertive',  //Optional
+        todayButtonType: 'button-assertive',  //Optional
+        closeButtonType: 'button-assertive',  //Optional
+        inputDate: new Date(),  //Optional
+        mondayFirst: true,  //Optional
+        //disabledDates: disabledDates, //Optional
+        weekDaysList: ["Sø", "Ma", "Ti", "On", "To", "Fr", "Lø"], //Optional
+        monthList: ["Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December"], //Optional
+        templateType: 'popup', //Optional
+        showTodayButton: 'true', //Optional
+        modalHeaderColor: 'bar-positive', //Optional
+        modalFooterColor: 'bar-positive', //Optional
+        //from: new Date(2012, 8, 2), //Optional
+        //to: new Date(2018, 8, 25),  //Optional
+        callback: function (val) {  //Mandatory
+          questionState.datepickerObject.inputDate = val;
+        },
+        dateFormat: 'dd-MM-yyyy', //Optional
+        closeOnSelect: false, //Optional
+      };
 
     $scope.questions = {
       "Blodprøve": {
@@ -137,13 +141,28 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
       }
     };
 
-    $scope.data = questionState.data;
-    $scope.datatype = questionState.data.type;
-    $scope.template = "fff";
+    $scope.datatype = questionState.type;
+    $scope.template = 0; //First template
     $scope.hideIndicators = Object.keys($scope.questions[$scope.datatype]).length<=1;
 
     $scope.finishedWizard = function(){
-      MucositisDataService.finishedWizard();
+
+      //Store entered data
+      if (questionState.type==='Mucositis')
+        MucositisDataService.finishedWizard();
+
+      //Clean up question state
+      for (var variableKey in questionState){
+
+        if (variableKey!=='timePickerObject' &&
+            variableKey!=='datepickerObject' &&
+            questionState.hasOwnProperty(variableKey))
+        {
+          delete questionState[variableKey];
+        }
+      }
+
+      $scope.$ionicGoBack();
       console.log("WIZARD SLUT!!!");
     }
 
@@ -151,12 +170,12 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
 
   .controller('frontpageController', ['$scope', '$location', 'questionState', function($scope, $location, questionState) {
     $scope.openQuestionWizardPage = function(type){
-      questionState.data.type = typeof(type)=="string"?type:undefined;
+      questionState.type = typeof(type)=="string"?type:undefined;
       $location.path("questionwizardpage");
     };
 
     $scope.openDataOverviewPage = function(type){
-      questionState.data.type = typeof(type)=="string"?type:undefined;
+      questionState.type = typeof(type)=="string"?type:undefined;
       $location.path("dataoverviewpage");
     };
   }])
@@ -297,7 +316,7 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
     });
 
     //Data type control
-    $scope.datatype = questionState.data.type; //e.g. Smerte
+    $scope.datatype = questionState.type; //e.g. Smerte
 
     //Display chart/table control
     $scope.displaytype = "";//'chart' or 'table'
@@ -319,65 +338,83 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
 
   }])
 
-  .controller('mucositisController', function($scope, MucositisDataService) {
+  .controller('mucositisController', function($scope, MucositisDataService, questionState) {
+
+    //Expose questionState
+    $scope.questionState = questionState;
+
     //Intialize nauseaScore
-    $scope.nauseaScore = 5;
+    if (questionState.nauseaScore === undefined)
+      questionState.nauseaScore = 5;
 
     //Initialize group values and classes
-    $scope.groupvalue = [undefined, undefined, undefined];
+    if (questionState.groupvalue === undefined)
+      questionState.groupvalue = [undefined, undefined, undefined];
 
     //Change selection
     $scope.select = function(groupnumber, newvalue) {
-      $scope.groupvalue[groupnumber] = newvalue;
+      questionState.groupvalue[groupnumber] = newvalue;
     };
 
     //Create new Mucositisdata instance
     MucositisDataService.finishedWizard = function(){
       console.log("Påbegynder oprettelse af mucositisdata!");
       var mucositisScore = 0;
-      for (var i = 0; i < $scope.groupvalue.length; i++) {
-        mucositisScore += $scope.groupvalue[i];
+      for (var i = 0; i < questionState.groupvalue.length; i++) {
+        mucositisScore += questionState.groupvalue[i];
       }
-      console.log("MucositisScore: " + mucositisScore + " , NauseaScore: " + $scope.nauseaScore);
-      MucositisDataService.createMucositisData(mucositisScore,$scope.nauseaScore);
+      console.log("MucositisScore: " + mucositisScore + " , NauseaScore: " + questionState.nauseaScore);
+      MucositisDataService.createMucositisData(mucositisScore, questionState.nauseaScore);
     };
 
   })
 
-  .controller('blodsampleController', ['$scope', function($scope) {
-    $scope.Blodsamples = {
-      "Leukocytter": undefined,
-      "Neutrofile": undefined,
-      "Thombocytter": undefined,
-      "Hemoglobin": undefined,
-      "Alat": undefined,
-      "CRP": undefined
-    };
-  }])
+  .controller('blodsampleController', function($scope, questionState) {
 
-  .controller('medicineController', ['$scope', function($scope) {
-    $scope.Medicine = {
-      "From": undefined,
-      "To": undefined,
-      "MP": undefined,
-      "MTX": undefined
-    };
-  }])
+    //Expose questionState
+    $scope.questionState = questionState;
 
-  .controller('painController', ['$scope', function($scope) {
+    //values
+    questionState.Leukocytter;
+    questionState.Neutrofile;
+    questionState.Thombocytter;
+    questionState.Hemoglobin;
+    questionState.Alat;
+    questionState.CRP;
+  })
 
-    $scope.painData = {
-      "painType": undefined,
-      "painScore": undefined,
-      "morphine": true,
-      "morphineType": 'oral',
-      "morphineDose": undefined,
-      "morphineMeasureUnit": 'mg'
-    };
+  .controller('medicineController', function($scope, questionState) {
 
+    //Expose questionState
+    $scope.questionState = questionState;
+
+    //values
+    questionState.From;
+    questionState.To;
+    questionState.MP;
+    questionState.MTX;
+  })
+
+  .controller('painController', function($scope, questionState) {
+
+    //Expose questionState
+    $scope.questionState = questionState;
+
+    //values
+    questionState.painType;
+    questionState.painScore;
+    questionState.morphine;
+    questionState.morphineType;
+    questionState.morphineDose;
+
+    //Initialize
+    if (questionState.morphineMeasureUnit === undefined)
+      questionState.morphineMeasureUnit = 'mg';
+
+    //pain type selection
     $scope.selectPainType = function(painType) {
-      $scope.painData.painType = painType;
+      questionState.painType = painType;
     }
 
-  }])
+  })
 ;

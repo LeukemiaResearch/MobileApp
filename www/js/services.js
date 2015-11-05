@@ -259,10 +259,9 @@ angular.module('starter.services', [])
   })
 
   .factory('questionState', function($timeout) {
-    var obj = {
-      type: undefined, //e.g. pain for pain questions
+    return {
+      type: undefined //e.g. pain for pain questions
     };
-    return {data: obj};
   })
 
   .factory('calendarFactory', function() {
@@ -291,13 +290,6 @@ angular.module('starter.services', [])
     };
 
     return obj;
-  })
-
-  .factory('questionState', function($timeout) {
-    var obj = {
-      type: undefined, //e.g. pain for pain questions
-    };
-    return {data: obj};
   })
 
   .factory('calendarFactory', function() {

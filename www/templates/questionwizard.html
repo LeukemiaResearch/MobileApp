@@ -3,12 +3,6 @@
     <div>
 
     <ion-content class="questionwizardpage">
-      <!--      <h1>Question wizard page</h1>
-
-            <div>url of the template: <code>*{{questions.blodsample[0]}}*</code></div>
-            <div>type: <code>*{{type}}*</code></div>
-            <div>number: <code>*{{number}}*</code></div>
-            template: <code>*{{template}}*</code> -->
 
       <div ng-include="questions[datatype][template]"></div>
 
@@ -21,7 +15,7 @@
             <ion-footer-bar class="bar">
               <section style=" width: 100%">
               <span ng-if="$first">
-                <a style="float:left" class="button ion-ios-undo button-royal icon-left" wz-cancel value="Cancel">Fortryd</a>
+                <a style="float:left" class="button ion-ios-undo button-royal icon-left" ng-click="$ionicGoBack()" value="Cancel">Fortryd</a>
               </span>
               <span ng-if="!$first">
                 <a style="float:left" class="button ion-chevron-left button-royal icon-left" wz-previous value="Previous">Forrige</a>
