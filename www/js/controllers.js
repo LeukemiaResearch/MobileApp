@@ -66,7 +66,7 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
   }])
 
 
-  .controller('questionsController', ['$scope', 'questionState','MucositisDataService', function($scope, questionState, MucositisDataService) {
+  .controller('questionsController', function($scope, questionState, MucositisDataService, $ionicPopup) {
 
     $scope.questionState = questionState;
 
@@ -162,11 +162,16 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
         }
       }
 
-      $scope.$ionicGoBack();
-      console.log("WIZARD SLUT!!!");
+      $ionicPopup.alert({
+        title: $scope.datatype,
+        content: 'Indtastede svar gemt!'
+      }).then(function(res) {
+        $scope.$ionicGoBack();
+        console.log("WIZARD SLUT!!!");
+      });
     }
 
-  }])
+  })
 
   .controller('frontpageController', ['$scope', '$location', 'questionState', function($scope, $location, questionState) {
     $scope.openQuestionWizardPage = function(type){
