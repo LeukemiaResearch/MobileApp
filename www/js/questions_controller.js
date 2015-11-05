@@ -100,7 +100,7 @@ angular.module('starter.controllers')
       title: $scope.datatype,
       content: 'Registrering gemt!'
     }).then(function(res) {
-      $scope.$ionicGoBack();
+      setTimeout($scope.$ionicGoBack);
       console.log("WIZARD SLUT!!!");
     });
   }
