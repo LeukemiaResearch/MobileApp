@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-  .controller('dataoverviewController', ['$scope', '$filter', 'questionState', function($scope, $filter, questionState){
+  .controller('dataoverviewController', function($scope, $filter, questionState, dataProvider){
 
   /* Inspired by Lee Byron's test data generator. */
   function stream_layers(n, m, o) {
@@ -73,7 +73,7 @@ angular.module('starter.controllers')
       transitionDuration: 500,
       xAxis: {
         tickFormat: function(d){
-          return d3.format(',f')(d);
+          return d3.time.format('%x')(new Date(d));
         }
       },
       yAxis1: {
@@ -90,17 +90,41 @@ angular.module('starter.controllers')
   };
 
   //Generate test data
-  $scope.storeddata = stream_layers(7,10+Math.random()*100,.1).map(function(data, i) {
-    return {
-      key: 'Stream' + i,
-      label: 'Stream' + i,
-      values: data.map(function(a){a.y = a.y * (i <= 1 ? -1 : 1); return a}),
-      type: "line",
-      visible: false,
-      color: $scope.options.chart.color[i]
-    };
-  });
-  $scope.storeddata[0].visible=true; //show first
+  if (dataProvider.getAllDataSeries) {
+    $scope.storeddata = new Array();
+    var rawdataseries = dataProvider.getAllDataSeries();
+    var dataserieNumber = 0;
+    for (var name in rawdataseries) {
+      var dataserie = {};
+      dataserie['values'] = rawdataseries[name];
+      dataserie['color'] = $scope.options.chart.color[dataserieNumber];
+      dataserie['type'] = 'line';
+      dataserie['key'] = dataserieNumber;
+      dataserie['label'] = name;
+      $scope.storeddata.push(dataserie);
+      dataserieNumber++;
+    }
+  } else {
+    $scope.storeddata = stream_layers(7,10+Math.random()*100,.1).map(function(data, i) {
+      return {
+        key: 'Stream' + i,
+        label: 'Stream' + i,
+        values: data.map(function(a){a.y = a.y * (i <= 1 ? -1 : 1); return a}),
+        type: "line",
+        visible: false,
+        color: $scope.options.chart.color[i]
+      };
+    });
+  }
+  if ($scope.storeddata[0])
+    $scope.storeddata[0].visible=true; //show first
+
+    // Format dates
+    $scope.xAxisTickFormatFunction = function(){
+      return function(d){
+        return d3.time.format('%x')(new Date(d)); //uncomment for date format
+      }
+    }
 
   //Data control
   $scope.dataseries = $filter('filter')($scope.storeddata,{visible:true});
@@ -156,4 +180,4 @@ angular.module('starter.controllers')
   };
   $scope.changeDisplayType("chart");
 
-}])
+})

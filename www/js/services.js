@@ -257,9 +257,30 @@ angular.module('starter.services', [])
     return mucositisdataservice;
   })
 
-  .factory('questionState', function($timeout) {
+  .factory('questionState', function() {
     return {
       type: undefined //e.g. pain for pain questions
+    };
+  })
+
+  .factory('dataProvider', function(MucositisDataService) {
+    return {
+      getAllDataSeries: function() {
+        var result = {};
+        var dataObjects = MucositisDataService.getAllMucositisData();
+        for (objcount in dataObjects) {
+          var obj = dataObjects[objcount];
+          var timeStamp = obj['timeStamp'];
+          for (key in obj) {
+            if (['id', 'timeStamp'].indexOf(key)>=0 || !obj.hasOwnProperty(key))
+              continue;
+            if (result[key]===undefined)
+              result[key] = new Array();
+            result[key].push({'x':timeStamp, 'y':obj[key]});
+          }
+        }
+        return result;
+      }
     };
   })
 
