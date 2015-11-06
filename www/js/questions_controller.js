@@ -4,16 +4,17 @@ angular.module('starter.controllers')
 
   $scope.questionState = questionState;
 
-  if (questionState.timePickerObject === undefined)
-    questionState.timePickerObject = {
-      timeDisplayValue: undefined,
+
+  if ($scope.timePickerObject === undefined)
+    $scope.timePickerObject = {
       displayValue: function () {
-        var selectedTime = new Date(questionState.timePickerObject.inputEpochTime * 1000);
-        return selectedTime.getUTCHours().toLocaleString('da-DK', {minimumIntegerDigits: 2, useGrouping: false})
+        var selectedTime = new Date($scope.timePickerObject.inputEpochTime * 1000);
+        return selectedTime.getUTCHours().toLocaleString('en', {minimumIntegerDigits: 2, useGrouping: false})
           + ' : '
-          + selectedTime.getUTCMinutes().toLocaleString('da-DK', {minimumIntegerDigits: 2, useGrouping: false});
+          + selectedTime.getUTCMinutes().toLocaleString('en', {minimumIntegerDigits: 2, useGrouping: false});
       },
-      inputEpochTime: (new Date().getHours() * 60 * 60 + Math.floor(new Date().getMinutes() / 5) * 5 * 60),  //Optional
+      inputEpochTime: ((questionState.timeStamp?questionState.timeStamp:new Date()).getHours() * 60 * 60 +
+        Math.floor((questionState.timeStamp?questionState.timeStamp:new Date()).getMinutes() / 5) * 5 * 60),  //Optional
       step: 5,  //Optional
       format: 24,  //Optional
       titleLabel: 'Tidspunkt',  //Optional
@@ -22,12 +23,13 @@ angular.module('starter.controllers')
       setButtonType: 'button-positive',  //Optional
       closeButtonType: 'button-stable',  //Optional
       callback: function (val) {    //Mandatory
-        questionState.timePickerObject.inputEpochTime = val;
+        $scope.timePickerObject.inputEpochTime = val;
+        $scope.updateQuestionStateTimeStamp();
       }
     };
 
-  if (questionState.datepickerObject === undefined)
-    questionState.datepickerObject = {
+  if ($scope.datepickerObject === undefined)
+    $scope.datepickerObject = {
       titleLabel: 'Dato',  //Optional
       todayLabel: 'I dag',  //Optional
       closeLabel: 'Luk',  //Optional
@@ -35,7 +37,7 @@ angular.module('starter.controllers')
       setButtonType: 'button-assertive',  //Optional
       todayButtonType: 'button-assertive',  //Optional
       closeButtonType: 'button-assertive',  //Optional
-      inputDate: new Date(),  //Optional
+      inputDate: (questionState.timeStamp?questionState.timeStamp:new Date()),  //Optional
       mondayFirst: true,  //Optional
       //disabledDates: disabledDates, //Optional
       weekDaysList: ["Sø", "Ma", "Ti", "On", "To", "Fr", "Lø"], //Optional
@@ -47,11 +49,21 @@ angular.module('starter.controllers')
       //from: new Date(2012, 8, 2), //Optional
       //to: new Date(2018, 8, 25),  //Optional
       callback: function (val) {  //Mandatory
-        questionState.datepickerObject.inputDate = val;
+        $scope.datepickerObject.inputDate = val;
+        $scope.updateQuestionStateTimeStamp();
       },
       dateFormat: 'dd-MM-yyyy', //Optional
       closeOnSelect: false, //Optional
     };
+
+    $scope.updateQuestionStateTimeStamp = function() {
+      var date = $scope.datepickerObject.inputDate;
+      var hours = Math.floor($scope.timePickerObject.inputEpochTime / 3600);
+      var minutes = Math.floor(($scope.timePickerObject.inputEpochTime-hours*3600)/60);
+      date.setHours(hours, minutes, 0, 0);
+      questionState.timeStamp = date;
+    };
+    $scope.updateQuestionStateTimeStamp();
 
   $scope.questions = {
     "Blodprøve": {
@@ -88,8 +100,7 @@ angular.module('starter.controllers')
     //Clean up question state
     for (var variableKey in questionState){
 
-      if (variableKey!=='timePickerObject' &&
-        variableKey!=='datepickerObject' &&
+      if (variableKey!=='timeStamp' &&
         questionState.hasOwnProperty(variableKey))
       {
         delete questionState[variableKey];

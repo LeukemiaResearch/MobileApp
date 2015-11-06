@@ -7,7 +7,7 @@ angular.module('starter.controllers')
 
   //Intialize nauseaScore
   if (questionState.nauseaScore === undefined)
-    questionState.nauseaScore = 5;
+    questionState.nauseaScore = "5";
 
   //Initialize group values and classes
   if (questionState.groupvalue === undefined)
@@ -19,14 +19,8 @@ angular.module('starter.controllers')
   };
 
   //Create new Mucositisdata instance
-  MucositisDataService.finishedWizard = function(){
-    console.log("Påbegynder oprettelse af mucositisdata!");
-    var mucositisScore = 0;
-    for (var i = 0; i < questionState.groupvalue.length; i++) {
-      mucositisScore += questionState.groupvalue[i];
-    }
-    console.log("MucositisScore: " + mucositisScore + " , NauseaScore: " + questionState.nauseaScore);
-    MucositisDataService.createMucositisData(mucositisScore, questionState.nauseaScore);
+  MucositisDataService.finishedWizard = function() {
+    MucositisDataService.createMucositisData(questionState.timeStamp, questionState.groupvalue[0], questionState.groupvalue[1], questionState.groupvalue[2], parseInt(questionState.nauseaScore, 10));
   };
 
 })

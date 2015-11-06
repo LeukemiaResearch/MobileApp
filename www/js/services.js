@@ -216,16 +216,15 @@ angular.module('starter.services', [])
     var mucositisdataservice = {};
 
     //MucositisData
-    MucositisData.inject([{id: 1, date: new Date(2015, 9, 16, 19, 14, 22, 0), mucositisScore:7, nauseaScore:6},{id: 2, date: new Date(2015, 10, 7, 19, 46, 0, 0), mucositisScore:9, nauseaScore:8}]);
+    //MucositisData.inject([{id: 1, date: new Date(2015, 9, 16, 19, 14, 22, 0), mucositisScore:7, nauseaScore:6},{id: 2, date: new Date(2015, 10, 7, 19, 46, 0, 0), mucositisScore:9, nauseaScore:8}]);
 
-    mucositisdataservice.createMucositisData = function (mucositisScore, nauseaScore){
+    mucositisdataservice.createMucositisData = function (timeStamp, pain, ulcers, food, nauseaScore){
       var id = IdGenerator.generateId();
-      console.log("Mucositis Id: " + id + " MucositisScore: " + mucositisScore);
-      console.log("1. Antal records i mucositisData " + this.getAllMucositisData());
-      var obj = MucositisData.createInstance({id: id, date:new Date(),mucositisScore: mucositisScore, nauseaScore: nauseaScore});
-      console.log("Object - MucositisScore: " + obj.mucositisScore);
+      //console.log("1. Antal records i mucositisData " + this.getAllMucositisData());
+      var obj = MucositisData.createInstance({'id':id, 'timeStamp':timeStamp, 'pain': pain, 'ulcers': ulcers, 'food':food, 'nauseaScore': nauseaScore});
+      //console.log("Object - MucositisScore: " + obj.mucositisScore);
       MucositisData.inject(obj);
-      console.log("2. Antal records i mucositisData " + this.getAllMucositisData());
+      //console.log("2. Antal records i mucositisData " + JSON.stringify(this.getAllMucositisData()));
       return obj;
     };
 

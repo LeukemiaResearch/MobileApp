@@ -4,15 +4,15 @@
 
     <div style="width: 100%" class="centervertically" ng-controller="blodsampleController">
 
-      <ionic-timepicker input-obj="questionState.timePickerObject">
+      <ionic-timepicker input-obj="timePickerObject">
         <button class="button button-block button-stable overflowShow">
-          <strong>{{questionState.timePickerObject.displayValue()}}</strong>
+          <strong>{{timePickerObject.displayValue()}}</strong>
         </button>
       </ionic-timepicker>
 
-      <ionic-datepicker input-obj="questionState.datepickerObject">
+      <ionic-datepicker input-obj="datepickerObject">
         <button class="button button-block button-stable">
-          <strong>{{questionState.datepickerObject.inputDate | date:'d. MMMM, yyyy'}}</strong>
+          <strong>{{datepickerObject.inputDate | date:'d. MMMM, yyyy'}}</strong>
         </button>
       </ionic-datepicker>
 
