@@ -4,12 +4,7 @@
 
     <ion-content class="dataoverviewpage dataoverviewflexparent">
 
-      <div class="button-bar">
-        <button ng-class="chartbuttonclass" class="button" ng-click="changeDisplayType('chart')">Graf</button>
-        <button ng-class="tablebuttonclass" class="button" ng-click="changeDisplayType('table')">Tabel</button>
-      </div>
-
-      <div class="dataseriesflexparent dataoverviewflexchild" style="margin-top: 3%">
+      <div class="dataseriesflexparent dataoverviewflexchild">
         <div class="dataseriesflexchild">
           <label class="item item-input">
             <span class="input-label">Fra</span>
@@ -71,6 +66,13 @@
 
 
     </ion-content>
+
+    <ion-footer-bar>
+      <div class="button-bar">
+        <button ng-class="chartbuttonclass" class="button" ng-click="changeDisplayType('chart')">Graf</button>
+        <button ng-class="tablebuttonclass" class="button" ng-click="changeDisplayType('table')">Tabel</button>
+      </div>
+    </ion-footer-bar>
 
   </ion-view>
 </div>
