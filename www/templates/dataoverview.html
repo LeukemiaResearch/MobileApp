@@ -24,47 +24,49 @@
         </div>
       </div>
 
-      <div id="dataoverviewpagechart" ng-if="displaytype=='chart'" style="min-height: 50%; margin-left:2%; margin-right:2%; width: 96%">
-          <nvd3 options="options"
-                data="dataseries"
-                config="config"
-                events="events"
-                api="api"></nvd3>
-
+      <div id="dataoverviewpagechart" ng-if="displaytype=='chart'"
+           style="min-height: 50%; margin-left:2%; margin-right:2%; width: 96%">
+        <nvd3 options="options"
+              data="dataseries"
+              config="config"
+              events="events"
+              api="api"></nvd3>
       </div>
 
-      <div id="dataoverviewpagetable" class="dataoverviewflexchild" ng-if="displaytype=='table'" style="min-height: 50%; margin-left:2%; margin-right:2%; width: 96%"
+      <div id="dataoverviewpagetable" class="dataoverviewflexchild" ng-if="displaytype=='table'"
+           style="min-height: 50%; margin-left:2%; margin-right:2%; width: 96%"
            ng-controller="dataoverviewController">
-        <div class="row">
-          <div class="col">.col</div>
-          <div class="col">.col</div>
-          <div class="col">.col</div>
-          <div class="col">.col</div>
-          <div class="col">.col</div>
-        </div>
-        <div class="row">
-          <div class="col">.col</div>
-          <div class="col">.col</div>
-          <div class="col">.col</div>
-          <div class="col">.col</div>
-          <div class="col">.col</div>
+        <div ng-repeat="dataserie in datatable">
+          <!--<div>{{dataserie.key}}:{{visibility[$index]}}</div>-->
+          <div ng-show="$index==0" class="row">
+            <div class="col"><strong></strong></div>
+            <div class="col" ng-repeat="(date, value) in dataserie.values"><strong>{{date}}</strong></div>
+          </div>
+          <!--<div ng-if="visibility[$index]">-->
+          <div class="row">
+            <div class="col">{{dataserie.key}}</div>
+            <div class="col" ng-repeat="(date, value) in dataserie.values">{{value}}</div>
+          </div>
+          <!--</div>-->
         </div>
       </div>
 
- <!--     {{"storeddata="+storeddata[0].visible+" "+storeddata[1].visible}}
-            {{"dataseries="+""+dataseries[0].visible+" "+dataseries[1].visible}}
--->
-      <div class="dataseriesflexparent dataoverviewflexchild">
+      <div id="dataoverviewpagechart" ng-if="displaytype=='chart'">
+
+        <div class="dataseriesflexparent dataoverviewflexchild">
       <span ng-repeat="dataserie in storeddata">
+        <!--<div>{{dataserie.label}}:{{visibility[dataserie.label]}}</div>-->
         <div class="dataseriesflexchild">
-          <label class="item item-checkbox">
-            <label class="checkbox checkbox-assertive">
-              <input type="checkbox" ng-model="dataserie.visible">
-            </label>
+
+          <!--<input type="checkbox" ng-model="visibility[dataserie.label]">-->
+          <button ng-click="toggleShowDataSerie($index)"
+                  ng-class="{'button-dark':visibility[$index], 'button-stable':!visibility[$index], 'button': true}">
             {{dataserie.label}}
-          </label>
+          </button>
         </div>
       </span>
+        </div>
+
       </div>
 
 
