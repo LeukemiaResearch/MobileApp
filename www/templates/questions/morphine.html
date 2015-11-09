@@ -8,7 +8,7 @@
       <span class="input-label">
         Administration type:
       </span>
-      <select data-ng-model="painData.morphineType">
+      <select data-ng-model="questionState.morphineType">
         <option selected value='oral'>Tablet</option>
         <option value='intravenous'>Intravenous</option>
       </select>
@@ -16,11 +16,11 @@
 
     <div class="item item-input">
       <span class="input-label">Dosage:</span>
-      <input type="number" style="direction: rtl;" placeholder="0" ng-model="painData.morphineDose">
+      <input type="number" style="direction: rtl;" placeholder="0" ng-model="questionState.morphineDose">
 
-      <span ng-if="painData.morphineType == 'oral'">mg/dag</span>
-      <select ng-if="painData.morphineType == 'intravenous'" class="item item-input item-select"
-              data-ng-model="painData.morphineMeasureUnit">
+      <span ng-if="questionState.morphineType == 'oral'">mg/dag</span>
+      <select ng-if="questionState.morphineType == 'intravenous'" class="item item-input item-select"
+              data-ng-model="questionState.morphineMeasureUnit">
         <option selected value='mg/t'>mg/t</option>
         <option value='mg'>mg</option>
       </select>

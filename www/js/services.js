@@ -125,8 +125,6 @@ angular.module('starter.services', [])
       PainData.destroy(id);
     };
 
-    paindataservice.finishedWizard = null;
-
     return paindataservice
   })
 
@@ -167,8 +165,6 @@ angular.module('starter.services', [])
     medicinedataservice.deleteMedicineData = function (id) {
       MedicineData.destroy(id);
     };
-
-    medicinedataservice.finishedWizard = null;
 
     return medicinedataservice;
   })
@@ -212,8 +208,6 @@ angular.module('starter.services', [])
       BloodsampleData.destroy(id);
     };
 
-    bloodsampledataservice.finishedWizard = null;
-
     return bloodsampledataservice;
   })
 
@@ -221,21 +215,16 @@ angular.module('starter.services', [])
 
     var mucositisdataservice = {};
 
-    //foodintake
-    //pain
-    //redness
-
     //MucositisData
-    MucositisData.inject([{id: 1, date: new Date(2015, 9, 16, 19, 14, 22, 0), foodintake: 2, pain: 2, redness: 3, nauseaScore:6},{id: 2, date: new Date(2015, 10, 7, 19, 46, 0, 0), foodintake: 3, pain: 3, redness: 3, nauseaScore:8}]);
+    //MucositisData.inject([{id: 1, date: new Date(2015, 9, 16, 19, 14, 22, 0), mucositisScore:7, nauseaScore:6},{id: 2, date: new Date(2015, 10, 7, 19, 46, 0, 0), mucositisScore:9, nauseaScore:8}]);
 
-    mucositisdataservice.createMucositisData = function (painScore, foodintakeScore, rednessScore, nauseaScore){
+    mucositisdataservice.createMucositisData = function (timeStamp, pain, ulcers, food, nauseaScore){
       var id = IdGenerator.generateId();
-      console.log("Mucositis Id: " + id + " NauseaScore: " + nauseaScore);
-      console.log("1. Antal records i mucositisData " + this.getAllMucositisData());
-      var obj = MucositisData.createInstance({id: id, date:new Date(),foodIntake: foodintakeScore,pain:painScore,redness:rednessScore,nauseaScore: nauseaScore});
-      console.log("Object - NauseaScore: " + obj.nauseaScore);
+      //console.log("1. Antal records i mucositisData " + this.getAllMucositisData());
+      var obj = MucositisData.createInstance({'id':id, 'timeStamp':timeStamp, 'pain': pain, 'ulcers': ulcers, 'food':food, 'nauseaScore': nauseaScore});
+      //console.log("Object - MucositisScore: " + obj.mucositisScore);
       MucositisData.inject(obj);
-      console.log("2. Antal records i mucositisData " + this.getAllMucositisData());
+      //console.log("2. Antal records i mucositisData " + JSON.stringify(this.getAllMucositisData()));
       return obj;
     };
 
@@ -268,14 +257,65 @@ angular.module('starter.services', [])
     return mucositisdataservice;
   })
 
-/*  .factory('questionState', function($timeout) {
-    var obj = {
-      type: undefined, //e.g. pain for pain questions
+  .factory('questionState', function() {
+    return {
+      type: undefined //e.g. pain for pain questions
     };
-    return {data: obj};
-  })*/
+  })
 
-  /*.factory('calendarFactory', function() {
+  .factory('dataProvider', function(MucositisDataService) {
+    var getDataObjects = function() {
+      return MucositisDataService.getAllMucositisData();
+    };
+
+     var getAllDataSeries = function() {
+      var result = {};
+      var dataObjects = getDataObjects();
+      for (objcount in dataObjects) {
+        var obj = dataObjects[objcount];
+        var timeStamp = obj['timeStamp'];
+        for (key in obj) {
+          if (['id', 'timeStamp'].indexOf(key)>=0 || !obj.hasOwnProperty(key))
+            continue;
+          if (result[key]===undefined)
+            result[key] = new Array();
+          result[key].push({'x':timeStamp, 'y':obj[key]});
+        }
+      }
+      return result;
+    };
+
+    var getAllDataTable = function() {
+      var result = {};
+      var dataSeries = getAllDataSeries();
+      for (dataseriename in dataSeries) {
+        if (!result.hasOwnProperty(dataseriename)) {
+          result[dataseriename] = {};
+          if (Object.keys(result).length>0) {
+            for (i in result[Object.keys(result)[0]])
+              result[dataseriename][i] = {'x': i.x, 'y':undefined};
+          };
+        }
+        for (obj_index in dataSeries[dataseriename]) {
+          var obj = dataSeries[dataseriename][obj_index];
+          if (!result[dataseriename].hasOwnProperty(obj.x)) {
+            for (var ds in result) {
+              result[ds][obj.x]=undefined;
+            }
+          }
+          result[dataseriename][obj.x] = obj.y;
+        }
+      }
+      return result;
+    };
+
+    return {
+      'getAllDataSeries': getAllDataSeries,
+      'getAllDataTable': getAllDataTable
+    };
+  })
+
+  .factory('calendarFactory', function() {
 
     var obj = {};
 
@@ -301,16 +341,9 @@ angular.module('starter.services', [])
     };
 
     return obj;
-  })*/
-
-  .factory('questionState', function($timeout) {
-    var obj = {
-      type: undefined, //e.g. pain for pain questions
-    };
-    return {data: obj};
   })
 
-  .factory('calendarFactory', function($filter) {
+  .factory('calendarFactory', function() {
 
     var obj = {};
 

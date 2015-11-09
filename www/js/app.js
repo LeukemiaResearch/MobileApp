@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('starter',
-  ['ionic', 'starter.controllers', 'starter.services', 'flexcalendar' , 'pascalprecht.translate', 'nvd3','js-data'])
+  ['ionic', 'starter.controllers', 'starter.services', 'flexcalendar' , 'pascalprecht.translate', 'nvd3', 'js-data', 'ionic-timepicker', 'ionic-datepicker'])
 
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {

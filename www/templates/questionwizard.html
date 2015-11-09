@@ -2,42 +2,38 @@
   <ion-view ng-attr-view-title="{{datatype}}">
     <div>
 
-    <ion-content class="questionwizardpage">
-      <!--      <h1>Question wizard page</h1>
+      <ion-content class="questionwizardpage">
+        <div ng-include="questions[datatype][template]"></div>
+      </ion-content>
 
-            <div>url of the template: <code>*{{questions.blodsample[0]}}*</code></div>
-            <div>type: <code>*{{type}}*</code></div>
-            <div>number: <code>*{{number}}*</code></div>
-            template: <code>*{{template}}*</code> -->
-
-      <div ng-include="questions[datatype][template]"></div>
-
-    </ion-content>
-
-    <ion-footer-bar class="bar thick-footer">
-      <wizard style="width: 100%" on-finish="finishedWizard()" current-step="template" ng-attr-hide-indicators="hideIndicators">
-        <div ng-repeat="(label,template) in questions[datatype]">
-          <wz-step ng-attr-title="{{label}}">
-            <ion-footer-bar class="bar">
-              <section style=" width: 100%">
+      <ion-footer-bar class="bar thick-footer">
+        <wizard style="width: 100%" on-finish="finishedWizard()" current-step="template"
+                ng-attr-hide-indicators="hideIndicators">
+          <div ng-repeat="(label,template) in questions[datatype]">
+            <wz-step ng-attr-title="{{label}}">
+              <ion-footer-bar class="bar">
+                <section style=" width: 100%">
               <span ng-if="$first">
-                <a style="float:left" class="button ion-ios-undo button-royal icon-left" wz-cancel value="Cancel">Fortryd</a>
+                <a style="float:left" class="button ion-ios-undo button-royal icon-left" ng-click="$ionicGoBack()"
+                   value="Cancel">Fortryd</a>
               </span>
               <span ng-if="!$first">
-                <a style="float:left" class="button ion-chevron-left button-royal icon-left" wz-previous value="Previous">Forrige</a>
+                <a style="float:left" class="button ion-chevron-left button-royal icon-left" wz-previous
+                   value="Previous">Forrige</a>
               </span>
               <span ng-if="!$last">
                 <a style="float:right" class="button ion-chevron-right button-royal icon-right" wz-next value="Next">Næste</a>
               </span>
               <span ng-if="$last">
-                <a style="float:Right" class="button ion-archive button-royal icon-right" wz-finish value="Finish">Gem</a>
+                <a style="float:Right" class="button ion-archive button-royal icon-right" wz-finish
+                   value="Finish">Gem</a>
               </span>
-              </section>
-            </ion-footer-bar>
-          </wz-step>
-        </div>
-      </wizard>
-    </ion-footer-bar>
+                </section>
+              </ion-footer-bar>
+            </wz-step>
+          </div>
+        </wizard>
+      </ion-footer-bar>
 
     </div>
   </ion-view>
