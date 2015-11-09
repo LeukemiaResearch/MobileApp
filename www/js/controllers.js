@@ -51,7 +51,7 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
       if ($scope.checkBoxModel.bloodsample == false) {
         calendarFactory.removeEvent('bloodsample');
       }
-    }
+    };
 
     $scope.updateHighDoseEvent = function() {
       if ($scope.checkBoxModel.highdose == true) {
@@ -62,12 +62,9 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
         calendarFactory.removeEvent('highdose');
       }
     }
-
   }])
 
-
-  .controller('questionsController', ['$scope', 'questionState','MucositisDataService', function($scope, questionState, MucositisDataService) {
-
+  .controller('questionsController', ['$scope', '$location', 'questionState','MucositisDataService', function($scope,$location,questionState, MucositisDataService, MedicineDataService, PainDataService, BloodsampleDataService) {
 
     $scope.questions = {
       "Blodprøve": {
@@ -93,8 +90,23 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
     $scope.hideIndicators = Object.keys($scope.questions[$scope.datatype]).length<=1;
 
     $scope.finishedWizard = function(){
-      MucositisDataService.finishedWizard();
-      console.log("WIZARD SLUT!!!");
+      switch($scope.datatype){
+        case 'Mucositis':
+          MucositisDataService.finishedWizard();
+          break;
+        case 'Medicin':
+          MedicineDataService.finishedWizard();
+          break;
+        case 'Smerte':
+          PainDataService.finishedWizard();
+          break;
+        case 'Blodprøve':
+          BloodsampleDataService.finishedWizard();
+          break;
+        default:
+          break;
+      }
+      $location.path('frontpage');
     }
 
   }])
@@ -284,12 +296,8 @@ angular.module('starter.controllers', ['mgo-angular-wizard'])
     //Create new Mucositisdata instance
     MucositisDataService.finishedWizard = function(){
       console.log("Påbegynder oprettelse af mucositisdata!");
-      var mucositisScore = 0;
-      for (var i = 0; i < $scope.groupvalue.length; i++) {
-        mucositisScore += $scope.groupvalue[i];
-      }
-      console.log("MucositisScore: " + mucositisScore + " , NauseaScore: " + $scope.nauseaScore);
-      MucositisDataService.createMucositisData(mucositisScore,$scope.nauseaScore);
+      console.log("MucositisScore: " + $scope.groupvalue[0]+$scope.groupvalue[1]+$scope.groupvalue[2] + " , NauseaScore: " + $scope.nauseaScore);
+      MucositisDataService.createMucositisData($scope.groupvalue[0],$scope.groupvalue[1],$scope.groupvalue[2],$scope.nauseaScore);
     };
 
   })
