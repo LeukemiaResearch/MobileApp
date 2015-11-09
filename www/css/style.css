@@ -73,8 +73,8 @@ flex-calendar {
   min-height: 9.0em;
 }
 
-@media (max-width: 767px) {
-  /* responsive-md */
+@media (max-width: 767px) { /* responsive-md */
+
   .mucositis-button {
     min-height: 3.0em;
   }
