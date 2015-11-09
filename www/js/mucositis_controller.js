@@ -23,4 +23,4 @@ angular.module('starter.controllers')
     MucositisDataService.createMucositisData(questionState.timeStamp, questionState.groupvalue[0], questionState.groupvalue[1], questionState.groupvalue[2], parseInt(questionState.nauseaScore, 10));
   };
 
-})
+});

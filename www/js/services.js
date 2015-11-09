@@ -137,7 +137,7 @@ angular.module('starter.services', [])
     //MedicineData
     MedicineData.inject([{id: 1, date: new Date(2015, 8, 27, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 2, date: new Date(2015, 9, 2, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 3, date: new Date(2015, 9, 16, 0, 0, 0, 0), sixmp:10.0, mtx:10.0}, {id: 4, date: new Date(2015, 9, 17, 0, 0, 0, 0), sixmp:0, mtx:0}, {id: 5, date: new Date(2015, 10, 1, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 6, date: new Date(2015, 10, 7, 0, 0, 0, 0), sixmp:25.0, mtx:10.0}]);
 
-    medicinedataservice.createMedicineData = function (sixmp, mtx, date){
+    medicinedataservice.createMedicineData = function (date, sixmp, mtx){
       var id = IdGenerator.generateId();
       var obj = MedicineData.createInstance({id: id, date: date, sixmp: sixmp, mtx: mtx});
       MedicineData.inject(obj);
