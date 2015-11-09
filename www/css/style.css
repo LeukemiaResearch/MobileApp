@@ -6,8 +6,13 @@
   align-items: stretch;
 }
 
-.frontpagecomponent {
+.frontpagetopcomponent {
   height: 350px;
+  flex: 1 0;
+}
+
+.frontpagecomponent {
+  height: 200px;
   flex: 1 0;
 }
 
