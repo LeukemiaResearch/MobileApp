@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-  .controller('questionsController', function($scope, questionState, MucositisDataService, $ionicPopup) {
+  .controller('questionsController', function($scope, questionState, PainDataService, MucositisDataService, MedicineDataService, BloodsampleDataService, $ionicPopup) {
 
   $scope.questionState = questionState;
 
