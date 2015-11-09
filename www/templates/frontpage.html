@@ -1,7 +1,7 @@
 <ion-view view-title="Leukæmi App" ng-controller="frontpageController">
   <ion-content class="frontpagecontainer">
-    <div class="row responsive-sm" ng-controller="calendarController">
-      <div class="col">
+    <div class="row responsive-sm bigScreen" ng-controller="calendarController">
+      <div class="col topmodulerow">
         <div class="card frontpagetopcomponent">
           <div class="item item-text-wrap">
             <div class="wrapp">
@@ -10,6 +10,35 @@
           </div>
         </div>
       </div>
+      <div class="col">
+        <div class="card frontpagetopcomponent">
+          <div class="item item-text-wrap">
+            <div class="calendar-date">
+              {{ calendarFactory.selectedDate.getDate() }} <br>
+            </div>
+            <div class="calendar-day">
+              {{ calendarFactory.getSelectedDayOfTheWeek() }} <br>
+            </div>
+            <div class="calendar-month">
+              {{ calendarFactory.getSelectedMonth() }} <br>
+            </div>
+            <li class="item item-checkbox">
+              <label class="checkbox">
+                <input type="checkbox" ng-model="checkBoxModel.bloodsample" ng-change="updateBloodSampleEvent()">
+              </label>
+              Bloodprøver
+            </li>
+            <li class="item item-checkbox">
+              <label class="checkbox">
+                <input type="checkbox" ng-model="checkBoxModel.highdose" ng-change="updateHighDoseEvent()">
+              </label>
+              Højdosis
+            </li>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row responsive-sm smallScreen" ng-controller="calendarController">
       <div class="col">
         <div class="card frontpagetopcomponent">
           <div class="item item-text-wrap">

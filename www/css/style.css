@@ -81,7 +81,25 @@ flex-calendar {
   .col, .button.button-block {
     margin: 0px 0px !important;
   }
+  .smallScreen {
+    visibility: visible;
+  }
+  .bigScreen {
+    max-height: 0px;
+    visibility: hidden;
+  }
 }
+
+@media (min-width: 768px) {
+  .smallScreen {
+    max-height: 0px;
+    visibility: hidden;
+  }
+  .bigScreen {
+    visibility: visible;
+  }
+}
+
 .centervertically {
   top: 50%;
   -webkit-transform: translateY(-50%);
