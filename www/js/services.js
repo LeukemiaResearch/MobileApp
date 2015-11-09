@@ -125,6 +125,8 @@ angular.module('starter.services', [])
       PainData.destroy(id);
     };
 
+    paindataservice.finishedWizard = null;
+
     return paindataservice
   })
 
@@ -166,6 +168,8 @@ angular.module('starter.services', [])
       MedicineData.destroy(id);
     };
 
+    medicinedataservice.finishedWizard = null
+
     return medicinedataservice;
   })
 
@@ -177,9 +181,9 @@ angular.module('starter.services', [])
     BloodsampleData.inject([{id: 1, date: new Date(2015, 9, 2, 15, 15, 0, 0), leucocytes: 4.5, neutrofile: 7.8, thrombocytes: 45.2, hemoglobin: 3.7, alat: 3465, crp: 453},
       {id: 2, date: new Date(2015, 10, 7, 12, 2, 34, 0), leucocytes:78.5, neutrofile:12.3, thrombocytes:15.0, hemoglobin:4.1, alat:2635, crp:251}]);
 
-    bloodsampledataservice.createBloodsampleData = function (leucocytes, neutrofile, thrombocytes, hemoglobin, alat, crp){
+    bloodsampledataservice.createBloodsampleData = function (date, leucocytes, neutrofile, thrombocytes, hemoglobin, alat, crp){
       var id = IdGenerator.generateId();
-      var obj = BloodsampleData.createInstance({id: id, date:new Date(),leucocytes: leucocytes,neutrofile: neutrofile,thrombocytes: thrombocytes,hemoglobin: hemoglobin,alat: alat,crp: crp});
+      var obj = BloodsampleData.createInstance({id: id, date:date, leucocytes: leucocytes,neutrofile: neutrofile,thrombocytes: thrombocytes,hemoglobin: hemoglobin,alat: alat,crp: crp});
       BloodsampleData.inject(obj);
       return obj;
     };
@@ -208,6 +212,8 @@ angular.module('starter.services', [])
       BloodsampleData.destroy(id);
     };
 
+    bloodsampledataservice.finishedWizard = null;
+
     return bloodsampledataservice;
   })
 
@@ -220,11 +226,8 @@ angular.module('starter.services', [])
 
     mucositisdataservice.createMucositisData = function (timeStamp, pain, ulcers, food, nauseaScore){
       var id = IdGenerator.generateId();
-      //console.log("1. Antal records i mucositisData " + this.getAllMucositisData());
-      var obj = MucositisData.createInstance({'id':id, 'timeStamp':timeStamp, 'pain': pain, 'ulcers': ulcers, 'food':food, 'nauseaScore': nauseaScore});
-      //console.log("Object - MucositisScore: " + obj.mucositisScore);
+      var obj = MucositisData.createInstance({id: id, timeStamp: timeStamp, pain: pain, ulcers: ulcers, food:food, 'nauseaScore': nauseaScore});
       MucositisData.inject(obj);
-      //console.log("2. Antal records i mucositisData " + JSON.stringify(this.getAllMucositisData()));
       return obj;
     };
 

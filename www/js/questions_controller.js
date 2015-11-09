@@ -94,8 +94,21 @@ angular.module('starter.controllers')
   $scope.finishedWizard = function(){
 
     //Store entered data
-    if (questionState.type==='Mucositis')
+    if (questionState.type==='Mucositis'){
       MucositisDataService.finishedWizard();
+    }
+
+    else if (questionState.type==='Medicin') {
+      MedicineDataService.finishedWizard();
+    }
+
+    else if (questionState.type==='Smerte') {
+      PainDataService.finishedWizard();
+    }
+
+    else if (questionState.type==='Blodprøve') {
+      BloodsampleDataService.finishedWizard();
+    }
 
     //Clean up question state
     for (var variableKey in questionState){
@@ -116,4 +129,4 @@ angular.module('starter.controllers')
     });
   }
 
-})
+});
