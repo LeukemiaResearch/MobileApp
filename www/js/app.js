@@ -24,7 +24,7 @@ angular.module('starter',
     });
   })
   .config(function ($translateProvider) {
-    $translateProvider.translations('en', {
+    $translateProvider.translations('en_EN', {
       JANUARY: 'January',
       FEBRUARY: 'February',
       MARCH: 'March',
@@ -46,7 +46,7 @@ angular.module('starter',
       FRIDAY: 'Friday',
       SATURDAY: 'Saturday'
     });
-    $translateProvider.translations('fr', {
+    $translateProvider.translations('fr_FR', {
       JANUARY: 'Janvier',
       FEBRUARY: 'Févier',
       MARCH: 'Mars',
@@ -68,7 +68,7 @@ angular.module('starter',
       FRIDAY: 'Vendredi',
       SATURDAY: 'Samedi'
     });
-    $translateProvider.translations('pt', {
+    $translateProvider.translations('pt_PT', {
       JANUARY: 'Janeiro',
       FEBRUARY: 'Fevereiro',
       MARCH: 'Março',
@@ -90,7 +90,31 @@ angular.module('starter',
       FRIDAY: 'Sexta',
       SATURDAY: 'Sábado'
     });
-    $translateProvider.preferredLanguage('en');
+
+    $translateProvider.translations('da_DA', {
+      JANUARY: 'Januar',
+      FEBRUARY: 'Februar',
+      MARCH: 'Marts',
+      APRIL: 'April',
+      MAI: 'Maj',
+      JUNE: 'Juni',
+      JULY: 'Juli',
+      AUGUST: 'August',
+      SEPTEMBER: 'September',
+      OCTOBER: 'Oktober',
+      NOVEMBER: 'November',
+      DECEMBER: 'December',
+
+      SUNDAY: 'Søndag',
+      MONDAY: 'Mandag',
+      TUESDAY: 'Tirsdag',
+      WEDNESDAY: 'Onsdag',
+      THURSDAY: 'Torsdag',
+      FRIDAY: 'Fredag',
+      SATURDAY: 'Lørdag'
+    });
+
+    $translateProvider.preferredLanguage('da_DA');
     $translateProvider.useSanitizeValueStrategy('escape');
   })
   .config(function($stateProvider, $urlRouterProvider) {
@@ -117,7 +141,7 @@ angular.module('starter',
       .state('dataoverviewpage', {
         url: '/dataoverviewpage',
         templateUrl: 'templates/dataoverview.html'
-      })
+      });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/frontpage');
