@@ -67,23 +67,23 @@ angular.module('starter.controllers')
 
   $scope.questions = {
     "Blodprøve": {
-      "Tid": "templates/questions/timestamp.html",
-      "Blodprøve": "templates/questions/blodsample.html"
+      "Blodprøve": "templates/questions/blodsample.html",
+      "Tid": "templates/questions/timestamp.html"
     },
     "Medicin": {
-      "Tid": "templates/questions/timestamp.html",
-      "Medicin": "templates/questions/medicine.html"
+      "Medicin": "templates/questions/medicine.html",
+      "Tid": "templates/questions/timestamp.html"
     },
     "Smerte": {
-      "Tid": "templates/questions/timestamp.html",
       "Morfin":"templates/questions/morphine.html",
       "Type":"templates/questions/painposition.html",
-      "Styrke": "templates/questions/painscale.html"
+      "Styrke": "templates/questions/painscale.html",
+      "Tid": "templates/questions/timestamp.html"
     },
     "Mucositis": {
-      "Tid": "templates/questions/timestamp.html",
       "Mundsår":"templates/questions/mucositistype.html",
-      "Kvalme":"templates/questions/nausea.html"
+      "Kvalme":"templates/questions/nausea.html",
+      "Tid": "templates/questions/timestamp.html"
     }
   };
 
