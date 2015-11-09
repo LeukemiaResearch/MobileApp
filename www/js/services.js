@@ -185,6 +185,7 @@ angular.module('starter.services', [])
       var id = IdGenerator.generateId();
       var obj = BloodsampleData.createInstance({id: id, date:date, leucocytes: leucocytes,neutrofile: neutrofile,thrombocytes: thrombocytes,hemoglobin: hemoglobin,alat: alat,crp: crp});
       BloodsampleData.inject(obj);
+      console.log("ID: " + obj.id + "Leuko: " + obj.leucocytes);
       return obj;
     };
 
