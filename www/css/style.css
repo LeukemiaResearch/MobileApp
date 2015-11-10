@@ -1,19 +1,11 @@
 /* Empty. Add your own CSS if you like */
 
 .frontpagecontainer {
+  /*
   display: flex;
   flex-direction: column;
   align-items: stretch;
-}
-
-.frontpagetopcomponent {
-  height: 350px;
-  flex: 1 0;
-}
-
-.frontpagecomponent {
-  height: 200px;
-  flex: 1 0;
+  */
 }
 
 .wrapp {
@@ -81,22 +73,39 @@ flex-calendar {
   .col, .button.button-block {
     margin: 0px 0px !important;
   }
-  .smallScreen {
+  .smallScreentoprow {
     visibility: visible;
+    /*flex: 1 0;*/
   }
-  .bigScreen {
+  .bigScreentoprow {
     max-height: 0px;
     visibility: hidden;
   }
 }
 
+/*
+.frontpagerow {
+  /!*min-height: 150px;*!/
+  flex: 1 0;
+}
+*/
+
 @media (min-width: 768px) {
-  .smallScreen {
+  .smallScreentoprow {
     max-height: 0px;
     visibility: hidden;
   }
   .bigScreen {
     visibility: visible;
+    /*flex: 5 0;*/
+  }
+
+  .frontpagecomponent {
+    min-height: 200px;
+  }
+
+  .frontpagetopcomponent {
+    min-height: 365px;
   }
 }
 
