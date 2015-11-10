@@ -5,7 +5,6 @@ angular.module('starter.controllers')
   //Expose questionState
   $scope.questionState = questionState;
 
-
   //Initialize SixMP
     questionState.SixMP = undefined;
 
