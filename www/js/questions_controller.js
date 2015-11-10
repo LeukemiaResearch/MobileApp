@@ -23,8 +23,10 @@ angular.module('starter.controllers')
       setButtonType: 'button-positive',  //Optional
       closeButtonType: 'button-stable',  //Optional
       callback: function (val) {    //Mandatory
-        $scope.timePickerObject.inputEpochTime = val;
-        $scope.updateQuestionStateTimeStamp();
+        if (val) {
+          $scope.timePickerObject.inputEpochTime = val;
+          $scope.updateQuestionStateTimeStamp();
+        }
       }
     };
 
@@ -49,8 +51,10 @@ angular.module('starter.controllers')
       //from: new Date(2012, 8, 2), //Optional
       //to: new Date(2018, 8, 25),  //Optional
       callback: function (val) {  //Mandatory
-        $scope.datepickerObject.inputDate = val;
-        $scope.updateQuestionStateTimeStamp();
+        if (val) {
+          $scope.datepickerObject.inputDate = val;
+          $scope.updateQuestionStateTimeStamp();
+        }
       },
       dateFormat: 'dd-MM-yyyy', //Optional
       closeOnSelect: false, //Optional
@@ -67,23 +71,23 @@ angular.module('starter.controllers')
 
   $scope.questions = {
     "Blodprøve": {
-      "Blodprøve": "templates/questions/blodsample.html",
-      "Tid": "templates/questions/timestamp.html"
+      "Tid": "templates/questions/timestamp.html",
+      "Blodprøve": "templates/questions/blodsample.html"
     },
     "Medicin": {
-      "Medicin": "templates/questions/medicine.html",
-      "Tid": "templates/questions/timestamp.html"
+      "Tid": "templates/questions/timestamp.html",
+      "Medicin": "templates/questions/medicine.html"
     },
     "Smerte": {
+      "Tid": "templates/questions/timestamp.html",
       "Morfin":"templates/questions/morphine.html",
       "Type":"templates/questions/painposition.html",
       "Styrke": "templates/questions/painscale.html",
-      "Tid": "templates/questions/timestamp.html"
     },
     "Mucositis": {
+      "Tid": "templates/questions/timestamp.html",
       "Mundsår":"templates/questions/mucositistype.html",
-      "Kvalme":"templates/questions/nausea.html",
-      "Tid": "templates/questions/timestamp.html"
+      "Kvalme":"templates/questions/nausea.html"
     }
   };
 
