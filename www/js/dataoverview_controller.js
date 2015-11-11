@@ -1,6 +1,11 @@
 angular.module('starter.controllers')
 
-  .controller('dataoverviewController', function ($scope, $filter, questionState, dataProvider) {
+  .controller('dataoverviewController', function ($scope, $filter, questionState, dataProvider, PainDataService, MucositisDataService, MedicineDataService, BloodsampleDataService) {
+
+    //Initialize period
+    $scope.endTimeStamp = new Date();
+    $scope.startTimeStamp = new Date();
+    $scope.startTimeStamp.setMonth($scope.startTimeStamp.getMonth()-1);
 
     $scope.formatTime = function (inputEpochTime) {
       var selectedTime = new Date(inputEpochTime * 1000);
@@ -11,15 +16,19 @@ angular.module('starter.controllers')
 
     /* Time and date picker */
     $scope.updateStartTimeStamp = function() {
-
+      var date = $scope.startDatepickerObject.inputDate;
+      var hours = Math.floor($scope.startTimePickerObject.inputEpochTime / 3600);
+      var minutes = Math.floor(($scope.startTimePickerObject.inputEpochTime - hours * 3600) / 60);
+      date.setHours(hours, minutes, 0, 0);
+      $scope.startTimeStamp = date;
     };
     if ($scope.startTimePickerObject === undefined)
       $scope.startTimePickerObject = {
         displayValue: function () {
           return $scope.formatTime($scope.startTimePickerObject.inputEpochTime);
         },
-        inputEpochTime: ((questionState.timeStamp?questionState.timeStamp:new Date()).getHours() * 60 * 60 +
-        Math.floor((questionState.timeStamp?questionState.timeStamp:new Date()).getMinutes() / 5) * 5 * 60),  //Optional
+        inputEpochTime: (($scope.startTimeStamp?$scope.startTimeStamp:new Date()).getHours() * 60 * 60 +
+        Math.floor(($scope.startTimeStamp?$scope.startTimeStamp:new Date()).getMinutes() / 5) * 5 * 60),  //Optional
         step: 5,  //Optional
         format: 24,  //Optional
         titleLabel: 'Tidspunkt',  //Optional
@@ -43,7 +52,7 @@ angular.module('starter.controllers')
         setButtonType: 'button-positive',  //Optional
         todayButtonType: 'button-stable',  //Optional
         closeButtonType: 'button-stable',  //Optional
-        inputDate: (questionState.timeStamp?questionState.timeStamp:new Date()),  //Optional
+        inputDate: ($scope.startTimeStamp?$scope.startTimeStamp:new Date()),  //Optional
         mondayFirst: true,  //Optional
         //disabledDates: disabledDates, //Optional
         weekDaysList: ["Sø", "Ma", "Ti", "On", "To", "Fr", "Lø"], //Optional
@@ -64,15 +73,19 @@ angular.module('starter.controllers')
         closeOnSelect: false, //Optional
       };
     $scope.updateEndTimeStamp = function() {
-
+      var date = $scope.endDatepickerObject.inputDate;
+      var hours = Math.floor($scope.endTimePickerObject.inputEpochTime / 3600);
+      var minutes = Math.floor(($scope.endTimePickerObject.inputEpochTime - hours * 3600) / 60);
+      date.setHours(hours, minutes, 0, 0);
+      $scope.endTimeStamp = date;
     };
     if ($scope.endTimePickerObject === undefined)
       $scope.endTimePickerObject = {
         displayValue: function () {
           return $scope.formatTime($scope.endTimePickerObject.inputEpochTime);
         },
-        inputEpochTime: ((questionState.timeStamp?questionState.timeStamp:new Date()).getHours() * 60 * 60 +
-        Math.floor((questionState.timeStamp?questionState.timeStamp:new Date()).getMinutes() / 5) * 5 * 60),  //Optional
+        inputEpochTime: (($scope.endTimeStamp?$scope.endTimeStamp:new Date()).getHours() * 60 * 60 +
+        Math.floor(($scope.endTimeStamp?$scope.endTimeStamp:new Date()).getMinutes() / 5) * 5 * 60),  //Optional
         step: 5,  //Optional
         format: 24,  //Optional
         titleLabel: 'Tidspunkt',  //Optional
@@ -96,7 +109,7 @@ angular.module('starter.controllers')
         setButtonType: 'button-positive',  //Optional
         todayButtonType: 'button-stable',  //Optional
         closeButtonType: 'button-stable',  //Optional
-        inputDate: (questionState.timeStamp?questionState.timeStamp:new Date()),  //Optional
+        inputDate: ($scope.endTimeStamp?$scope.endTimeStamp:new Date()),  //Optional
         mondayFirst: true,  //Optional
         //disabledDates: disabledDates, //Optional
         weekDaysList: ["Sø", "Ma", "Ti", "On", "To", "Fr", "Lø"], //Optional
@@ -208,35 +221,6 @@ angular.module('starter.controllers')
     //Data serie visibility control
     $scope.visibility = [];
 
-    //Load graph data
-    $scope.storeddata = new Array();
-    var rawdataseries = dataProvider.getAllDataSeries();
-    var dataserieNumber = 0;
-    for (var name in rawdataseries) {
-      var dataserie = {};
-      dataserie['values'] = rawdataseries[name];
-      dataserie['color'] = $scope.options.chart.allcolors[dataserieNumber];
-      dataserie['type'] = 'line';
-      dataserie['key'] = name;
-      dataserie['label'] = name;
-      dataserie['visible'] = true;
-      $scope.storeddata.push(dataserie);
-      $scope.visibility[dataserieNumber] =  dataserieNumber == 0;
-      dataserieNumber++;
-    }
-
-    //Load table data
-    $scope.storeddatatable = dataProvider.getAllDataTable();
-    $scope.datatable = [];
-    for (var dataseriename in $scope.storeddatatable) {
-      if ($scope.storeddatatable.hasOwnProperty(dataseriename)) {
-        if ($scope.storeddatatable.hasOwnProperty(dataseriename)) {
-          var datarow = {'key': dataseriename, values: $scope.storeddatatable[dataseriename]};
-          $scope.datatable.push(datarow);
-        }
-      }
-    }
-
     //Data serie control display
     $scope.updateDataContent = function () {
       $scope.dataseries = $filter('filter')($scope.storeddata, function (value, index, array) {
@@ -266,7 +250,53 @@ angular.module('starter.controllers')
         return dataserie.color;
       });
     };
-    $scope.updateDataContent();
+
+    //Lookup data service based on type
+    $scope.getDataService = function() {
+      if ($scope.datatype=='Medicin') {
+        return MedicineDataService;
+      } else if ($scope.datatype=='Smerte') {
+        return PainDataService;
+      } else if ($scope.datatype=='Blodprøve') {
+        return BloodsampleDataService;
+      } else if ($scope.datatype=='Mucositis') {
+        return MucositisDataService;
+      };
+    }
+
+    //Load graph data
+    $scope.updateGraphContent = function() {
+      $scope.storeddata = new Array();
+      var rawdataseries = dataProvider.getAllDataSeries($scope.getDataService(), $scope.startTimeStamp, $scope.endTimeStamp);
+      var dataserieNumber = 0;
+      for (var name in rawdataseries) {
+        var dataserie = {};
+        dataserie['values'] = rawdataseries[name];
+        dataserie['color'] = $scope.options.chart.allcolors[dataserieNumber];
+        dataserie['type'] = 'line';
+        dataserie['key'] = name;
+        dataserie['label'] = name;
+        dataserie['visible'] = true;
+        $scope.storeddata.push(dataserie);
+        $scope.visibility[dataserieNumber] = dataserieNumber == 0;
+        dataserieNumber++;
+      }
+      $scope.updateDataContent();
+    };
+
+    //Load table data
+    $scope.updateTableData = function() {
+      $scope.storeddatatable = dataProvider.getAllDataTable($scope.getDataService(), $scope.startTimeStamp, $scope.endTimeStamp);
+      $scope.datatable = [];
+      for (var dataseriename in $scope.storeddatatable) {
+        if ($scope.storeddatatable.hasOwnProperty(dataseriename)) {
+          if ($scope.storeddatatable.hasOwnProperty(dataseriename)) {
+            var datarow = {'key': dataseriename, values: $scope.storeddatatable[dataseriename]};
+            $scope.datatable.push(datarow);
+          }
+        }
+      }
+    }
 
     //Toggle display of data serie
     $scope.toggleShowDataSerie = function(number) {
@@ -295,5 +325,8 @@ angular.module('starter.controllers')
     };
     $scope.changeDisplayType("chart");
 
+    //Initialize
+    $scope.updateGraphContent();
+    $scope.updateTableData();
   });
 
