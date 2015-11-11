@@ -4,14 +4,17 @@ angular.module('starter.controllers')
 
   $scope.questionState = questionState;
 
+    $scope.formatTime = function (inputEpochTime) {
+      var selectedTime = new Date(inputEpochTime * 1000);
+      var hours = selectedTime.getUTCHours();
+      var minutes = selectedTime.getUTCMinutes();
+      return (hours < 10 ? '0' : '') + hours +' : '+ (minutes < 10 ? '0' : '') + minutes;
+    };
 
-  if ($scope.timePickerObject === undefined)
+    if ($scope.timePickerObject === undefined)
     $scope.timePickerObject = {
       displayValue: function () {
-        var selectedTime = new Date($scope.timePickerObject.inputEpochTime * 1000);
-        return selectedTime.getUTCHours().toLocaleString('en', {minimumIntegerDigits: 2, useGrouping: false})
-          + ' : '
-          + selectedTime.getUTCMinutes().toLocaleString('en', {minimumIntegerDigits: 2, useGrouping: false});
+        return $scope.formatTime($scope.timePickerObject.inputEpochTime);
       },
       inputEpochTime: ((questionState.timeStamp?questionState.timeStamp:new Date()).getHours() * 60 * 60 +
         Math.floor((questionState.timeStamp?questionState.timeStamp:new Date()).getMinutes() / 5) * 5 * 60),  //Optional

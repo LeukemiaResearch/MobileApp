@@ -2,6 +2,13 @@ angular.module('starter.controllers')
 
   .controller('dataoverviewController', function ($scope, $filter, questionState, dataProvider) {
 
+    $scope.formatTime = function (inputEpochTime) {
+      var selectedTime = new Date(inputEpochTime * 1000);
+      var hours = selectedTime.getUTCHours();
+      var minutes = selectedTime.getUTCMinutes();
+      return (hours < 10 ? '0' : '') + hours +' : '+ (minutes < 10 ? '0' : '') + minutes;
+    };
+
     /* Time and date picker */
     $scope.updateStartTimeStamp = function() {
 
@@ -9,10 +16,7 @@ angular.module('starter.controllers')
     if ($scope.startTimePickerObject === undefined)
       $scope.startTimePickerObject = {
         displayValue: function () {
-          var selectedTime = new Date($scope.startTimePickerObject.inputEpochTime * 1000);
-          return selectedTime.getUTCHours().toLocaleString('en', {minimumIntegerDigits: 2, useGrouping: false})
-            + ' : '
-            + selectedTime.getUTCMinutes().toLocaleString('en', {minimumIntegerDigits: 2, useGrouping: false});
+          return $scope.formatTime($scope.startTimePickerObject.inputEpochTime);
         },
         inputEpochTime: ((questionState.timeStamp?questionState.timeStamp:new Date()).getHours() * 60 * 60 +
         Math.floor((questionState.timeStamp?questionState.timeStamp:new Date()).getMinutes() / 5) * 5 * 60),  //Optional
@@ -65,10 +69,7 @@ angular.module('starter.controllers')
     if ($scope.endTimePickerObject === undefined)
       $scope.endTimePickerObject = {
         displayValue: function () {
-          var selectedTime = new Date($scope.endTimePickerObject.inputEpochTime * 1000);
-          return selectedTime.getUTCHours().toLocaleString('en', {minimumIntegerDigits: 2, useGrouping: false})
-            + ' : '
-            + selectedTime.getUTCMinutes().toLocaleString('en', {minimumIntegerDigits: 2, useGrouping: false});
+          return $scope.formatTime($scope.endTimePickerObject.inputEpochTime);
         },
         inputEpochTime: ((questionState.timeStamp?questionState.timeStamp:new Date()).getHours() * 60 * 60 +
         Math.floor((questionState.timeStamp?questionState.timeStamp:new Date()).getMinutes() / 5) * 5 * 60),  //Optional
