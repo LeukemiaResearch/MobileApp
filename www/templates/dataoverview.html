@@ -84,13 +84,22 @@
         <div class="dataseriesflexparent dataoverviewflexchild">
       <span ng-repeat="dataserie in storeddata">
         <!--<div>{{dataserie.label}}:{{visibility[dataserie.label]}}</div>-->
+
         <div class="dataseriesflexchild">
 
           <!--<input type="checkbox" ng-model="visibility[dataserie.label]">-->
-          <button ng-click="toggleShowDataSerie($index)"
-                  ng-class="{'button-dark':visibility[$index], 'button-stable':!visibility[$index], 'button': true}">
-            {{dataserie.label}}
-          </button>
+          <span ng-if="visibility[$index]">
+            <button ng-click="toggleShowDataSerie($index)" class="button button-stable"
+                    ng-style="{'background-color': '{{options.chart.allcolors[$index]}}'};">
+              {{dataserie.label}}
+            </button>
+          </span>
+          <span ng-if="!visibility[$index]">
+            <button ng-click="toggleShowDataSerie($index)" class="button button-stable">
+              {{dataserie.label}}
+            </button>
+          </span>
+
         </div>
       </span>
         </div>

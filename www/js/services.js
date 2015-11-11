@@ -232,6 +232,17 @@ angular.module('starter.services', [])
       return obj;
     };
 
+    mucositisdataservice.getData = function (start, end) {
+      return MucositisData.filter({
+        where: {
+          timeStamp: {
+            '>=': start,
+            '<=': end
+          }
+        }
+      });
+    };
+
     mucositisdataservice.getAllMucositisData = function () {
       return MucositisData.getAll();
     };
@@ -267,14 +278,14 @@ angular.module('starter.services', [])
     };
   })
 
-  .factory('dataProvider', function(MucositisDataService) {
-    var getDataObjects = function() {
-      return MucositisDataService.getAllMucositisData();
+  .factory('dataProvider', function() {
+    var getDataObjects = function(dataStore, start, end) {
+      return dataStore.getData(start, end);
     };
 
-     var getAllDataSeries = function() {
+     var getAllDataSeries = function(dataStore, start, end) {
       var result = {};
-      var dataObjects = getDataObjects();
+      var dataObjects = getDataObjects(dataStore, start, end);
       for (objcount in dataObjects) {
         var obj = dataObjects[objcount];
         var timeStamp = obj['timeStamp'];
@@ -289,9 +300,9 @@ angular.module('starter.services', [])
       return result;
     };
 
-    var getAllDataTable = function() {
+    var getAllDataTable = function(dataStore, start, end) {
       var result = {};
-      var dataSeries = getAllDataSeries();
+      var dataSeries = getAllDataSeries(dataStore, start, end);
       for (dataseriename in dataSeries) {
         if (!result.hasOwnProperty(dataseriename)) {
           result[dataseriename] = {};
