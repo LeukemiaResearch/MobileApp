@@ -24,7 +24,7 @@ angular.module('starter.controllers')
         format: 24,  //Optional
         titleLabel: 'Tidspunkt',  //Optional
         setLabel: 'Vælg',  //Optional
-        closeLabel: 'Anuller',  //Optional
+        closeLabel: 'Luk',  //Optional
         setButtonType: 'button-positive',  //Optional
         closeButtonType: 'button-stable',  //Optional
         callback: function (val) {    //Mandatory
@@ -40,9 +40,9 @@ angular.module('starter.controllers')
         todayLabel: 'I dag',  //Optional
         closeLabel: 'Luk',  //Optional
         setLabel: 'Vælg',  //Optional
-        setButtonType: 'button-assertive',  //Optional
-        todayButtonType: 'button-assertive',  //Optional
-        closeButtonType: 'button-assertive',  //Optional
+        setButtonType: 'button-positive',  //Optional
+        todayButtonType: 'button-stable',  //Optional
+        closeButtonType: 'button-stable',  //Optional
         inputDate: (questionState.timeStamp?questionState.timeStamp:new Date()),  //Optional
         mondayFirst: true,  //Optional
         //disabledDates: disabledDates, //Optional
@@ -77,7 +77,7 @@ angular.module('starter.controllers')
         format: 24,  //Optional
         titleLabel: 'Tidspunkt',  //Optional
         setLabel: 'Vælg',  //Optional
-        closeLabel: 'Anuller',  //Optional
+        closeLabel: 'Luk',  //Optional
         setButtonType: 'button-positive',  //Optional
         closeButtonType: 'button-stable',  //Optional
         callback: function (val) {    //Mandatory
@@ -93,9 +93,9 @@ angular.module('starter.controllers')
         todayLabel: 'I dag',  //Optional
         closeLabel: 'Luk',  //Optional
         setLabel: 'Vælg',  //Optional
-        setButtonType: 'button-assertive',  //Optional
-        todayButtonType: 'button-assertive',  //Optional
-        closeButtonType: 'button-assertive',  //Optional
+        setButtonType: 'button-positive',  //Optional
+        todayButtonType: 'button-stable',  //Optional
+        closeButtonType: 'button-stable',  //Optional
         inputDate: (questionState.timeStamp?questionState.timeStamp:new Date()),  //Optional
         mondayFirst: true,  //Optional
         //disabledDates: disabledDates, //Optional
