@@ -159,6 +159,7 @@ angular.module('starter.controllers')
       chart: {
         type: 'multiChart',
         height: window.innerHeight / 2,
+        showLegend: false,
         margin: {
           top: 30,
           right: 30,
@@ -198,7 +199,7 @@ angular.module('starter.controllers')
           "#17becf"
         ],
         //color: d3.scale.category10().range(),
-        //useInteractiveGuideline: true,
+        //useInteractiveGuideline: false,
         transitionDuration: 500,
         xAxis: {
           tickFormat: function (d) {
