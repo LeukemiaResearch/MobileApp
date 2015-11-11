@@ -65,8 +65,19 @@ flex-calendar {
   min-height: 9.0em;
 }
 
+.flacc-button {
+  padding: 0;
+  margin: 0;
+  line-height: 1.5em;
+  min-height: 5.0em;
+}
+
+
 @media (max-width: 767px) { /* responsive-md */
 
+  .flacc-button {
+    min-height: 3.0em;
+  }
   .mucositis-button {
     min-height: 3.0em;
   }
