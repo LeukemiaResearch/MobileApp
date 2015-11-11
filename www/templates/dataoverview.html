@@ -5,18 +5,51 @@
     <ion-content class="dataoverviewpage dataoverviewflexparent">
 
       <div class="dataseriesflexparent dataoverviewflexchild">
+
+
         <div class="dataseriesflexchild">
-          <label class="item item-input">
-            <span class="input-label">Fra</span>
-            <input type="datetime-local">
-          </label>
+
+          <div class="row">
+            <span class="col" style="text-align: center"><strong>Fra:</strong></span>
+            <span class="col" style="text-align: center"><strong>Til:</strong></span>
+          </div>
+
+          <div class="row">
+
+            <div class="col">
+              <div class="row responsive-sm">
+                <ionic-datepicker input-obj="startDatepickerObject" class="col">
+                  <button class="button button-block button-stable">
+                    <strong>{{startDatepickerObject.inputDate | date:'dd/MM, yyyy'}}</strong>
+                  </button>
+                </ionic-datepicker>
+                <ionic-timepicker input-obj="startTimePickerObject" class="col">
+                  <button class="button button-block button-stable overflowShow">
+                    <strong>{{startTimePickerObject.displayValue()}}</strong>
+                  </button>
+                </ionic-timepicker>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="row responsive-sm">
+                <ionic-datepicker input-obj="endDatepickerObject" class="col">
+                  <button class="button button-block button-stable">
+                    <strong>{{endDatepickerObject.inputDate | date:'dd/MM, yyyy'}}</strong>
+                  </button>
+                </ionic-datepicker>
+                <ionic-timepicker input-obj="endTimePickerObject" class="col">
+                  <button class="button button-block button-stable overflowShow">
+                    <strong>{{endTimePickerObject.displayValue()}}</strong>
+                  </button>
+                </ionic-timepicker>
+              </div>
+            </div>
+
+          </div>
         </div>
-        <div class="dataseriesflexchild">
-          <label class="item item-input">
-            <span class="input-label">Til</span>
-            <input type="datetime-local">
-          </label>
-        </div>
+
+
       </div>
 
       <div id="dataoverviewpagechart" ng-if="displaytype=='chart'"
