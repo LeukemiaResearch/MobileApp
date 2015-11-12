@@ -274,7 +274,7 @@ angular.module('starter.services', [])
 
   .factory('questionState', function() {
     return {
-      type: undefined //e.g. pain for pain questions
+      type: undefined //e.g. pain fo9r pain questions
     };
   })
 
