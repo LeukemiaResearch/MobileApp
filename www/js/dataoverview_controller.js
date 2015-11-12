@@ -326,7 +326,21 @@ angular.module('starter.controllers')
     };
     $scope.changeDisplayType("chart");
 
-    //Initialize
+    //Update data content
+    $scope.$watch(
+      function() { return $scope.startTimeStamp.getTime(); },
+      function(newValue, oldValue) {
+        $scope.updateGraphContent();
+        $scope.updateTableData();
+      }
+    );
+    $scope.$watch(
+      function() { return $scope.endTimeStamp.getTime(); },
+      function(newValue, oldValue) {
+        $scope.updateGraphContent();
+        $scope.updateTableData();
+      }
+    );
     $scope.updateGraphContent();
     $scope.updateTableData();
   });
