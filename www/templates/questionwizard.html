@@ -1,15 +1,15 @@
 <div ng-controller="questionsController">
-  <ion-view ng-attr-view-title="{{datatype}}">
+  <ion-view ng-attr-view-title="{{dataType}}">
     <div>
 
       <ion-content class="questionwizardpage">
-        <div ng-include="questions[datatype][template]"></div>
+        <div ng-include="questions[dataType][template]"></div>
       </ion-content>
 
       <ion-footer-bar class="bar thick-footer">
         <wizard style="width: 100%" on-finish="finishedWizard()" current-step="template"
                 ng-attr-hide-indicators="hideIndicators">
-          <div ng-repeat="(label,template) in questions[datatype]">
+          <div ng-repeat="(label,template) in questions[dataType]">
             <wz-step ng-attr-title="{{label}}">
               <ion-footer-bar class="bar">
                 <section style=" width: 100%">

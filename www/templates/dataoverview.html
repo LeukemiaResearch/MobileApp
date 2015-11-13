@@ -1,6 +1,6 @@
 <div ng-controller="dataoverviewController">
 
-  <ion-view view-title="{{datatype}}">
+  <ion-view view-title="{{dataType}}">
 
     <ion-content class="dataoverviewpage dataoverviewflexparent">
 
@@ -55,8 +55,9 @@
 
       <div id="dataoverviewpagechart" ng-if="displaytype=='chart'"
            style="min-height: 50%; margin-left:2%; margin-right:2%; width: 96%">
-        <nvd3 options="options"
-              data="dataseries"
+        <nvd3 id="graph"
+              options="options"
+              data="filteredDataSeries"
               config="config"
               events="events"
               api="api"></nvd3>
@@ -65,49 +66,39 @@
       <div id="dataoverviewpagetable" class="dataoverviewflexchild" ng-if="displaytype=='table'"
            style="min-height: 50%; margin-left:2%; margin-right:2%; width: 96%"
            ng-controller="dataoverviewController">
-        <div ng-repeat="dataserie in datatable">
-          <!--<div>{{dataserie.key}}:{{visibility[$index]}}</div>-->
+        <div ng-repeat="dataserie in filteredDataSeries">
           <div ng-show="$index==0" class="row">
             <div class="col"><strong></strong></div>
-            <div class="col" ng-repeat="(date, value) in dataserie.values"><strong>{{date}}</strong></div>
+            <div class="col" ng-repeat="(index, value) in dataserie.values"><strong>{{value.x}}</strong></div>
           </div>
-          <!--<div ng-if="visibility[$index]">-->
           <div class="row">
             <div class="col">{{dataserie.key}}</div>
-            <div class="col" ng-repeat="(date, value) in dataserie.values">{{value}}</div>
+            <div class="col" ng-repeat="(index, value) in dataserie.values">{{value.y}}</div>
           </div>
-          <!--</div>-->
         </div>
       </div>
 
-      <div id="dataoverviewpagechart" ng-if="displaytype=='chart'">
 
-        <div class="dataseriesflexparent dataoverviewflexchild">
-      <span ng-repeat="dataserie in storeddata">
-        <!--<div>{{dataserie.label}}:{{visibility[dataserie.label]}}</div>-->
+      <div class="dataseriesflexparent dataoverviewflexchild">
+        <div ng-repeat="dataserie in dataSeries">
 
-        <div class="dataseriesflexchild">
+          <div class="dataseriesflexchild">
 
-          <!--<input type="checkbox" ng-model="visibility[dataserie.label]">-->
-          <span ng-if="visibility[$index]">
-            <button ng-click="toggleShowDataSerie($index)" class="button button-stable"
+          <span ng-if="dataserie.visible">
+            <button ng-click="toggleShowDataSerie(dataserie.key)" class="button button-dark"
                     ng-style="{'background-color': '{{options.chart.allcolors[$index]}}'};">
               {{dataserie.label}}
             </button>
           </span>
-          <span ng-if="!visibility[$index]">
-            <button ng-click="toggleShowDataSerie($index)" class="button button-stable">
+          <span ng-if="!dataserie.visible">
+            <button ng-click="toggleShowDataSerie(dataserie.key)" class="button button-stable">
               {{dataserie.label}}
             </button>
           </span>
 
+          </div>
         </div>
-      </span>
-        </div>
-
       </div>
-
-
     </ion-content>
 
     <ion-footer-bar>
