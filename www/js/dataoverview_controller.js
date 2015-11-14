@@ -199,7 +199,7 @@ angular.module('starter.controllers')
         transitionDuration: 500,
         xAxis: {
           tickFormat: function (d) {
-            return d3.time.format('%x')(new Date(d));
+            return d3.time.format('%d/%m')(new Date(d));
           }
         },
         yAxis1: {
@@ -247,6 +247,12 @@ angular.module('starter.controllers')
     if ($scope.dataSeries===undefined || newDataTypeInController) {
       $scope.dataSeries = []; // Objects like {values: [{x:timeStap, y:value},...], color: ?, type: ?, key: ?, label: ?, visible: true}
     }
+    $scope.$watch($scope.startTimeStamp, function() {
+      $scope.updateDataObjects;
+    })
+    $scope.$watch($scope.endTimeStamp, function() {
+      $scope.updateDataObjects;
+    })
     $scope.updateDataObjects = function () {
 
       //create graph dataseries content
@@ -296,7 +302,7 @@ angular.module('starter.controllers')
 
       //Sort data values
       for (dataserie in $scope.dataSeries) {
-        $scope.dataSeries[dataserie].values.sort(function(e1,e2){return e1.x<e2.x});
+        $scope.dataSeries[dataserie].values.sort(function(e1,e2){return e1.x>e2.x});
       }
 
       //Data serie display control
