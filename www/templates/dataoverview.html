@@ -69,7 +69,7 @@
         <div ng-repeat="dataserie in filteredDataSeries">
           <div ng-show="$index==0" class="row">
             <div class="col"><strong></strong></div>
-            <div class="col" ng-repeat="(index, value) in dataserie.values"><strong>{{value.x}}</strong></div>
+            <div class="col" ng-repeat="(index, value) in dataserie.values"><strong>{{value.x | date:'dd/MM'}}<br>{{value.x | date:'HH:mm'}}</strong></div>
           </div>
           <div class="row">
             <div class="col">{{dataserie.key}}</div>

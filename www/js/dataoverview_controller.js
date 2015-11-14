@@ -241,20 +241,12 @@ angular.module('starter.controllers')
       $scope.$apply();
       $scope.displaytype = curr;
       $scope.$apply();
-      //$scope.$state.go('path',null,{reload:true});
     }
 
     //Load data objects to display
     if ($scope.dataSeries===undefined || newDataTypeInController) {
       $scope.dataSeries = []; // Objects like {values: [{x:timeStap, y:value},...], color: ?, type: ?, key: ?, label: ?, visible: true}
-      //$scope.filteredDataSeries = [];
     }
-    /*$scope.$watch($scope.dataSeries, function() {
-      var chart = nv.models.lineChart();
-      d3.select("graph svg").datum($scope.filteredDataSeries).call(chart);
-      console.log("Change");
-    });*/
-
     $scope.updateDataObjects = function () {
 
       //create graph dataseries content
