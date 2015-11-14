@@ -278,58 +278,6 @@ angular.module('starter.services', [])
     };
   })
 
-  .factory('dataProvider', function() {
-    var getDataObjects = function(DataStore, start, end) {
-      return DataStore.getData(start, end);
-    };
-
-     var getAllDataSeries = function(DataStore, start, end) {
-      var result = {};
-      var dataObjects = getDataObjects(DataStore, start, end);
-      for (objcount in dataObjects) {
-        var obj = dataObjects[objcount];
-        var timeStamp = obj['timeStamp'];
-        for (key in obj) {
-          if (['id', 'timeStamp'].indexOf(key)>=0 || !obj.hasOwnProperty(key))
-            continue;
-          if (result[key]===undefined)
-            result[key] = new Array();
-          result[key].push({'x':timeStamp, 'y':obj[key]});
-        }
-      }
-      return result;
-    };
-
-    var getAllDataTable = function(DataStore, start, end) {
-      var result = {};
-      var dataSeries = getAllDataSeries(DataStore, start, end);
-      for (dataseriename in dataSeries) {
-        if (!result.hasOwnProperty(dataseriename)) {
-          result[dataseriename] = {};
-          if (Object.keys(result).length>0) {
-            for (i in result[Object.keys(result)[0]])
-              result[dataseriename][i] = {'x': i.x, 'y':undefined};
-          };
-        }
-        for (obj_index in dataSeries[dataseriename]) {
-          var obj = dataSeries[dataseriename][obj_index];
-          if (!result[dataseriename].hasOwnProperty(obj.x)) {
-            for (var ds in result) {
-              result[ds][obj.x]=undefined;
-            }
-          }
-          result[dataseriename][obj.x] = obj.y;
-        }
-      }
-      return result;
-    };
-
-    return {
-      'getAllDataSeries': getAllDataSeries,
-      'getAllDataTable': getAllDataTable
-    };
-  })
-
   .factory('calendarFactory', function() {
 
     var obj = {};

@@ -94,9 +94,9 @@ angular.module('starter.controllers')
       }
     };
 
-    $scope.datatype = questionState.type;
+    $scope.dataType = questionState.type;
     $scope.template = 0; //First template
-    $scope.hideIndicators = Object.keys($scope.questions[$scope.datatype]).length <= 1;
+    $scope.hideIndicators = Object.keys($scope.questions[$scope.dataType]).length <= 1;
 
     $scope.finishedWizard = function () {
 
@@ -127,7 +127,7 @@ angular.module('starter.controllers')
       }
 
       $ionicPopup.alert({
-        title: $scope.datatype,
+        title: $scope.dataType,
         content: 'Registrering gemt!'
       }).then(function (res) {
         setTimeout($scope.$ionicGoBack);
