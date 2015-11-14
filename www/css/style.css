@@ -69,7 +69,7 @@ flex-calendar {
   padding: 0;
   margin: 0;
   line-height: 1.5em;
-  min-height: 5.0em;
+  min-height: 4.0em;
 }
 
 
@@ -118,6 +118,10 @@ flex-calendar {
   .frontpagetopcomponent {
     min-height: 365px;
   }
+
+  .flacc-button {
+    min-height: 5.0em;
+  }
 }
 
 .centervertically {
@@ -147,3 +151,6 @@ flex-calendar {
   line-height: 40px !important;
 }
 
+.image{float:none; background-size:contain; background-repeat:no-repeat; background-position:left;}
+
+.responsive{height: 163px; width:213px; box-shadow: 0 0 0 5px white inset;}

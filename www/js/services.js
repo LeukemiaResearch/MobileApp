@@ -87,16 +87,16 @@ angular.module('starter.services', [])
     var paindataservice = {};
 
     //Inject TestData
-    PainData.inject([{id: 1, date: new Date(2015, 8, 27, 10, 0, 0, 0), painType:'stomach', painScore: 6, morphine:false, morphineType:'', morphineDose:''},
-      {id: 2, date: new Date(2015, 8, 27, 17, 23, 22, 0), painType:'stomach', painScore: 8, morphine:true, morphineType:'oral', morphineDose:10.0},
-      {id: 3, date: new Date(2015, 9, 16, 19, 7, 34, 0), painType:'stomach', painScore: 2, morphine:false, morphineType:'', morphineDose:''},
-      {id: 4, date: new Date(2015, 10, 1, 18, 53, 17, 0), painType:'stomach', painScore: 4, morphine:false, morphineType:'', morphineDose:''},
-      {id: 5, date: new Date(2015, 10, 1, 22, 18, 56, 0), painType:'stomach', painScore: 8, morphine:true, morphineType:'oral', morphineDose:7.5}]);
+    PainData.inject([{id: 1, date: new Date(2015, 8, 27, 10, 0, 0, 0), painType:'stomach', painScore: 6, morphine:false, morphineType:'', morphineDose:'', morphineMeasureUnit:''},
+      {id: 2, date: new Date(2015, 8, 27, 17, 23, 22, 0), painType:'stomach', painScore: 8, morphine:true, morphineType:'oral', morphineDose:10.0, morphineMeasureUnit:'mg/dag'},
+      {id: 3, date: new Date(2015, 9, 16, 19, 7, 34, 0), painType:'stomach', painScore: 2, morphine:false, morphineType:'', morphineDose:'', morphineMeasureUnit:''},
+      {id: 4, date: new Date(2015, 10, 1, 18, 53, 17, 0), painType:'stomach', painScore: 4, morphine:false, morphineType:'', morphineDose:'', morphineMeasureUnit:''},
+      {id: 5, date: new Date(2015, 10, 1, 22, 18, 56, 0), painType:'stomach', painScore: 8, morphine:true, morphineType:'oral', morphineDose:7.5, morphineMeasureUnit:'mg/dag'}]);
 
     //Pain data functions
-    paindataservice.createPainData = function (date, painType, painScore, morphine, morphineType, morphineDose){
+    paindataservice.createPainData = function (date, painType, painScore, morphine, morphineType, morphineDose, morphineMeasureUnit){
       var id = IdGenerator.generateId();
-      var obj = PainData.createInstance({id: id, date: date, painType: painType, painScore: painScore, morphine: morphine, morphineType: morphineType, morphineDose: morphineDose});
+      var obj = PainData.createInstance({id: id, date: date, painType: painType, painScore: painScore, morphine: morphine, morphineType: morphineType, morphineDose: morphineDose, morphineMeasureUnit: morphineMeasureUnit});
       PainData.inject(obj);
       return obj;
     };
@@ -279,13 +279,13 @@ angular.module('starter.services', [])
   })
 
   .factory('dataProvider', function() {
-    var getDataObjects = function(dataStore, start, end) {
-      return dataStore.getData(start, end);
+    var getDataObjects = function(DataStore, start, end) {
+      return DataStore.getData(start, end);
     };
 
-     var getAllDataSeries = function(dataStore, start, end) {
+     var getAllDataSeries = function(DataStore, start, end) {
       var result = {};
-      var dataObjects = getDataObjects(dataStore, start, end);
+      var dataObjects = getDataObjects(DataStore, start, end);
       for (objcount in dataObjects) {
         var obj = dataObjects[objcount];
         var timeStamp = obj['timeStamp'];
@@ -300,9 +300,9 @@ angular.module('starter.services', [])
       return result;
     };
 
-    var getAllDataTable = function(dataStore, start, end) {
+    var getAllDataTable = function(DataStore, start, end) {
       var result = {};
-      var dataSeries = getAllDataSeries(dataStore, start, end);
+      var dataSeries = getAllDataSeries(DataStore, start, end);
       for (dataseriename in dataSeries) {
         if (!result.hasOwnProperty(dataseriename)) {
           result[dataseriename] = {};

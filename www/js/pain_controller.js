@@ -1,8 +1,6 @@
 angular.module('starter.controllers')
 
-  .controller('painController', function ($scope, questionState) {
-
-    $scope.show = true;
+  .controller('painController', function ($scope, PainDataService, questionState) {
 
     //Expose questionState
     $scope.questionState = questionState;
@@ -18,31 +16,62 @@ angular.module('starter.controllers')
     if (questionState.flaccvalue === undefined)
       questionState.flaccvalue = [undefined, undefined, undefined];
 
-    questionState.score = 0;
-
-    //Change selection
-    $scope.select = function (flaccnumber, newvalue) {
-      if (questionState.flaccvalue[flaccnumber] !== undefined)
-      {
-        questionState.score -= questionState.flaccvalue[flaccnumber];
-      }
-      questionState.flaccvalue[flaccnumber] = newvalue;
-      questionState.score += newvalue;
-    };
-
-    //Initialize
     if (questionState.morphineMeasureUnit === undefined)
-      questionState.morphineMeasureUnit = 'mg';
+      questionState.morphineMeasureUnit = 'mg/t';
+
+    questionState.painScore = 0;
+
+    //used for switching between pain scales
+    $scope.show = true;
+
+    //morphine dose
 
     //pain type selection
     $scope.selectPainType = function (painType) {
       questionState.painType = painType;
     }
 
-    $scope.smileys = [
-      {id: 0, src: "img/smiley0.png"},
-      {id: 1, src: "img/smiley2.png"},
-      {id: 2, src: "img/smiley4.png"}
-    ];
+    //flacc selection
+    $scope.selectFlacc = function (flaccnumber, newvalue) {
+      if (questionState.flaccvalue[flaccnumber] !== undefined) {
+        questionState.painScore -= questionState.flaccvalue[flaccnumber];
+      }
+      questionState.flaccvalue[flaccnumber] = newvalue;
+      questionState.painScore += newvalue;
+    };
 
+    //smiley selection
+    questionState.selectedSmiley = undefined;
+
+    $scope.selectSmiley = function (smileynumber) {
+      questionState.selectedSmiley = smileynumber;
+      questionState.painScore = smileynumber;
+    };
+
+    $scope.changeScale = function () {
+      $scope.show = !$scope.show;
+      questionState.painScore = 0;
+      questionState.selectedSmiley = undefined;
+      questionState.flaccvalue = [undefined, undefined, undefined];
+    }
+
+    //Save Data
+    PainDataService.finishedWizard = function () {
+      if (questionState.morphineType === undefined) {
+        questionState.morphine = false;
+        questionState.morphineMeasureUnit = '';
+        questionState.morphineDose = '';
+        questionState.morphineType = '';
+      } else questionState.morphine = true;
+
+      if (questionState.morphineType == 'oral') {
+        questionState.morphineMeasureUnit = 'mg/dag';
+      }
+
+      var data = PainDataService.createPainData(questionState.timeStamp, questionState.painType, parseInt(questionState.painScore, 10),
+        questionState.morphine, questionState.morphineType, parseFloat(questionState.morphineDose), questionState.morphineMeasureUnit);
+      console.log(data);
+    }
   })
+
+
