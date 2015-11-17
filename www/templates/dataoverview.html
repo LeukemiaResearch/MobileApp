@@ -72,7 +72,7 @@
             <div class="col" ng-repeat="(index, value) in dataserie.values"><strong>{{value.x | date:'dd/MM'}}<br>{{value.x | date:'HH:mm'}}</strong></div>
           </div>
           <div class="row">
-            <div class="col">{{dataserie.key}}</div>
+            <div class="col" translate>{{dataserie.key}}</div>
             <div class="col" ng-repeat="(index, value) in dataserie.values">{{value.y}}</div>
           </div>
         </div>
