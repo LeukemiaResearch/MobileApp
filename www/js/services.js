@@ -87,22 +87,33 @@ angular.module('starter.services', [])
     var paindataservice = {};
 
     //Inject TestData
-    PainData.inject([{id: 1, date: new Date(2015, 8, 27, 10, 0, 0, 0), painType:'stomach', painScore: 6, morphine:false, morphineType:'', morphineDose:'', morphineMeasureUnit:''},
+    /*PainData.inject([{id: 1, date: new Date(2015, 8, 27, 10, 0, 0, 0), painType:'stomach', painScore: 6, morphine:false, morphineType:'', morphineDose:'', morphineMeasureUnit:''},
       {id: 2, date: new Date(2015, 8, 27, 17, 23, 22, 0), painType:'stomach', painScore: 8, morphine:true, morphineType:'oral', morphineDose:10.0, morphineMeasureUnit:'mg/dag'},
       {id: 3, date: new Date(2015, 9, 16, 19, 7, 34, 0), painType:'stomach', painScore: 2, morphine:false, morphineType:'', morphineDose:'', morphineMeasureUnit:''},
       {id: 4, date: new Date(2015, 10, 1, 18, 53, 17, 0), painType:'stomach', painScore: 4, morphine:false, morphineType:'', morphineDose:'', morphineMeasureUnit:''},
-      {id: 5, date: new Date(2015, 10, 1, 22, 18, 56, 0), painType:'stomach', painScore: 8, morphine:true, morphineType:'oral', morphineDose:7.5, morphineMeasureUnit:'mg/dag'}]);
+      {id: 5, date: new Date(2015, 10, 1, 22, 18, 56, 0), painType:'stomach', painScore: 8, morphine:true, morphineType:'oral', morphineDose:7.5, morphineMeasureUnit:'mg/dag'}]);*/
 
     //Pain data functions
     paindataservice.createPainData = function (date, painType, painScore, morphine, morphineType, morphineDose, morphineMeasureUnit){
       var id = IdGenerator.generateId();
-      var obj = PainData.createInstance({id: id, date: date, painType: painType, painScore: painScore, morphine: morphine, morphineType: morphineType, morphineDose: morphineDose, morphineMeasureUnit: morphineMeasureUnit});
+      var obj = PainData.createInstance({id: id, timeStamp: date, painType: painType, painScore: painScore, morphine: morphine, morphineType: morphineType, morphineDose: morphineDose, morphineMeasureUnit: morphineMeasureUnit});
       PainData.inject(obj);
       return obj;
     };
 
     paindataservice.getAllPainData = function () {
       return PainData.getAll();
+    };
+
+    paindataservice.getData = function (start, end) {
+      return PainData.filter({
+        where: {
+          timeStamp: {
+            '>=': start,
+            '<=': end
+          }
+        }
+      });
     };
 
     paindataservice.getPainData = function (id) {
@@ -113,7 +124,7 @@ angular.module('starter.services', [])
       var temp = date.setHours(0,0,0,0);
       return PainData.filter({
         where: {
-          date: {
+          timeStamp: {
             '>': temp,
             '<': temp.setDate(temp.getDate()+1)
           }
@@ -135,13 +146,24 @@ angular.module('starter.services', [])
     var medicinedataservice = {};
 
     //MedicineData
-    MedicineData.inject([{id: 1, date: new Date(2015, 8, 27, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 2, date: new Date(2015, 9, 2, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 3, date: new Date(2015, 9, 16, 0, 0, 0, 0), sixmp:10.0, mtx:10.0}, {id: 4, date: new Date(2015, 9, 17, 0, 0, 0, 0), sixmp:0, mtx:0}, {id: 5, date: new Date(2015, 10, 1, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 6, date: new Date(2015, 10, 7, 0, 0, 0, 0), sixmp:25.0, mtx:10.0}]);
+    //MedicineData.inject([{id: 1, date: new Date(2015, 8, 27, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 2, date: new Date(2015, 9, 2, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 3, date: new Date(2015, 9, 16, 0, 0, 0, 0), sixmp:10.0, mtx:10.0}, {id: 4, date: new Date(2015, 9, 17, 0, 0, 0, 0), sixmp:0, mtx:0}, {id: 5, date: new Date(2015, 10, 1, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 6, date: new Date(2015, 10, 7, 0, 0, 0, 0), sixmp:25.0, mtx:10.0}]);
 
     medicinedataservice.createMedicineData = function (date, sixmp, mtx){
       var id = IdGenerator.generateId();
-      var obj = MedicineData.createInstance({id: id, date: date, sixmp: sixmp, mtx: mtx});
+      var obj = MedicineData.createInstance({id: id, timeStamp: date, sixmp: sixmp, mtx: mtx});
       MedicineData.inject(obj);
       return obj;
+    };
+
+    medicinedataservice.getData = function (start, end) {
+      return MedicineData.filter({
+        where: {
+          timeStamp: {
+            '>=': start,
+            '<=': end
+          }
+        }
+      });
     };
 
     medicinedataservice.getAllMedicineData = function () {
@@ -156,7 +178,7 @@ angular.module('starter.services', [])
       var temp = date.setHours(0,0,0,0);
       return MedicineData.filter({
         where: {
-          date: {
+          timeStamp: {
             '>': temp,
             '<': temp.setDate(temp.getDate()+1)
           }
@@ -178,12 +200,12 @@ angular.module('starter.services', [])
     var bloodsampledataservice = {};
 
     //BloodsampleData
-    BloodsampleData.inject([{id: 1, date: new Date(2015, 9, 2, 15, 15, 0, 0), leucocytes: 4.5, neutrofile: 7.8, thrombocytes: 45.2, hemoglobin: 3.7, alat: 3465, crp: 453},
-      {id: 2, date: new Date(2015, 10, 7, 12, 2, 34, 0), leucocytes:78.5, neutrofile:12.3, thrombocytes:15.0, hemoglobin:4.1, alat:2635, crp:251}]);
+    /*BloodsampleData.inject([{id: 1, date: new Date(2015, 9, 2, 15, 15, 0, 0), leucocytes: 4.5, neutrofile: 7.8, thrombocytes: 45.2, hemoglobin: 3.7, alat: 3465, crp: 453},
+      {id: 2, date: new Date(2015, 10, 7, 12, 2, 34, 0), leucocytes:78.5, neutrofile:12.3, thrombocytes:15.0, hemoglobin:4.1, alat:2635, crp:251}]);*/
 
     bloodsampledataservice.createBloodsampleData = function (date, leucocytes, neutrofile, thrombocytes, hemoglobin, alat, crp){
       var id = IdGenerator.generateId();
-      var obj = BloodsampleData.createInstance({id: id, date:date, leucocytes: leucocytes,neutrofile: neutrofile,thrombocytes: thrombocytes,hemoglobin: hemoglobin,alat: alat,crp: crp});
+      var obj = BloodsampleData.createInstance({id: id, timeStamp:date, leucocytes: leucocytes,neutrofile: neutrofile,thrombocytes: thrombocytes,hemoglobin: hemoglobin,alat: alat,crp: crp});
       BloodsampleData.inject(obj);
       console.log("ID: " + obj.id + "Leuko: " + obj.leucocytes);
       return obj;
@@ -191,6 +213,17 @@ angular.module('starter.services', [])
 
     bloodsampledataservice.getAllBloodsampleData = function () {
       return BloodsampleData.getAll();
+    };
+
+    bloodsampledataservice.getData = function (start, end) {
+      return BloodsampleData.filter({
+        where: {
+          timeStamp: {
+            '>=': start,
+            '<=': end
+          }
+        }
+      });
     };
 
     bloodsampledataservice.getBloodsampleData = function (id) {
@@ -201,7 +234,7 @@ angular.module('starter.services', [])
       var temp = date.setHours(0,0,0,0);
       return BloodsampleData.filter({
         where: {
-          date: {
+          timeStamp: {
             '>': temp,
             '<': temp.setDate(temp.getDate()+1)
           }
@@ -255,7 +288,7 @@ angular.module('starter.services', [])
       var temp = date.setHours(0,0,0,0);
       return MucositisData.filter({
         where: {
-          date: {
+          timeStamp: {
             '>': temp,
             '<': temp.setDate(temp.getDate()+1)
           }
