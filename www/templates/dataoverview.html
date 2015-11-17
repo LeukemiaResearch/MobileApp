@@ -86,12 +86,10 @@
 
           <span ng-if="dataserie.visible">
             <button ng-click="toggleShowDataSerie(dataserie.key)" class="button button-dark"
-                    ng-style="{'background-color': '{{options.chart.allcolors[$index]}}'};">
-              {{dataserie.label}}
-            </button>
+                    ng-style="{'background-color': '{{options.chart.allcolors[$index]}}'};" translate>{{dataserie.label}}</button>
           </span>
           <span ng-if="!dataserie.visible">
-            <button ng-click="toggleShowDataSerie(dataserie.key)" class="button button-stable">
+            <button ng-click="toggleShowDataSerie(dataserie.key)" class="button button-stable" translate>
               {{dataserie.label}}
             </button>
           </span>

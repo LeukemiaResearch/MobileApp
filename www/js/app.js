@@ -111,7 +111,12 @@ angular.module('starter',
       WEDNESDAY: 'Onsdag',
       THURSDAY: 'Torsdag',
       FRIDAY: 'Fredag',
-      SATURDAY: 'Lørdag'
+      SATURDAY: 'Lørdag',
+
+      pain: 'Smerte',
+      ulcers: 'Mundsår',
+      food: 'Fødeindtag',
+      nauseaScore: 'Kvalme'
     });
 
     $translateProvider.preferredLanguage('da_DA');
