@@ -15,6 +15,5 @@ angular.module('starter.controllers')
 
     BloodsampleDataService.finishedWizard = function() {
       BloodsampleDataService.createBloodsampleData(questionState.timeStamp, questionState.Leukocytter, questionState.Neutrofile, questionState.Thombocytter, questionState.Hemoglobin, questionState.Alat, questionState.CRP);
-      console.log("Blodprøve gemt");
     };
 });

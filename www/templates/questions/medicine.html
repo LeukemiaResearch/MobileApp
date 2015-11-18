@@ -14,19 +14,27 @@
       </label>
     </div>
   </div>-->
-
+<form name="medicineform">
   <div class="list">
     <label class="item item-input">
       <span class="input-label">Tablet 6 MP</span>
-      <input type="number" style="direction: rtl;" placeholder="....." ng-model="questionState.SixMP">
+      <input type="number" name="sixmp" style="direction: rtl;" placeholder="....." ng-model="questionState.SixMP" required>
       <span class="input-label">mg/dag</span>
     </label>
 
     <label class="item item-input">
       <span class="input-label">Tablet MTX</span>
-      <input type="number" style="direction: rtl;" placeholder="....." ng-model="questionState.MTX">
+      <input type="number" name="mtx" style="direction: rtl;" placeholder="....." ng-model="questionState.MTX" required>
       <span class="input-label">mg/uge</span>
     </label>
+  </div>
+</form>
+  <div class="error"
+       ng-show="medicineform.sixmp.$invalid">
+    <small class="error"
+           ng-show="medicineform.sixmp.$error.required">
+      SIXMP is required.
+    </small>
   </div>
 
 </div>

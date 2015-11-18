@@ -96,8 +96,11 @@ angular.module('starter.services', [])
     //Pain data functions
     paindataservice.createPainData = function (date, painType, painScore, morphine, morphineType, morphineDose){
       var id = IdGenerator.generateId();
+      //console.log("Gemmer PAINDATA!! - Antal PAINDATA records i DB: " + this.getAllPainData().length.toString());
       var obj = PainData.createInstance({id: id, date: date, painType: painType, painScore: painScore, morphine: morphine, morphineType: morphineType, morphineDose: morphineDose});
       PainData.inject(obj);
+      //console.log("Data gemt - ID: " + obj.id + " , DATE: " + obj.date + " , PAINTYPE: " + obj.painType + " , PAINSCORE: " + obj.painScore + " , MORPHINE: " + obj.morphine + " , MORPHINETYPE: " + obj.morphineType + " , MORPHINEDOSE: " + obj.morphineDose);
+      //console.log("Antal PAINDATA records i DB: " + this.getAllPainData().length.toString());
       return obj;
     };
 
@@ -139,8 +142,11 @@ angular.module('starter.services', [])
 
     medicinedataservice.createMedicineData = function (date, sixmp, mtx){
       var id = IdGenerator.generateId();
+      //console.log("Gemmer MEDICINEDATA!! - Antal MEDICINEDATA records i DB: " + this.getAllMedicineData().length.toString());
       var obj = MedicineData.createInstance({id: id, date: date, sixmp: sixmp, mtx: mtx});
       MedicineData.inject(obj);
+      //console.log("Data gemt - ID: " + obj.id + " , DATE: " + obj.date + " , SIXMP: " + obj.sixmp + " , MTX:" + obj.mtx);
+      //console.log("Antal MEDICINEDATA records i DB: " + this.getAllMedicineData().length.toString());
       return obj;
     };
 
@@ -168,7 +174,7 @@ angular.module('starter.services', [])
       MedicineData.destroy(id);
     };
 
-    medicinedataservice.finishedWizard = null
+    medicinedataservice.finishedWizard = null;
 
     return medicinedataservice;
   })
@@ -183,9 +189,11 @@ angular.module('starter.services', [])
 
     bloodsampledataservice.createBloodsampleData = function (date, leucocytes, neutrofile, thrombocytes, hemoglobin, alat, crp){
       var id = IdGenerator.generateId();
+      //console.log("Gemmer BLOODSAMPLEDATA!! - Antal BLOODSAMPLEDATA records i DB: " + this.getAllBloodsampleData().length.toString());
       var obj = BloodsampleData.createInstance({id: id, date:date, leucocytes: leucocytes,neutrofile: neutrofile,thrombocytes: thrombocytes,hemoglobin: hemoglobin,alat: alat,crp: crp});
       BloodsampleData.inject(obj);
-      console.log("ID: " + obj.id + "Leuko: " + obj.leucocytes);
+      //console.log("Data gemt!! - ID: " + obj.id + ", DATE: " + obj.date + ", leucocytes: " + obj.leucocytes + " , neutrofile: " + obj.neutrofile + " , thrombocytes: " + obj.thrombocytes + " , hemoglobin: " + obj.hemoglobin + " , alat: " + obj.alat + " , crp: " + obj.crp);
+      //console.log("Antal BLOODSAMPLEDATA records i DB: " + this.getAllBloodsampleData().length.toString());
       return obj;
     };
 
@@ -227,8 +235,11 @@ angular.module('starter.services', [])
 
     mucositisdataservice.createMucositisData = function (timeStamp, pain, ulcers, food, nauseaScore){
       var id = IdGenerator.generateId();
-      var obj = MucositisData.createInstance({id: id, timeStamp: timeStamp, pain: pain, ulcers: ulcers, food:food, 'nauseaScore': nauseaScore});
+      //console.log("Gemmer paindata!! - Antal MUCOSITISDATA records i DB: " + this.getAllMucositisData().length.toString());
+      var obj = MucositisData.createInstance({id: id, date: timeStamp, pain: pain, ulcers: ulcers, food:food, 'nauseaScore': nauseaScore});
       MucositisData.inject(obj);
+      //console.log("Data gemt!! - ID: " + obj.id + ", DATE: " + obj.date + ", pain: " + obj.pain + " , ulcers: " + obj.ulcers + " , food: " + obj.food + " , nauseaScore: " + obj.nauseaScore);
+      //console.log("Antal MUCOSITISDATA records i DB: " + this.getAllMucositisData().length.toString());
       return obj;
     };
 
@@ -396,3 +407,6 @@ angular.module('starter.services', [])
 
     return obj;
   });
+
+
+
