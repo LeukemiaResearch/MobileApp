@@ -1,1 +1,169 @@
-Pain scale content
+<div style="width: 100%" ng-controller="painController">
+
+  <h2 style="text-align: center">Vurdér smerten</h2>
+
+  <div>
+
+    <button style="float: right" class="button button-clear button-positive" ng-click="changeScale()">
+      Skift skala
+    </button>
+
+    <div ng-show="show">
+
+      <div name="FLACC" class="row responsive-md" style="text-align: center">
+        <div class="col col-20"><b>FLACC</b></div>
+        <div class="col"><b>0</b></div>
+        <div class="col"><b>1</b></div>
+        <div class="col"><b>2</b></div>
+      </div>
+      <div name="Ansigtsudtryk" class="row responsive-md">
+        <div class="col col-20" style="text-align: center"><b>Ansigtsudtryk</b></div>
+        <div class="col">
+          <button ng-click="selectFlacc(0,0)" ng-class="{'button-dark':questionState.flaccvalue[0]===0,
+                                                  'button-stable':questionState.flaccvalue[0]!==0,
+                                                  'button button-block flacc-button': true}">
+            Upåvirket/Afslappet
+          </button>
+        </div>
+        <div class="col">
+          <button ng-click="selectFlacc(0,1)" ng-class="{'button-dark':questionState.flaccvalue[0]===1,
+                                                  'button-stable':questionState.flaccvalue[0]!==1,
+                                                  'button button-block flacc-button': true}">
+            Bekymret,indadvendt
+          </button>
+        </div>
+        <div class="col">
+          <button ng-click="selectFlacc(0,2)" ng-class="{'button-dark':questionState.flaccvalue[0]===2,
+                                                  'button-stable':questionState.flaccvalue[0]!==2,
+                                                  'button button-block flacc-button': true}">
+            Hyppigt til konstant dirren omkring munden eller sammenbidt
+          </button>
+        </div>
+      </div>
+      <div name="Ben" class="row responsive-md">
+        <div class="col col-20" style="text-align: center"><b>Ben</b></div>
+        <div class="col">
+          <button ng-click="selectFlacc(1,0)" ng-class="{'button-dark':questionState.flaccvalue[1]===0,
+                                                  'button-stable':questionState.flaccvalue[1]!==0,
+                                                  'button button-block flacc-button': true}">
+            Normal position eller afslappet
+          </button>
+        </div>
+        <div class="col">
+          <button ng-click="selectFlacc(1,1)" ng-class="{'button-dark':questionState.flaccvalue[1]===1,
+                                                  'button-stable':questionState.flaccvalue[1]!==1,
+                                                  'button button-block flacc-button': true}">
+            Urolig, spændt
+          </button>
+        </div>
+        <div class="col">
+          <button ng-click="selectFlacc(1,2)" ng-class="{'button-dark':questionState.flaccvalue[1]===2,
+                                                  'button-stable':questionState.flaccvalue[1]!==2,
+                                                  'button button-block flacc-button': true}">
+            Trækker benene op under sig, sparker
+          </button>
+        </div>
+      </div>
+      <div name="Aktivitet" class="row responsive-md">
+        <div class="col col-20" style="text-align: center"><b>Aktivitet</b></div>
+        <div class="col">
+          <button ng-click="selectFlacc(2,0)" ng-class="{'button-dark':questionState.flaccvalue[2]===0,
+                                                  'button-stable':questionState.flaccvalue[2]!==0,
+                                                  'button button-block flacc-button': true}">
+            Normal stilling eller ligger stille, bevæger sig frit
+          </button>
+        </div>
+        <div class="col">
+          <button ng-click="selectFlacc(2,1)" ng-class="{'button-dark':questionState.flaccvalue[2]===1,
+                                                  'button-stable':questionState.flaccvalue[2]!==1,
+                                                  'button button-block flacc-button': true}">
+            Vrider sig, kan ikke finde ro
+          </button>
+        </div>
+        <div class="col">
+          <button ng-click="selectFlacc(2,2)" ng-class="{'button-dark':questionState.flaccvalue[2]===2,
+                                                  'button-stable':questionState.flaccvalue[2]!==2,
+                                                  'button button-block flacc-button': true}">
+            "Går i bro", stiv eller kaster sig rundt
+          </button>
+        </div>
+      </div>
+      <div name="Gråd" class="row responsive-md">
+        <div class="col col-20" style="text-align: center"><b>Gråd</b></div>
+        <div class="col">
+          <button ng-click="selectFlacc(3,0)" ng-class="{'button-dark':questionState.flaccvalue[3]===0,
+                                                  'button-stable':questionState.flaccvalue[3]!==0,
+                                                  'button button-block flacc-button': true}">
+            Græder ikke (Vågen eller sovende)
+          </button>
+        </div>
+        <div class="col">
+          <button ng-click="selectFlacc(3,1)" ng-class="{'button-dark':questionState.flaccvalue[3]===1,
+                                                  'button-stable':questionState.flaccvalue[3]!==1,
+                                                  'button button-block flacc-button': true}">
+            Klynker, klager sig af og til
+          </button>
+        </div>
+        <div class="col">
+          <button ng-click="selectFlacc(3,2)" ng-class="{'button-dark':questionState.flaccvalue[3]===2,
+                                                  'button-stable':questionState.flaccvalue[3]!==2,
+                                                  'button button-block flacc-button': true}">
+            Græder uafbrudt, skriger eller klager sig hyppigt
+          </button>
+        </div>
+      </div>
+      <div name="Trøstbarhed" class="row responsive-md">
+        <div class="col col-20" style="text-align: center"><b>"Trøstbarhed"</b></div>
+        <div class="col">
+          <button ng-click="selectFlacc(4,0)" ng-class="{'button-dark':questionState.flaccvalue[4]===0,
+                                                  'button-stable':questionState.flaccvalue[4]!==0,
+                                                  'button button-block flacc-button': true}">
+            Tilfreds, afslappet
+          </button>
+        </div>
+        <div class="col">
+          <button ng-click="selectFlacc(4,1)" ng-class="{'button-dark':questionState.flaccvalue[4]===1,
+                                                  'button-stable':questionState.flaccvalue[4]!==1,
+                                                  'button button-block flacc-button': true}">
+            Kan beroliges ved berøring, ved at blive talt til og kan afledes fra smerten
+          </button>
+        </div>
+        <div class="col">
+          <button ng-click="selectFlacc(4,2)" ng-class="{'button-dark':questionState.flaccvalue[4]===2,
+                                                  'button-stable':questionState.flaccvalue[4]!==2,
+                                                  'button button-block flacc-button': true}">
+            Vanskelig at trøste eller utrøstelig
+          </button>
+        </div>
+      </div>
+      <h3 style="text-align: center">Score:</h3>
+
+      <h1 style="text-align: center">{{questionState.painScore}}</h1>
+    </div>
+    <div ng-show="!show">
+      <div class="row responsive-md">
+        <div class="col">
+          <div class="image responsive" ng-style="{'background-image': questionState.selectedSmiley == 0 ? 'url(img/smiley0selected.png)':'url(img/smiley0.png)' }" ng-click="selectSmiley(0)"></div>
+        </div>
+        <div class="col">
+          <div class="image responsive" ng-style="{'background-image': questionState.selectedSmiley == 2 ? 'url(img/smiley2selected.png)':'url(img/smiley2.png)' }" ng-click="selectSmiley(2)"></div>
+        </div>
+        <div class="col">
+          <div class="image responsive" ng-style="{'background-image': questionState.selectedSmiley == 4 ? 'url(img/smiley4selected.png)':'url(img/smiley4.png)' }" ng-click="selectSmiley(4)"></div>
+        </div>
+        <div class="col">
+          <div class="image responsive" ng-style="{'background-image': questionState.selectedSmiley == 6 ? 'url(img/smiley6selected.png)':'url(img/smiley6.png)' }" ng-click="selectSmiley(6)"></div>
+        </div>
+        <div class="col">
+          <div class="image responsive" ng-style="{'background-image': questionState.selectedSmiley == 8 ? 'url(img/smiley8selected.png)':'url(img/smiley8.png)' }" ng-click="selectSmiley(8)"></div>
+        </div>
+        <div class="col">
+          <div class="image responsive" ng-style="{'background-image': questionState.selectedSmiley == 10 ? 'url(img/smiley10selected.png)':'url(img/smiley10.png)' }" ng-click="selectSmiley(10)"></div>
+        </div>
+      </div>
+      <h3 style="text-align: center">Score:</h3>
+
+      <h1 style="text-align: center">{{questionState.painScore}}</h1>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
         <wizard style="width: 100%" on-finish="finishedWizard()" current-step="template"
                 ng-attr-hide-indicators="hideIndicators">
           <div ng-repeat="(label,template) in questions[datatype]">
-            <wz-step ng-attr-title="{{label}}" canexit="exitValidation">
+            <wz-step ng-attr-title="{{label}}">
               <ion-footer-bar class="bar">
                 <section style=" width: 100%">
               <span ng-if="$first">

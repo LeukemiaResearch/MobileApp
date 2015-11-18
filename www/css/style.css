@@ -136,6 +136,9 @@ flex-calendar {
   line-height: 40px !important;
 }
 
+.image{float:none; background-size:contain; background-repeat:no-repeat; background-position:left;}
+
+.responsive{height: 163px; width:213px; box-shadow: 0 0 0 5px white inset;}
 .error {
   padding: 5px 10px;
   font-family: "Arial Black", Gadget, sans-serif;

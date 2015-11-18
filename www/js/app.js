@@ -111,7 +111,33 @@ angular.module('starter',
       WEDNESDAY: 'Onsdag',
       THURSDAY: 'Torsdag',
       FRIDAY: 'Fredag',
-      SATURDAY: 'Lørdag'
+      SATURDAY: 'Lørdag',
+
+      //Data overview Mucositis
+      pain: 'Smerte',
+      ulcers: 'Mundsår',
+      food: 'Fødeindtag',
+      nauseaScore: 'Kvalme',
+
+      //Data overview Pain
+      painType: 'Placering',
+      painScore: 'Intensitet',
+      morphine: 'Morfin',
+      morphineType: 'Morfintype',
+      morphineDose: 'Dosis',
+      morphineMeasureUnit: 'Måleenhed',
+
+      //Data overview
+      sixmp: '6 MP',
+      mtx: 'MTX',
+
+      //Data overview Blood samples
+      leucocytes: 'Leukocytter',
+      neutrofile: 'Neutrofile',
+      hemoglobin: 'Hæmoglobin',
+      alat: 'Alat',
+      crp: 'CRP'
+
     });
 
     $translateProvider.preferredLanguage('da_DA');

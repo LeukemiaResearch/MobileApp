@@ -4,14 +4,17 @@ angular.module('starter.controllers')
 
     $scope.questionState = questionState;
 
+    $scope.formatTime = function (inputEpochTime) {
+      var selectedTime = new Date(inputEpochTime * 1000);
+      var hours = selectedTime.getUTCHours();
+      var minutes = selectedTime.getUTCMinutes();
+      return (hours < 10 ? '0' : '') + hours + ' : ' + (minutes < 10 ? '0' : '') + minutes;
+    };
 
     if ($scope.timePickerObject === undefined)
       $scope.timePickerObject = {
         displayValue: function () {
-          var selectedTime = new Date($scope.timePickerObject.inputEpochTime * 1000);
-          return selectedTime.getUTCHours().toLocaleString('en', {minimumIntegerDigits: 2, useGrouping: false})
-            + ' : '
-            + selectedTime.getUTCMinutes().toLocaleString('en', {minimumIntegerDigits: 2, useGrouping: false});
+          return $scope.formatTime($scope.timePickerObject.inputEpochTime);
         },
         inputEpochTime: ((questionState.timeStamp ? questionState.timeStamp : new Date()).getHours() * 60 * 60 +
         Math.floor((questionState.timeStamp ? questionState.timeStamp : new Date()).getMinutes() / 5) * 5 * 60),  //Optional
@@ -19,7 +22,7 @@ angular.module('starter.controllers')
         format: 24,  //Optional
         titleLabel: 'Tidspunkt',  //Optional
         setLabel: 'Vælg',  //Optional
-        closeLabel: 'Anuller',  //Optional
+        closeLabel: 'Luk',  //Optional
         setButtonType: 'button-positive',  //Optional
         closeButtonType: 'button-stable',  //Optional
         callback: function (val) {    //Mandatory
@@ -36,9 +39,9 @@ angular.module('starter.controllers')
         todayLabel: 'I dag',  //Optional
         closeLabel: 'Luk',  //Optional
         setLabel: 'Vælg',  //Optional
-        setButtonType: 'button-assertive',  //Optional
-        todayButtonType: 'button-assertive',  //Optional
-        closeButtonType: 'button-assertive',  //Optional
+        setButtonType: 'button-positive',  //Optional
+        todayButtonType: 'button-stable',  //Optional
+        closeButtonType: 'button-stable',  //Optional
         inputDate: (questionState.timeStamp ? questionState.timeStamp : new Date()),  //Optional
         mondayFirst: true,  //Optional
         //disabledDates: disabledDates, //Optional
@@ -91,11 +94,12 @@ angular.module('starter.controllers')
       }
     };
 
-    $scope.datatype = questionState.type;
+    $scope.dataType = questionState.type;
     $scope.template = 0; //First template
-    $scope.hideIndicators = Object.keys($scope.questions[$scope.datatype]).length <= 1;
+    $scope.hideIndicators = Object.keys($scope.questions[$scope.dataType]).length <= 1;
 
     $scope.finishedWizard = function () {
+
       //Store entered data
       if (questionState.type === 'Mucositis') {
         MucositisDataService.finishedWizard();
@@ -123,11 +127,30 @@ angular.module('starter.controllers')
       }
 
       $ionicPopup.alert({
-        title: $scope.datatype,
+        title: $scope.dataType,
         content: 'Registrering gemt!'
       }).then(function (res) {
         setTimeout($scope.$ionicGoBack);
+        console.log("WIZARD SLUT!!!");
       });
+    }
+
+
+    //Lookup data service based on type
+    $scope.getDataService = function() {
+      if ($scope.dataType=='Medicin') {
+        return MedicineDataService;
+      } else if ($scope.dataType=='Smerte') {
+        return PainDataService;
+      } else if ($scope.dataType=='Blodprøve') {
+        return BloodsampleDataService;
+      } else if ($scope.dataType=='Mucositis') {
+        return MucositisDataService;
+      }
+    }
+
+    $scope.exitValidation = function(label){
+      return $scope.getDataService().finishedStep(label);
     };
 
   });

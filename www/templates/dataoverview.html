@@ -1,28 +1,63 @@
 <div ng-controller="dataoverviewController">
 
-  <ion-view view-title="{{datatype}}">
+  <ion-view view-title="{{dataType}}">
 
     <ion-content class="dataoverviewpage dataoverviewflexparent">
 
       <div class="dataseriesflexparent dataoverviewflexchild">
+
+
         <div class="dataseriesflexchild">
-          <label class="item item-input">
-            <span class="input-label">Fra</span>
-            <input type="datetime-local">
-          </label>
+
+          <div class="row">
+            <span class="col" style="text-align: center"><strong>Fra:</strong></span>
+            <span class="col" style="text-align: center"><strong>Til:</strong></span>
+          </div>
+
+          <div class="row">
+
+            <div class="col">
+              <div class="row responsive-sm">
+                <ionic-datepicker input-obj="startDatepickerObject" class="col">
+                  <button class="button button-block button-stable">
+                    <strong>{{startDatepickerObject.inputDate | date:'dd/MM, yyyy'}}</strong>
+                  </button>
+                </ionic-datepicker>
+                <ionic-timepicker input-obj="startTimePickerObject" class="col">
+                  <button class="button button-block button-stable overflowShow">
+                    <strong>{{startTimePickerObject.displayValue()}}</strong>
+                  </button>
+                </ionic-timepicker>
+              </div>
+            </div>
+
+
+            <div class="col">
+              <div class="row responsive-sm">
+                <ionic-datepicker input-obj="endDatepickerObject" class="col">
+                  <button class="button button-block button-stable">
+                    <strong>{{endDatepickerObject.inputDate | date:'dd/MM, yyyy'}}</strong>
+                  </button>
+                </ionic-datepicker>
+                <ionic-timepicker input-obj="endTimePickerObject" class="col">
+                  <button class="button button-block button-stable overflowShow">
+                    <strong>{{endTimePickerObject.displayValue()}}</strong>
+                  </button>
+                </ionic-timepicker>
+              </div>
+            </div>
+
+          </div>
         </div>
-        <div class="dataseriesflexchild">
-          <label class="item item-input">
-            <span class="input-label">Til</span>
-            <input type="datetime-local">
-          </label>
-        </div>
+
+
       </div>
 
       <div id="dataoverviewpagechart" ng-if="displaytype=='chart'"
            style="min-height: 50%; margin-left:2%; margin-right:2%; width: 96%">
-        <nvd3 options="options"
-              data="dataseries"
+        <nvd3 id="graph"
+              options="options"
+              data="filteredDataSeries"
               config="config"
               events="events"
               api="api"></nvd3>
@@ -31,40 +66,37 @@
       <div id="dataoverviewpagetable" class="dataoverviewflexchild" ng-if="displaytype=='table'"
            style="min-height: 50%; margin-left:2%; margin-right:2%; width: 96%"
            ng-controller="dataoverviewController">
-        <div ng-repeat="dataserie in datatable">
-          <!--<div>{{dataserie.key}}:{{visibility[$index]}}</div>-->
+        <div ng-repeat="dataserie in filteredDataSeries">
           <div ng-show="$index==0" class="row">
             <div class="col"><strong></strong></div>
-            <div class="col" ng-repeat="(date, value) in dataserie.values"><strong>{{date}}</strong></div>
+            <div class="col" ng-repeat="(index, value) in dataserie.values"><strong>{{value.x | date:'dd/MM'}}<br>{{value.x | date:'HH:mm'}}</strong></div>
           </div>
-          <!--<div ng-if="visibility[$index]">-->
           <div class="row">
-            <div class="col">{{dataserie.key}}</div>
-            <div class="col" ng-repeat="(date, value) in dataserie.values">{{value}}</div>
+            <div class="col" translate>{{dataserie.key}}</div>
+            <div class="col" ng-repeat="(index, value) in dataserie.values">{{value.y}}</div>
           </div>
-          <!--</div>-->
         </div>
       </div>
 
-      <div id="dataoverviewpagechart" ng-if="displaytype=='chart'">
 
-        <div class="dataseriesflexparent dataoverviewflexchild">
-      <span ng-repeat="dataserie in storeddata">
-        <!--<div>{{dataserie.label}}:{{visibility[dataserie.label]}}</div>-->
-        <div class="dataseriesflexchild">
+      <div class="dataseriesflexparent dataoverviewflexchild">
+        <div ng-repeat="dataserie in dataSeries">
 
-          <!--<input type="checkbox" ng-model="visibility[dataserie.label]">-->
-          <button ng-click="toggleShowDataSerie($index)"
-                  ng-class="{'button-dark':visibility[$index], 'button-stable':!visibility[$index], 'button': true}">
-            {{dataserie.label}}
-          </button>
+          <div class="dataseriesflexchild">
+
+          <span ng-if="dataserie.visible">
+            <button ng-click="toggleShowDataSerie(dataserie.key)" class="button button-dark"
+                    ng-style="{'background-color': '{{options.chart.allcolors[$index]}}'};" translate>{{dataserie.label}}</button>
+          </span>
+          <span ng-if="!dataserie.visible">
+            <button ng-click="toggleShowDataSerie(dataserie.key)" class="button button-stable" translate>
+              {{dataserie.label}}
+            </button>
+          </span>
+
+          </div>
         </div>
-      </span>
-        </div>
-
       </div>
-
-
     </ion-content>
 
     <ion-footer-bar>
