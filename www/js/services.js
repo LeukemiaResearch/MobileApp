@@ -136,6 +136,10 @@ angular.module('starter.services', [])
       PainData.destroy(id);
     };
 
+    paindataservice.finishedStep = function(stepNumber) {
+      return true;
+    };
+
     paindataservice.finishedWizard = null;
 
     return paindataservice
@@ -188,6 +192,10 @@ angular.module('starter.services', [])
 
     medicinedataservice.deleteMedicineData = function (id) {
       MedicineData.destroy(id);
+    };
+
+    medicinedataservice.finishedStep = function(stepNumber) {
+      return true;
     };
 
     medicinedataservice.finishedWizard = null;
@@ -244,6 +252,10 @@ angular.module('starter.services', [])
 
     bloodsampledataservice.deleteBloodsampleData = function (id) {
       BloodsampleData.destroy(id);
+    };
+
+    bloodsampledataservice.finishedStep = function(stepNumber) {
+      return true;
     };
 
     bloodsampledataservice.finishedWizard = null;
