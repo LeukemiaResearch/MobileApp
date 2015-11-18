@@ -7,10 +7,10 @@ angular.module('starter.controllers')
 
     //values
     questionState.painType;
-    questionState.painScore;
+    /*questionState.painScore;
     questionState.morphine;
     questionState.morphineType;
-    questionState.morphineDose;
+    questionState.morphineDose;*/
 
     //Initialize group values and classes
     if (questionState.flaccvalue === undefined)

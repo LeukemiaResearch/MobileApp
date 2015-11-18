@@ -9,6 +9,7 @@ angular.module('starter.controllers')
 
     //Lookup data service based on type
     $scope.getDataService = function() {
+      console.log(questionState.type);
       if ($scope.dataType=='Medicin') {
         return MedicineDataService;
       } else if ($scope.dataType=='Smerte') {
@@ -18,7 +19,7 @@ angular.module('starter.controllers')
       } else if ($scope.dataType=='Mucositis') {
         return MucositisDataService;
       }
-    }
+    };
 
     //Initialize period
     if (!$scope.endTimeStamp || !$scope.startTimeStamp) {

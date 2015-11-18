@@ -85,7 +85,7 @@ angular.module('starter.controllers')
         "Tid": "templates/questions/timestamp.html",
         "Morfin": "templates/questions/morphine.html",
         "Type": "templates/questions/painposition.html",
-        "Styrke": "templates/questions/painscale.html",
+        "Styrke": "templates/questions/painscale.html"
       },
       "Mucositis": {
         "Tid": "templates/questions/timestamp.html",
@@ -133,7 +133,7 @@ angular.module('starter.controllers')
         setTimeout($scope.$ionicGoBack);
         console.log("WIZARD SLUT!!!");
       });
-    }
+    };
 
 
     //Lookup data service based on type
@@ -147,7 +147,7 @@ angular.module('starter.controllers')
       } else if ($scope.dataType=='Mucositis') {
         return MucositisDataService;
       }
-    }
+    };
 
     $scope.exitValidation = function(label){
       return $scope.getDataService().finishedStep(label);
