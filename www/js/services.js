@@ -190,7 +190,7 @@ angular.module('starter.services', [])
       MedicineData.destroy(id);
     };
 
-    medicinedataservice.finishedWizard = null
+    medicinedataservice.finishedWizard = null;
 
     return medicinedataservice;
   })
@@ -277,12 +277,12 @@ angular.module('starter.services', [])
     };
 
 
-    mucositisdataservice.finishedStep = function(label) {
-      if (label=="Tid")
+    mucositisdataservice.finishedStep = function(stepNumber) {
+      if (stepNumber==1)
         return questionState.timeStamp !== undefined;
-      else if (label=="Mundsår")
+      else if (stepNumber==2)
         return questionState.groupvalue !== undefined && questionState.groupvalue[0] !== undefined && questionState.groupvalue[1] !== undefined && questionState.groupvalue[2] !== undefined;
-      else if (label=="Kvalme")
+      else if (stepNumber==3)
         return questionState.nauseaScore;
       else
         return false;

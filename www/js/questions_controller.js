@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-  .controller('questionsController', function ($scope, questionState, PainDataService, MucositisDataService, MedicineDataService, BloodsampleDataService, $ionicPopup) {
+  .controller('questionsController', function ($scope, questionState, PainDataService, MucositisDataService, MedicineDataService, BloodsampleDataService, $ionicPopup, WizardHandler) {
 
     $scope.questionState = questionState;
 
@@ -149,8 +149,8 @@ angular.module('starter.controllers')
       }
     };
 
-    $scope.exitValidation = function(label){
-      return $scope.getDataService().finishedStep(label);
+    $scope.exitValidation = function(){
+      return $scope.getDataService().finishedStep(WizardHandler.wizard().currentStepNumber());
     };
 
   });
