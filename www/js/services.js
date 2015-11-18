@@ -251,7 +251,7 @@ angular.module('starter.services', [])
     return bloodsampledataservice;
   })
 
-  .factory('MucositisDataService', function(IdGenerator, MucositisData){
+  .factory('MucositisDataService', function(IdGenerator, MucositisData, questionState){
 
     var mucositisdataservice = {};
 
@@ -274,6 +274,18 @@ angular.module('starter.services', [])
           }
         }
       });
+    };
+
+
+    mucositisdataservice.finishedStep = function(label) {
+      if (label=="Tid")
+        return questionState.timeStamp !== undefined;
+      else if (label=="Mundsår")
+        return questionState.groupvalue !== undefined && questionState.groupvalue[0] !== undefined && questionState.groupvalue[1] !== undefined && questionState.groupvalue[2] !== undefined;
+      else if (label=="Kvalme")
+        return questionState.nauseaScore;
+      else
+        return false;
     };
 
     mucositisdataservice.getAllMucositisData = function () {

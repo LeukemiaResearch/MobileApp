@@ -135,4 +135,22 @@ angular.module('starter.controllers')
       });
     }
 
+
+    //Lookup data service based on type
+    $scope.getDataService = function() {
+      if ($scope.dataType=='Medicin') {
+        return MedicineDataService;
+      } else if ($scope.dataType=='Smerte') {
+        return PainDataService;
+      } else if ($scope.dataType=='Blodprøve') {
+        return BloodsampleDataService;
+      } else if ($scope.dataType=='Mucositis') {
+        return MucositisDataService;
+      }
+    }
+
+    $scope.exitValidation = function(label){
+      return $scope.getDataService().finishedStep(label);
+    };
+
   });
