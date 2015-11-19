@@ -56,8 +56,8 @@ angular.module('starter.controllers')
         callback: function (val) {  //Mandatory
           if (val) {
             $scope.datepickerObject.inputDate = val;
-            $scope.updateQuestionStateTimeStamp();
           }
+          $scope.updateQuestionStateTimeStamp();
         },
         dateFormat: 'dd-MM-yyyy', //Optional
         closeOnSelect: false, //Optional

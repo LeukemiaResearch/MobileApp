@@ -9,7 +9,7 @@ angular.module('starter.controllers')
 
     //Lookup data service based on type
     $scope.getDataService = function() {
-      console.log(questionState.type);
+      //console.log(questionState.type);
       if ($scope.dataType=='Medicin') {
         return MedicineDataService;
       } else if ($scope.dataType=='Smerte') {
@@ -86,8 +86,8 @@ angular.module('starter.controllers')
           callback: function (val) {  //Mandatory
             if (val) {
               $scope.startDatepickerObject.inputDate = val;
-              $scope.updateStartTimeStamp();
             }
+            $scope.updateStartTimeStamp();
           },
           dateFormat: 'dd-MM-yyyy', //Optional
           closeOnSelect: false, //Optional
@@ -143,8 +143,8 @@ angular.module('starter.controllers')
           callback: function (val) {  //Mandatory
             if (val) {
               $scope.endDatepickerObject.inputDate = val;
-              $scope.updateEndTimeStamp();
             }
+            $scope.updateEndTimeStamp();
           },
           dateFormat: 'dd-MM-yyyy', //Optional
           closeOnSelect: false, //Optional
