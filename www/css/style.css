@@ -146,3 +146,10 @@ flex-calendar {
   text-transform: uppercase;
   color: red;
 }
+
+.box-bar-icon {
+  padding-right: 20px;
+  margin: -10px -15px;
+  float: left;
+  height:48px;
+}
