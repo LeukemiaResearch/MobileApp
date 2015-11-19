@@ -200,16 +200,19 @@ angular.module('starter.controllers')
         transitionDuration: 500,
         xAxis: {
           tickFormat: function (d) {
+            if (!d) return d;
             return d3.time.format('%d/%m')(new Date(d));
           }
         },
         yAxis1: {
           tickFormat: function (d) {
+            if (!d) return d;
             return d3.format(',.1f')(d);
           }
         },
         yAxis2: {
           tickFormat: function (d) {
+            if (!d) return d;
             return d3.format(',.1f')(d);
           }
         }
