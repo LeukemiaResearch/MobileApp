@@ -212,8 +212,7 @@ angular.module('starter.services', [])
         return questionState.timeStamp !== undefined;
       }
       else if (stepNumber==2){
-        console.log("6MP: " + parseFloat(questionState.SixMP) + ", MTX: " + parseFloat(questionState.MTX));
-        return (questionState.SixMP !== undefined && parseFloat(questionState.SixMP)) && (questionState.MTX !== undefined && parseFloat(questionState.MTX));
+        return (questionState.SixMP !== undefined) && (questionState.MTX !== undefined);
       }
       else
         return false;
@@ -279,7 +278,12 @@ angular.module('starter.services', [])
         return questionState.timeStamp !== undefined;
       }
       else if (stepNumber==2){
-        return questionState.Leukocytter !== undefined && questionState.Neutrofile !== undefined && questionState.Thombocytter !== undefined && questionState.Hemoglobin !== undefined && questionState.Alat !== undefined && questionState.CRP !== undefined;
+        return (questionState.Leukocytter !== undefined && 0.0<=parseFloat(questionState.Leukocytter) && parseFloat(questionState.Leukocytter)<=100.0) &&
+        (questionState.Neutrofile !== undefined && 0.0<=parseFloat(questionState.Neutrofile) && parseFloat(questionState.Neutrofile)<=20.0) &&
+        (questionState.Thombocytter !== undefined && 0.0<=parseFloat(questionState.Thombocytter) && parseFloat(questionState.Thombocytter)<=100.0) &&
+        (questionState.Hemoglobin !== undefined && 2.0<=parseFloat(questionState.Hemoglobin) && parseFloat(questionState.Hemoglobin)<=10.0) &&
+        (questionState.Alat !== undefined && 99<=parseInt(questionState.Alat) && parseInt(questionState.Alat)<=9999) &&
+        (questionState.CRP !== undefined && 1<=parseInt(questionState.CRP) && parseInt(questionState.CRP)<=999);
       }
       else
         return false;
