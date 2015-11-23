@@ -210,7 +210,7 @@ angular.module('starter.services', [])
     return medicinedataservice;
   })
 
-  .factory('BloodsampleDataService', function(IdGenerator, BloodsampleData){
+  .factory('BloodsampleDataService', function(IdGenerator, BloodsampleData, questionState){
 
     var bloodsampledataservice = {};
 
@@ -262,7 +262,14 @@ angular.module('starter.services', [])
     };
 
     bloodsampledataservice.finishedStep = function(stepNumber) {
-      return true;
+      if (stepNumber==1){
+        return questionState.timeStamp !== undefined;
+      }
+      else if (stepNumber==2){
+        return questionState.Leukocytter !== undefined && questionState.Neutrofile !== undefined && questionState.Thombocytter !== undefined && questionState.Hemoglobin !== undefined && questionState.Alat !== undefined && questionState.CRP !== undefined;
+      }
+      else
+        return false;
     };
 
     bloodsampledataservice.finishedWizard = null;
