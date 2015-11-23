@@ -145,7 +145,7 @@ angular.module('starter.services', [])
     return paindataservice
   })
 
-  .factory('MedicineDataService', function(IdGenerator, MedicineData){
+  .factory('MedicineDataService', function(IdGenerator, MedicineData, questionState){
 
     var medicinedataservice = {};
 
@@ -195,7 +195,14 @@ angular.module('starter.services', [])
     };
 
     medicinedataservice.finishedStep = function(stepNumber) {
-      return true;
+      if (stepNumber==1){
+        return questionState.timeStamp !== undefined;
+      }
+      else if (stepNumber==2){
+        return questionState.SixMP !== undefined && questionState.MTX !== undefined;
+      }
+      else
+        return false;
     };
 
     medicinedataservice.finishedWizard = null;
@@ -288,18 +295,6 @@ angular.module('starter.services', [])
       });
     };
 
-
-    mucositisdataservice.finishedStep = function(stepNumber) {
-      if (stepNumber==1)
-        return questionState.timeStamp !== undefined;
-      else if (stepNumber==2)
-        return questionState.groupvalue !== undefined && questionState.groupvalue[0] !== undefined && questionState.groupvalue[1] !== undefined && questionState.groupvalue[2] !== undefined;
-      else if (stepNumber==3)
-        return questionState.nauseaScore;
-      else
-        return false;
-    };
-
     mucositisdataservice.getAllMucositisData = function () {
       return MucositisData.getAll();
     };
@@ -323,6 +318,21 @@ angular.module('starter.services', [])
     mucositisdataservice.deleteMucositisData = function (id) {
       MucositisData.destroy(id);
     };
+
+    mucositisdataservice.finishedStep = function(stepNumber) {
+      if (stepNumber==1)
+        return questionState.timeStamp !== undefined;
+      else if (stepNumber==2)
+        return questionState.groupvalue !== undefined && questionState.groupvalue[0] !== undefined && questionState.groupvalue[1] !== undefined && questionState.groupvalue[2] !== undefined;
+      else if (stepNumber==3)
+        return questionState.nauseaScore;
+      else
+        return false;
+    };
+
+/*
+    mucositisdataservice.finishedStep = null;
+*/
 
     mucositisdataservice.finishedWizard = null;
 

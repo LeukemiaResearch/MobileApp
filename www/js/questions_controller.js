@@ -99,29 +99,34 @@ angular.module('starter.controllers')
     $scope.hideIndicators = Object.keys($scope.questions[$scope.dataType]).length <= 1;
 
     $scope.finishedWizard = function () {
+      if(this.exitValidation()) {
+        $scope.getDataService().finishedWizard();
 
-      $scope.getDataService().finishedWizard();
+        //Clean up question state
+        for (var variableKey in questionState) {
 
-      //Clean up question state
-      for (var variableKey in questionState) {
-
-        if (variableKey !== 'timeStamp' &&
-          questionState.hasOwnProperty(variableKey)) {
-          delete questionState[variableKey];
+          if (variableKey !== 'timeStamp' &&
+            questionState.hasOwnProperty(variableKey)) {
+            delete questionState[variableKey];
+          }
         }
-      }
 
-      $ionicPopup.alert({
-        title: $scope.dataType,
-        content: 'Registrering gemt!'
-      }).then(function (res) {
-        setTimeout($scope.$ionicGoBack);
-      });
+        $ionicPopup.alert({
+          title: $scope.dataType,
+          content: 'Registrering gemt!'
+        }).then(function (res) {
+          setTimeout($scope.$ionicGoBack);
+        });
+      }
     };
 
     $scope.exitValidation = function(){
       return $scope.getDataService().finishedStep(WizardHandler.wizard().currentStepNumber());
     };
+
+    /*$scope.exitValidation = function(){
+      return $scope.getDataService().finishedStep();
+    };*/
 
     //Lookup data service based on type
     $scope.getDataService = function() {
