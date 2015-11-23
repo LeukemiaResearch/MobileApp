@@ -212,7 +212,8 @@ angular.module('starter.services', [])
         return questionState.timeStamp !== undefined;
       }
       else if (stepNumber==2){
-        return questionState.SixMP !== undefined && questionState.MTX !== undefined;
+        console.log("6MP: " + parseFloat(questionState.SixMP) + ", MTX: " + parseFloat(questionState.MTX));
+        return (questionState.SixMP !== undefined && parseFloat(questionState.SixMP)) && (questionState.MTX !== undefined && parseFloat(questionState.MTX));
       }
       else
         return false;
