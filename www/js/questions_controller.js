@@ -100,22 +100,7 @@ angular.module('starter.controllers')
 
     $scope.finishedWizard = function () {
 
-      //Store entered data
-      if (questionState.type === 'Mucositis') {
-        MucositisDataService.finishedWizard();
-      }
-
-      else if (questionState.type === 'Medicin') {
-        MedicineDataService.finishedWizard();
-      }
-
-      else if (questionState.type === 'Smerte') {
-        PainDataService.finishedWizard();
-      }
-
-      else if (questionState.type === 'Blodprøve') {
-        BloodsampleDataService.finishedWizard();
-      }
+      $scope.getDataService().finishedWizard();
 
       //Clean up question state
       for (var variableKey in questionState) {
@@ -131,10 +116,12 @@ angular.module('starter.controllers')
         content: 'Registrering gemt!'
       }).then(function (res) {
         setTimeout($scope.$ionicGoBack);
-        console.log("WIZARD SLUT!!!");
       });
     };
 
+    $scope.exitValidation = function(){
+      return $scope.getDataService().finishedStep(WizardHandler.wizard().currentStepNumber());
+    };
 
     //Lookup data service based on type
     $scope.getDataService = function() {
@@ -147,10 +134,6 @@ angular.module('starter.controllers')
       } else if ($scope.dataType=='Mucositis') {
         return MucositisDataService;
       }
-    };
-
-    $scope.exitValidation = function(){
-      return $scope.getDataService().finishedStep(WizardHandler.wizard().currentStepNumber());
     };
 
   });
