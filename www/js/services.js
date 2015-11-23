@@ -82,7 +82,7 @@ angular.module('starter.services', [])
     return dailydataservice;
   })
 
-  .factory('PainDataService', function(IdGenerator, PainData){
+  .factory('PainDataService', function(IdGenerator, PainData, questionState){
 
     var paindataservice = {};
 
@@ -137,7 +137,20 @@ angular.module('starter.services', [])
     };
 
     paindataservice.finishedStep = function(stepNumber) {
-      return true;
+      if (stepNumber==1) {
+        return questionState.timeStamp !== undefined;
+      }
+      else if (stepNumber==2) {
+        return true;
+      }
+      else if (stepNumber==3) {
+        return questionState.painType !== undefined;
+      }
+      else if (stepNumber==4) {
+        return (questionState.flaccvalue !== undefined && questionState.flaccvalue[0] !== undefined && questionState.flaccvalue[1] !== undefined && questionState.flaccvalue[2] !== undefined) || questionState.selectedSmiley !==undefined;
+      }
+      else
+        return false;
     };
 
     paindataservice.finishedWizard = null;
@@ -222,7 +235,6 @@ angular.module('starter.services', [])
       var id = IdGenerator.generateId();
       var obj = BloodsampleData.createInstance({id: id, timeStamp:date, leucocytes: leucocytes,neutrofile: neutrofile,thrombocytes: thrombocytes,hemoglobin: hemoglobin,alat: alat,crp: crp});
       BloodsampleData.inject(obj);
-      console.log("ID: " + obj.id + "Leuko: " + obj.leucocytes);
       return obj;
     };
 
