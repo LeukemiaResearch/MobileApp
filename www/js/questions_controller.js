@@ -99,42 +99,34 @@ angular.module('starter.controllers')
     $scope.hideIndicators = Object.keys($scope.questions[$scope.dataType]).length <= 1;
 
     $scope.finishedWizard = function () {
+      if(this.exitValidation()) {
+        $scope.getDataService().finishedWizard();
 
-      //Store entered data
-      if (questionState.type === 'Mucositis') {
-        MucositisDataService.finishedWizard();
-      }
+        //Clean up question state
+        for (var variableKey in questionState) {
 
-      else if (questionState.type === 'Medicin') {
-        MedicineDataService.finishedWizard();
-      }
-
-      else if (questionState.type === 'Smerte') {
-        PainDataService.finishedWizard();
-      }
-
-      else if (questionState.type === 'Blodprøve') {
-        BloodsampleDataService.finishedWizard();
-      }
-
-      //Clean up question state
-      for (var variableKey in questionState) {
-
-        if (variableKey !== 'timeStamp' &&
-          questionState.hasOwnProperty(variableKey)) {
-          delete questionState[variableKey];
+          if (variableKey !== 'timeStamp' &&
+            questionState.hasOwnProperty(variableKey)) {
+            delete questionState[variableKey];
+          }
         }
-      }
 
-      $ionicPopup.alert({
-        title: $scope.dataType,
-        content: 'Registrering gemt!'
-      }).then(function (res) {
-        setTimeout($scope.$ionicGoBack);
-        console.log("WIZARD SLUT!!!");
-      });
+        $ionicPopup.alert({
+          title: $scope.dataType,
+          content: 'Registrering gemt!'
+        }).then(function (res) {
+          setTimeout($scope.$ionicGoBack);
+        });
+      }
     };
 
+    $scope.exitValidation = function(){
+      return $scope.getDataService().finishedStep(WizardHandler.wizard().currentStepNumber());
+    };
+
+    /*$scope.exitValidation = function(){
+      return $scope.getDataService().finishedStep();
+    };*/
 
     //Lookup data service based on type
     $scope.getDataService = function() {
@@ -147,10 +139,6 @@ angular.module('starter.controllers')
       } else if ($scope.dataType=='Mucositis') {
         return MucositisDataService;
       }
-    };
-
-    $scope.exitValidation = function(){
-      return $scope.getDataService().finishedStep(WizardHandler.wizard().currentStepNumber());
     };
 
   });

@@ -29,7 +29,7 @@ angular.module('starter.controllers')
     //pain type selection
     $scope.selectPainType = function (painType) {
       questionState.painType = painType;
-    }
+    };
 
     //flacc selection
     $scope.selectFlacc = function (flaccnumber, newvalue) {
@@ -72,6 +72,6 @@ angular.module('starter.controllers')
         questionState.morphine, questionState.morphineType, parseFloat(questionState.morphineDose), questionState.morphineMeasureUnit);
       console.log(data);
     }
-  })
+  });
 
 

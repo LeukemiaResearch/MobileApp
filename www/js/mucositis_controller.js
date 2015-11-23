@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-  .controller('mucositisController', function ($scope, MucositisDataService, questionState) {
+  .controller('mucositisController', function ($scope, MucositisDataService, questionState, WizardHandler) {
 
     //Expose questionState
     $scope.questionState = questionState;
@@ -22,5 +22,18 @@ angular.module('starter.controllers')
     MucositisDataService.finishedWizard = function () {
       MucositisDataService.createMucositisData(questionState.timeStamp, questionState.groupvalue[0], questionState.groupvalue[1], questionState.groupvalue[2], parseInt(questionState.nauseaScore, 10));
     };
+
+    //Validate input
+    /*MucositisDataService.finishedStep = function() {
+      var stepNumber = WizardHandler.wizard().currentStepNumber();
+      if (stepNumber==1)
+        return questionState.timeStamp !== undefined;
+      else if (stepNumber==2)
+        return questionState.groupvalue !== undefined && questionState.groupvalue[0] !== undefined && questionState.groupvalue[1] !== undefined && questionState.groupvalue[2] !== undefined;
+      else if (stepNumber==3)
+        return questionState.nauseaScore;
+      else
+        return false;
+    };*/
 
   });
