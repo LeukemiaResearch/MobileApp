@@ -68,6 +68,8 @@ angular.module('starter.controllers')
         questionState.morphineMeasureUnit = 'mg/dag';
       }
 
+      $scope.lastRegistration = PainDataService.getLastPainData();
+
       var data = PainDataService.createPainData(questionState.timeStamp, questionState.painType, parseInt(questionState.painScore, 10),
         questionState.morphine, questionState.morphineType, parseFloat(questionState.morphineDose), questionState.morphineMeasureUnit);
       console.log(data);

@@ -90,7 +90,7 @@ angular.module('starter.controllers')
             $scope.updateStartTimeStamp();
           },
           dateFormat: 'dd-MM-yyyy', //Optional
-          closeOnSelect: false, //Optional
+          closeOnSelect: false //Optional
         };
       $scope.updateEndTimeStamp = function () {
         var date = $scope.endDatepickerObject.inputDate;
@@ -147,7 +147,7 @@ angular.module('starter.controllers')
             $scope.updateEndTimeStamp();
           },
           dateFormat: 'dd-MM-yyyy', //Optional
-          closeOnSelect: false, //Optional
+          closeOnSelect: false //Optional
         };
     }
 
@@ -245,24 +245,24 @@ angular.module('starter.controllers')
       $scope.$apply();
       $scope.displaytype = curr;
       $scope.$apply();
-    }
+    };
 
     //Load data objects to display
     if ($scope.dataSeries===undefined || newDataTypeInController) {
       $scope.dataSeries = []; // Objects like {values: [{x:timeStap, y:value},...], color: ?, type: ?, key: ?, label: ?, visible: true}
     }
     $scope.$watch($scope.startTimeStamp, function() {
-      $scope.updateDataObjects;
-    })
+      $scope.updateDataObjects();
+    });
     $scope.$watch($scope.endTimeStamp, function() {
-      $scope.updateDataObjects;
-    })
+      $scope.updateDataObjects();
+    });
     $scope.updateDataObjects = function () {
 
       //create graph dataseries content
       var dataObjects = $scope.getDataService().getData($scope.startTimeStamp, $scope.endTimeStamp);
       var dataserieNumber = 0;
-      for (objcount in dataObjects) {
+      for (var objcount in dataObjects) {
 
         //Insert all timeStamp data in data series
         var obj = dataObjects[objcount];
@@ -336,7 +336,7 @@ angular.module('starter.controllers')
 
       //Data serie visibility control
       $scope.updateFilteredDataSeries();
-    }
+    };
 
     //Toggle display of data serie
     $scope.toggleShowDataSerie = function(key) {
@@ -347,7 +347,7 @@ angular.module('starter.controllers')
 
       //Data serie visibility control
       $scope.updateFilteredDataSeries();
-    }
+    };
 
     //Display chart/table control
     $scope.displaytype = "";//'chart' or 'table'

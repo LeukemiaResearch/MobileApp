@@ -42,7 +42,7 @@
               </div>
             </div>
             Notes:
-              <textarea rows="10" cols="1" class="notes" placeholder="Tap to enter text"  data-ng-model="notes"></textarea>
+            <textarea rows="10" cols="1" class="notes" placeholder="Tap to enter text" data-ng-model="notes"></textarea>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@
         </div>
       </div>
       <div class="col">
-        <div class="card frontpagecomponent">
+        <div class="card frontpagecomponent" ng-controller="painController">
           <div class="item item-divider bar bar-balanced">
             <span class="box-bar-icon smertetransparent" ng-style="{'content':'url(img/smertetransparent.png)'}"></span>
             <strong>Smerte</strong>
@@ -118,17 +118,17 @@
                     ng-click="openDataOverviewPage('Smerte')"></button>
           </div>
           <div class="item item-text-wrap">
+            <div class="row">Sidste registrering:</div>
             <div class="row">
-              <div class="col"><strong>Mavesmerte</strong></div>
-              <div class="col"></div>
+              <div class="col"><strong>{{ lastRegistration.painType }}</strong></div>
             </div>
             <div class="row">
               <div class="col"><strong>Intensitet</strong></div>
-              <div class="col">4,8</div>
+              <div class="col">{{ lastRegistration.painScore }}</div>
             </div>
             <div class="row">
               <div class="col"><strong>Morfin</strong></div>
-              <div class="col">3 mg/daglig</div>
+              <div class="col">{{ lastRegistration.morphineDose }} {{ lastRegistration.morphineMeasureUnit }}</div>
             </div>
           </div>
         </div>
