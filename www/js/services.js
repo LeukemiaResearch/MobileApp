@@ -298,6 +298,8 @@ angular.module('starter.services', [])
 
     var mucositisdataservice = {};
 
+    var latestId = undefined;
+
     //MucositisData
     //MucositisData.inject([{id: 1, date: new Date(2015, 9, 16, 19, 14, 22, 0), mucositisScore:7, nauseaScore:6},{id: 2, date: new Date(2015, 10, 7, 19, 46, 0, 0), mucositisScore:9, nauseaScore:8}]);
 
@@ -305,6 +307,7 @@ angular.module('starter.services', [])
       var id = IdGenerator.generateId();
       var obj = MucositisData.createInstance({id: id, timeStamp: timeStamp, pain: pain, ulcers: ulcers, food:food, 'nauseaScore': nauseaScore});
       MucositisData.inject(obj);
+      latestId = id;
       return obj;
     };
 
@@ -354,6 +357,73 @@ angular.module('starter.services', [])
         return false;
     };
 
+    mucositisdataservice.getLatestMucositisPain = function (){
+      var message = undefined;
+        if(this.getLatestMucositisRegistration().pain === 0){
+          message = "Ingen smerter"
+        }
+        else if(this.getLatestMucositisRegistration().pain === 1){
+          message = "Lette smerter"
+        }
+        else if(this.getLatestMucositisRegistration().pain === 2){
+          message = "Moderate smerter"
+        }
+        else if(this.getLatestMucositisRegistration().pain === 3){
+          message = "Kraftige smerter"
+        }
+        else if(this.getLatestMucositisRegistration().pain === 4){
+          message = "Uudholdlige smerter"
+        }
+      return message;
+    };
+
+    mucositisdataservice.getLatestUlcers = function (){
+      var message = undefined;
+        if(this.getLatestMucositisRegistration().ulcers === 0){
+          message = "Ingen sår"
+        }
+        else if(this.getLatestMucositisRegistration().ulcers === 1){
+          message = "Ingen sår, let rødmen"
+        }
+        else if(this.getLatestMucositisRegistration().ulcers === 2){
+          message = "Enkelte mindre sår"
+        }
+        else if(this.getLatestMucositisRegistration().ulcers === 3){
+          message = "Mange sår"
+        }
+        else if(this.getLatestMucositisRegistration().ulcers === 4){
+          message = "Udtalt rødmen + mange store sår"
+        }
+      return message;
+    };
+
+    mucositisdataservice.getLatestFoodIntake = function(){
+      var message = undefined;
+        if(this.getLatestMucositisRegistration().food === 0){
+          message = "Ingen påvirkning"
+        }
+        else if(this.getLatestMucositisRegistration().food === 1){
+          message = "Spiser næsten normalt"
+        }
+        else if(this.getLatestMucositisRegistration().food === 2){
+          message = "Spiser lidt fast føde"
+        }
+        else if(this.getLatestMucositisRegistration().food === 3){
+          message = "Spiser flydende føde"
+        }
+        else if(this.getLatestMucositisRegistration().food === 4){
+          message = "Behov for sondemad"
+        }
+      return message;
+    };
+
+    mucositisdataservice.getLatestMucositisRegistration = function () {
+      var latestRegistration = undefined;
+      if(latestId !== undefined){
+        latestRegistration = this.getMucositisData(latestId);
+      }
+      return latestRegistration;
+    };
 /*
     mucositisdataservice.finishedStep = null;
 */
