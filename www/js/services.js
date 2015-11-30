@@ -177,6 +177,8 @@ angular.module('starter.services', [])
   .factory('MedicineDataService', function (IdGenerator, MedicineData, questionState) {
 
     var medicinedataservice = {};
+    var latestId = undefined;
+
 
     //MedicineData
     //MedicineData.inject([{id: 1, date: new Date(2015, 8, 27, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 2, date: new Date(2015, 9, 2, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 3, date: new Date(2015, 9, 16, 0, 0, 0, 0), sixmp:10.0, mtx:10.0}, {id: 4, date: new Date(2015, 9, 17, 0, 0, 0, 0), sixmp:0, mtx:0}, {id: 5, date: new Date(2015, 10, 1, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 6, date: new Date(2015, 10, 7, 0, 0, 0, 0), sixmp:25.0, mtx:10.0}]);
@@ -185,6 +187,7 @@ angular.module('starter.services', [])
       var id = IdGenerator.generateId();
       var obj = MedicineData.createInstance({id: id, timeStamp: date, sixmp: sixmp, mtx: mtx});
       MedicineData.inject(obj);
+      latestId = id;
       return obj;
     };
 
@@ -232,6 +235,22 @@ angular.module('starter.services', [])
       }
       else
         return false;
+    };
+
+    medicinedataservice.getLatestMtx = function (){
+      return this.getLatestMedicineRegistration().mtx + " mg";
+    };
+
+    medicinedataservice.getLatestSixMp = function(){
+      return this.getLatestMedicineRegistration().sixmp + " mg";
+    };
+
+    medicinedataservice.getLatestMedicineRegistration = function () {
+      var latestRegistration = undefined;
+      if(latestId !== undefined){
+        latestRegistration = this.getMedicineData(latestId);
+      }
+      return latestRegistration;
     };
 
     medicinedataservice.finishedWizard = null;
