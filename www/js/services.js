@@ -177,8 +177,8 @@ angular.module('starter.services', [])
   .factory('MedicineDataService', function (IdGenerator, MedicineData, questionState) {
 
     var medicinedataservice = {};
-    var latestId = undefined;
 
+    var latestId = undefined;
 
     //MedicineData
     //MedicineData.inject([{id: 1, date: new Date(2015, 8, 27, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 2, date: new Date(2015, 9, 2, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 3, date: new Date(2015, 9, 16, 0, 0, 0, 0), sixmp:10.0, mtx:10.0}, {id: 4, date: new Date(2015, 9, 17, 0, 0, 0, 0), sixmp:0, mtx:0}, {id: 5, date: new Date(2015, 10, 1, 0, 0, 0, 0), sixmp:0, mtx:0},{id: 6, date: new Date(2015, 10, 7, 0, 0, 0, 0), sixmp:25.0, mtx:10.0}]);
@@ -238,11 +238,11 @@ angular.module('starter.services', [])
     };
 
     medicinedataservice.getLatestMtx = function (){
-      return this.getLatestMedicineRegistration().mtx + " mg";
+      return this.getLatestMedicineRegistration().mtx;
     };
 
     medicinedataservice.getLatestSixMp = function(){
-      return this.getLatestMedicineRegistration().sixmp + " mg";
+      return this.getLatestMedicineRegistration().sixmp;
     };
 
     medicinedataservice.getLatestMedicineRegistration = function () {
@@ -262,6 +262,8 @@ angular.module('starter.services', [])
 
     var bloodsampledataservice = {};
 
+    var latestId = undefined;
+
     //BloodsampleData
     /*BloodsampleData.inject([{id: 1, date: new Date(2015, 9, 2, 15, 15, 0, 0), leucocytes: 4.5, neutrofile: 7.8, thrombocytes: 45.2, hemoglobin: 3.7, alat: 3465, crp: 453},
      {id: 2, date: new Date(2015, 10, 7, 12, 2, 34, 0), leucocytes:78.5, neutrofile:12.3, thrombocytes:15.0, hemoglobin:4.1, alat:2635, crp:251}]);*/
@@ -279,7 +281,7 @@ angular.module('starter.services', [])
         crp: crp
       });
       BloodsampleData.inject(obj);
-      console.log("ID: " + obj.id + "Leuko: " + obj.leucocytes);
+      latestId = id;
       return obj;
     };
 
@@ -332,6 +334,26 @@ angular.module('starter.services', [])
       }
       else
         return false;
+    };
+
+    bloodsampledataservice.getLatestThrombocytes = function (){
+      return this.getLatestBloodsampleRegistration().thrombocytes;
+    };
+
+    bloodsampledataservice.getLatestHemoglobin = function(){
+      return this.getLatestBloodsampleRegistration().hemoglobin;
+    };
+
+    bloodsampledataservice.getLatestAlat = function(){
+      return this.getLatestBloodsampleRegistration().alat;
+    };
+
+    bloodsampledataservice.getLatestBloodsampleRegistration = function () {
+      var latestRegistration = undefined;
+      if(latestId !== undefined){
+        latestRegistration = this.getBloodsampleData(latestId);
+      }
+      return latestRegistration;
     };
 
     bloodsampledataservice.finishedWizard = null;
