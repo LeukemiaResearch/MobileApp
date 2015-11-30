@@ -1,5 +1,6 @@
 <ion-view view-title="Leukæmi App" ng-controller="frontpageController">
   <ion-content class="frontpagecontainer">
+
     <div class="row responsive-md bigScreentoprow" ng-controller="calendarController">
       <div class="col topmodulerow">
         <div class="card frontpagetopcomponent">
@@ -13,35 +14,43 @@
       <div class="col">
         <div class="card frontpagetopcomponent">
           <div class="item item-text-wrap">
-            <div class="calendar-date">
-              {{ calendarFactory.selectedDate.getDate() }} <br>
+            <div class="row">
+              <div class="col-33" style="float:right">
+                <div class="calendar-date">
+                  {{ calendarFactory.selectedDate.getDate() }} <br>
+                </div>
+                <div class="calendar-day">
+                  {{ calendarFactory.getSelectedDayOfTheWeek() }} <br>
+                </div>
+                <div class="calendar-month">
+                  {{ calendarFactory.getSelectedMonth() }} <br>
+                </div>
+              </div>
+              <div class="col" style="float:left">
+                <div class="item item-checkbox">
+                  <label class="checkbox">
+                    <input type="checkbox" ng-model="checkBoxModel.bloodsample" ng-change="updateBloodSampleEvent()">
+                  </label>
+                  Bloodprøver
+                </div>
+                <div class="item item-checkbox">
+                  <label class="checkbox">
+                    <input type="checkbox" ng-model="checkBoxModel.highdose" ng-change="updateHighDoseEvent()">
+                  </label>
+                  Højdosis
+                </div>
+              </div>
             </div>
-            <div class="calendar-day">
-              {{ calendarFactory.getSelectedDayOfTheWeek() }} <br>
-            </div>
-            <div class="calendar-month">
-              {{ calendarFactory.getSelectedMonth() }} <br>
-            </div>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="checkBoxModel.bloodsample" ng-change="updateBloodSampleEvent()">
-              </label>
-              Bloodprøver
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="checkBoxModel.highdose" ng-change="updateHighDoseEvent()">
-              </label>
-              Højdosis
-            </li>
+            Notes:
+              <textarea rows="10" cols="1" class="notes" placeholder="Tap to enter text"  data-ng-model="notes"></textarea>
           </div>
         </div>
       </div>
     </div>
     <div class="row smallScreentoprow" ng-controller="calendarController">
-      <div class="col">
-        <div class="card frontpagetopcomponent">
-          <div class="item item-text-wrap">
+      <div class="card frontpagetopcomponent">
+        <div class="item item-text-wrap">
+          <div class="col" style="float:right">
             <div class="calendar-date">
               {{ calendarFactory.selectedDate.getDate() }} <br>
             </div>
@@ -51,31 +60,39 @@
             <div class="calendar-month">
               {{ calendarFactory.getSelectedMonth() }} <br>
             </div>
-            <li class="item item-checkbox">
+          </div>
+          <div class="col" style="float:left">
+            <div class="item item-checkbox">
               <label class="checkbox">
                 <input type="checkbox" ng-model="checkBoxModel.bloodsample" ng-change="updateBloodSampleEvent()">
               </label>
               Bloodprøver
-            </li>
-            <li class="item item-checkbox">
+            </div>
+            <div class="item item-checkbox">
               <label class="checkbox">
                 <input type="checkbox" ng-model="checkBoxModel.highdose" ng-change="updateHighDoseEvent()">
               </label>
               Højdosis
-            </li>
+            </div>
           </div>
+
         </div>
       </div>
+
+    </div>
     </div>
     <div class="row responsive-md frontpagerow">
       <div class="col">
         <div class="card frontpagecomponent">
           <div class="item item-divider bar bar-calm">
-            <span class="box-bar-icon smertetransparent" style="content:url('../www/img/medicintransparent.png')"></span>
+            <span class="box-bar-icon smertetransparent"
+                  ng-style="{'content':'url(img/medicintransparent.png)'}"></span>
             <strong>Medicin</strong>
-            <button style="float: right" class="button button-icon ion-compose"  ng-click="openQuestionWizardPage('Medicin')"></button>
+            <button style="float: right" class="button button-icon ion-compose"
+                    ng-click="openQuestionWizardPage('Medicin')"></button>
             <span style="padding-left: 50px; float: right;"></span>
-            <button style="float: right" class="button button-icon ion-stats-bars"  ng-click="openDataOverviewPage('Medicin')"></button>
+            <button style="float: right" class="button button-icon ion-stats-bars"
+                    ng-click="openDataOverviewPage('Medicin')"></button>
           </div>
           <div class="item item-text-wrap">
             <div class="row">
@@ -92,25 +109,27 @@
       <div class="col">
         <div class="card frontpagecomponent">
           <div class="item item-divider bar bar-balanced">
-            <span class="box-bar-icon smertetransparent" style="content:url('../www/img/smertetransparent.png')"></span>
+            <span class="box-bar-icon smertetransparent" ng-style="{'content':'url(img/smertetransparent.png)'}"></span>
             <strong>Smerte</strong>
-            <button style="float: right" class="button button-icon ion-compose"  ng-click="openQuestionWizardPage('Smerte')"></button>
+            <button style="float: right" class="button button-icon ion-compose"
+                    ng-click="openQuestionWizardPage('Smerte')"></button>
             <span style="padding-left: 50px; float: right;"></span>
-            <button style="float: right" class="button button-icon ion-stats-bars"  ng-click="openDataOverviewPage('Smerte')"></button>
+            <button style="float: right" class="button button-icon ion-stats-bars"
+                    ng-click="openDataOverviewPage('Smerte')"></button>
           </div>
-            <div class="item item-text-wrap">
-              <div class="row">
-                <div class="col"><strong>Trombocytter</strong></div>
-                <div class="col">3 10^9 L</div>
-              </div>
-              <div class="row">
-                <div class="col"><strong>Hæmoglobin</strong></div>
-                <div class="col">4 10^ L</div>
-              </div>
-              <div class="row">
-                <div class="col"><strong>ALAT</strong></div>
-                <div class="col">3 U/L</div>
-              </div>
+          <div class="item item-text-wrap">
+            <div class="row">
+              <div class="col"><strong>Mavesmerte</strong></div>
+              <div class="col"></div>
+            </div>
+            <div class="row">
+              <div class="col"><strong>Intensitet</strong></div>
+              <div class="col">4,8</div>
+            </div>
+            <div class="row">
+              <div class="col"><strong>Morfin</strong></div>
+              <div class="col">3 mg/daglig</div>
+            </div>
           </div>
         </div>
       </div>
@@ -119,36 +138,42 @@
       <div class="col">
         <div class="card frontpagecomponent">
           <div class="item item-divider bar bar-assertive">
-            <span class="box-bar-icon smertetransparent" style="content:url('../www/img/blodtransparent.png')"></span>
+            <span class="box-bar-icon smertetransparent" ng-style="{'content':'url(img/blodtransparent.png)'}"></span>
             <strong>Blodprøver</strong>
-            <button style="float: right" class="button button-icon ion-compose"  ng-click="openQuestionWizardPage('Blodprøve')"></button>
+            <button style="float: right" class="button button-icon ion-compose"
+                    ng-click="openQuestionWizardPage('Blodprøve')"></button>
             <span style="padding-left: 50px; float: right;"></span>
-            <button style="float: right" class="button button-icon ion-stats-bars"  ng-click="openDataOverviewPage('Blodprøve')"></button>
+            <button style="float: right" class="button button-icon ion-stats-bars"
+                    ng-click="openDataOverviewPage('Blodprøve')"></button>
           </div>
           <div class="item item-text-wrap">
-              <div class="row">
-                <div class="col"><strong>Mavesmerte</strong></div>
-                <div class="col"></div>
-              </div>
-              <div class="row">
-                <div class="col"><strong>Intensitet</strong></div>
-                <div class="col">4,8</div>
-              </div>
-              <div class="row">
-                <div class="col"><strong>Morfin</strong></div>
-                <div class="col">3 mg/daglig</div>
-              </div>
+            <div class="row">
+              <div class="col"><strong>Trombocytter</strong></div>
+              <div class="col">3 10^9 L</div>
             </div>
+            <div class="row">
+              <div class="col"><strong>Hæmoglobin</strong></div>
+              <div class="col">4 10^ L</div>
+            </div>
+            <div class="row">
+              <div class="col"><strong>ALAT</strong></div>
+              <div class="col">3 U/L</div>
+            </div>
+
+          </div>
         </div>
       </div>
       <div class="col">
         <div class="card frontpagecomponent">
           <div class="item item-divider bar bar-energized">
-            <span class="box-bar-icon smertetransparent" style="content:url('../www/img/mucositistransparent.png')"></span>
+            <span class="box-bar-icon smertetransparent"
+                  ng-style="{'content':'url(img/mucositistransparent.png)'}"></span>
             <strong>Mucositis</strong>
-            <button style="float: right" class="button button-icon ion-compose"  ng-click="openQuestionWizardPage('Mucositis')"></button>
+            <button style="float: right" class="button button-icon ion-compose"
+                    ng-click="openQuestionWizardPage('Mucositis')"></button>
             <span style="padding-left: 50px; float: right;"></span>
-            <button style="float: right" class="button button-icon ion-stats-bars"  ng-click="openDataOverviewPage('Mucositis')"></button>
+            <button style="float: right" class="button button-icon ion-stats-bars"
+                    ng-click="openDataOverviewPage('Mucositis')"></button>
           </div>
           <div class="item item-text-wrap">
             <div class="row">

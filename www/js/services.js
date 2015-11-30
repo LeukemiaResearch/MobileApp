@@ -235,6 +235,7 @@ angular.module('starter.services', [])
       var id = IdGenerator.generateId();
       var obj = BloodsampleData.createInstance({id: id, timeStamp:date, leucocytes: leucocytes,neutrofile: neutrofile,thrombocytes: thrombocytes,hemoglobin: hemoglobin,alat: alat,crp: crp});
       BloodsampleData.inject(obj);
+      console.log("ID: " + obj.id + "Leuko: " + obj.leucocytes);
       return obj;
     };
 
@@ -322,7 +323,8 @@ angular.module('starter.services', [])
       });
     };
 
-    mucositisdataservice.getAllMucositisData = function () {
+
+     mucositisdataservice.getAllMucositisData = function () {
       return MucositisData.getAll();
     };
 
