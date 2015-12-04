@@ -118,17 +118,19 @@
                     ng-click="openDataOverviewPage('Smerte')"></button>
           </div>
           <div class="item item-text-wrap">
-            <div class="row">Sidste registrering:</div>
+
             <div class="row">
-              <div class="col"><strong>{{ lastRegistration.painType }}</strong></div>
+              <div class="col"><strong>Smerte typen</strong></div>
+              <div class="col">{{getLatestPainRegistration(1)}}</div>
+
             </div>
             <div class="row">
               <div class="col"><strong>Intensitet</strong></div>
-              <div class="col">{{ lastRegistration.painScore }}</div>
+              <div class="col">{{getLatestPainRegistration(2)}}</div>
             </div>
             <div class="row">
               <div class="col"><strong>Morfin</strong></div>
-              <div class="col">{{ lastRegistration.morphineDose }} {{ lastRegistration.morphineMeasureUnit }}</div>
+              <div class="col">{{getLatestPainRegistration(3)}} {{getLatestPainRegistration(4)}}</div>
             </div>
           </div>
         </div>
