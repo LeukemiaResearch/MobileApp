@@ -65,6 +65,11 @@ flex-calendar {
   min-height: 9.0em;
 }
 
+.pain-button {
+  line-height: 1.5em;
+  min-height: 5.0em;
+}
+
 @media (max-width: 767px) { /* responsive-md */
 
   .mucositis-button {
