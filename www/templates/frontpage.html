@@ -48,34 +48,36 @@
       </div>
     </div>
     <div class="row smallScreentoprow" ng-controller="calendarController">
-      <div class="card frontpagetopcomponent">
-        <div class="item item-text-wrap">
-          <div class="col" style="float:right">
-            <div class="calendar-date">
-              {{ calendarFactory.selectedDate.getDate() }} <br>
+      <div class="col">
+        <div class="card frontpagetopcomponent">
+          <div class="item item-text-wrap">
+            <div class="col" style="float:right">
+              <div class="calendar-date">
+                {{ calendarFactory.selectedDate.getDate() }} <br>
+              </div>
+              <div class="calendar-day">
+                {{ calendarFactory.getSelectedDayOfTheWeek() }} <br>
+              </div>
+              <div class="calendar-month">
+                {{ calendarFactory.getSelectedMonth() }} <br>
+              </div>
             </div>
-            <div class="calendar-day">
-              {{ calendarFactory.getSelectedDayOfTheWeek() }} <br>
+            <div class="col" style="float:left">
+              <div class="item item-checkbox">
+                <label class="checkbox">
+                  <input type="checkbox" ng-model="checkBoxModel.bloodsample" ng-change="updateBloodSampleEvent()">
+                </label>
+                Bloodprøver
+              </div>
+              <div class="item item-checkbox">
+                <label class="checkbox">
+                  <input type="checkbox" ng-model="checkBoxModel.highdose" ng-change="updateHighDoseEvent()">
+                </label>
+                Højdosis
+              </div>
             </div>
-            <div class="calendar-month">
-              {{ calendarFactory.getSelectedMonth() }} <br>
-            </div>
-          </div>
-          <div class="col" style="float:left">
-            <div class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="checkBoxModel.bloodsample" ng-change="updateBloodSampleEvent()">
-              </label>
-              Bloodprøver
-            </div>
-            <div class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="checkBoxModel.highdose" ng-change="updateHighDoseEvent()">
-              </label>
-              Højdosis
-            </div>
-          </div>
 
+          </div>
         </div>
       </div>
 
