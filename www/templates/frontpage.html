@@ -76,12 +76,9 @@
                 Højdosis
               </div>
             </div>
-
           </div>
         </div>
       </div>
-
-    </div>
     </div>
     <div class="row responsive-md frontpagerow">
       <div class="col">
@@ -99,46 +96,15 @@
           <div class="item item-text-wrap">
             <div class="row">
               <div class="col"><strong>MTX</strong></div>
-              <div class="col">{{getLatestMedicineRegistration(1)}} <b><small>mg</small></b></div>
+              <div class="col">{{getLatestMedicineRegistration(1)}} <b><small>mg / ugentlig</small></b></div>
             </div>
             <div class="row">
               <div class="col"><strong>6 MP</strong></div>
-              <div class="col">{{getLatestMedicineRegistration(2)}} <b><small>mg</small></b></div>
+              <div class="col">{{getLatestMedicineRegistration(2)}} <b><small>mg / daglig</small></b></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col">
-        <div class="card frontpagecomponent" ng-controller="painController">
-          <div class="item item-divider bar bar-balanced">
-            <span class="box-bar-icon smertetransparent" ng-style="{'content':'url(img/smertetransparent.png)'}"></span>
-            <strong>Smerte</strong>
-            <button style="float: right" class="button button-icon ion-compose"
-                    ng-click="openQuestionWizardPage('Smerte')"></button>
-            <span style="padding-left: 50px; float: right;"></span>
-            <button style="float: right" class="button button-icon ion-stats-bars"
-                    ng-click="openDataOverviewPage('Smerte')"></button>
-          </div>
-          <div class="item item-text-wrap">
-
-            <div class="row">
-              <div class="col"><strong>Smerte typen</strong></div>
-              <div class="col">{{getLatestPainRegistration(1)}}</div>
-
-            </div>
-            <div class="row">
-              <div class="col"><strong>Intensitet</strong></div>
-              <div class="col">{{getLatestPainRegistration(2)}}</div>
-            </div>
-            <div class="row">
-              <div class="col"><strong>Morfin</strong></div>
-              <div class="col">{{getLatestPainRegistration(3)}} {{getLatestPainRegistration(4)}}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row responsive-md frontpagerow">
       <div class="col">
         <div class="card frontpagecomponent">
           <div class="item item-divider bar bar-assertive">
@@ -164,6 +130,35 @@
               <div class="col">{{getLatestBloodsampleRegistration(3)}} <b><small>U/L</small></b></div>
             </div>
 
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row responsive-md frontpagerow">
+      <div class="col">
+        <div class="card frontpagecomponent" ng-controller="painController">
+          <div class="item item-divider bar bar-balanced">
+            <span class="box-bar-icon smertetransparent" ng-style="{'content':'url(img/smertetransparent.png)'}"></span>
+            <strong>Smerte</strong>
+            <button style="float: right" class="button button-icon ion-compose"
+                    ng-click="openQuestionWizardPage('Smerte')"></button>
+            <span style="padding-left: 50px; float: right;"></span>
+            <button style="float: right" class="button button-icon ion-stats-bars"
+                    ng-click="openDataOverviewPage('Smerte')"></button>
+          </div>
+          <div class="item item-text-wrap">
+            <div class="row">
+              <div class="col"><strong>Smerte typen</strong></div>
+              <div class="col">{{getLatestPainRegistration(1)}}</div>
+            </div>
+            <div class="row">
+              <div class="col"><strong>Intensitet</strong></div>
+              <div class="col">{{getLatestPainRegistration(2)}}</div>
+            </div>
+            <div class="row">
+              <div class="col"><strong>Morfin</strong></div>
+              <div class="col">{{getLatestPainRegistration(3)}} {{getLatestPainRegistration(4)}}</div>
+            </div>
           </div>
         </div>
       </div>

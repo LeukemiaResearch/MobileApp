@@ -105,13 +105,6 @@ angular.module('starter.services', [])
       return PainData.getAll();
     };
 
-    paindataservice.getLastPainData = function () {
-      var painData = PainData.getAll();
-      console.log("painData:" + painData);
-      console.log("last paindata:" + painData[painData.length - 1]);
-      return painData[painData.length - 1];
-    }
-
     paindataservice.getData = function (start, end) {
       return PainData.filter({
         where: {

@@ -42,10 +42,33 @@ angular.module('starter.controllers')
 
     //smiley selection
     questionState.selectedSmiley = undefined;
+    questionState.smileyDescription = "";
 
     $scope.selectSmiley = function (smileynumber) {
       questionState.selectedSmiley = smileynumber;
       questionState.painScore = smileynumber;
+      switch (smileynumber) {
+        case 0:
+          questionState.smileyDescription = "Man kan gøre fuldstændig, som man plejer uden at tænke på, at det gør ondt.";
+          break;
+        case 2:
+          questionState.smileyDescription = "Man kan gøre, som man plejer, men af og til må man standse op, fordi det gør ondt.";
+          break;
+        case 4:
+          questionState.smileyDescription = "Man har mest lyst til at sidde stille og få læst en historie eller se fjernsyn, fordi det gør ondt.";
+          break;
+        case 6:
+          questionState.smileyDescription = "Man tænker på, at det gør ondt hele tiden.";
+          break;
+        case 8:
+          questionState.smileyDescription = "Man har så ondt, at man har lyst til at græde, fordi det gør ondt.";
+          break;
+        case 10:
+          questionState.smileyDescription = "Man har så ondt, at man slet ikke kan holde det ud."
+          break;
+        default:
+          questionState.smileyDescription = "";
+      }
     };
 
     $scope.changeScale = function () {
@@ -53,6 +76,7 @@ angular.module('starter.controllers')
       questionState.painScore = 0;
       questionState.selectedSmiley = undefined;
       questionState.flaccvalue = [undefined, undefined, undefined];
+      questionState.smileyDescription = "";
     }
 
     //Save Data
@@ -67,8 +91,6 @@ angular.module('starter.controllers')
       if (questionState.morphineType == 'oral') {
         questionState.morphineMeasureUnit = 'mg/dag';
       }
-
-      $scope.lastRegistration = PainDataService.getLastPainData();
 
       var data = PainDataService.createPainData(questionState.timeStamp, questionState.painType, parseInt(questionState.painScore, 10),
         questionState.morphine, questionState.morphineType, parseFloat(questionState.morphineDose), questionState.morphineMeasureUnit);
