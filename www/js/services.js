@@ -82,7 +82,7 @@ angular.module('starter.services', [])
     return dailydataservice;
   })
 
-  .factory('PainDataService', function(IdGenerator, PainData, questionState){
+  .factory('PainDataService', function(IdGenerator, PainData, questionState, calendarFactory){
 
     var paindataservice = {};
 
@@ -153,12 +153,23 @@ angular.module('starter.services', [])
         return false;
     };
 
+    paindataservice.getLatestPainRegistration = function () {
+      var latestRegistration = undefined;
+      var latestDate = new Date(calendarFactory.selectedDate.getTime());
+      latestDate.setHours(24);
+      var dataObjects = paindataservice.getData(new Date(0), latestDate);
+      if (dataObjects.length > 0) {
+        latestRegistration = dataObjects[dataObjects.length-1]
+      }
+      return latestRegistration;
+    };
+
     paindataservice.finishedWizard = null;
 
     return paindataservice
   })
 
-  .factory('MedicineDataService', function(IdGenerator, MedicineData, questionState){
+  .factory('MedicineDataService', function(IdGenerator, MedicineData, questionState, calendarFactory){
 
     var medicinedataservice = {};
 
@@ -231,8 +242,11 @@ angular.module('starter.services', [])
 
     medicinedataservice.getLatestMedicineRegistration = function () {
       var latestRegistration = undefined;
-      if(latestId !== undefined){
-        latestRegistration = this.getMedicineData(latestId);
+      var latestDate = new Date(calendarFactory.selectedDate.getTime());
+      latestDate.setHours(24);
+      var dataObjects = medicinedataservice.getData(new Date(0), latestDate);
+      if (dataObjects.length > 0) {
+        latestRegistration = dataObjects[dataObjects.length-1]
       }
       return latestRegistration;
     };
@@ -242,7 +256,7 @@ angular.module('starter.services', [])
     return medicinedataservice;
   })
 
-  .factory('BloodsampleDataService', function(IdGenerator, BloodsampleData, questionState){
+  .factory('BloodsampleDataService', function(IdGenerator, BloodsampleData, questionState, calendarFactory){
 
     var bloodsampledataservice = {};
 
@@ -325,8 +339,11 @@ angular.module('starter.services', [])
 
     bloodsampledataservice.getLatestBloodsampleRegistration = function () {
       var latestRegistration = undefined;
-      if(latestId !== undefined){
-        latestRegistration = this.getBloodsampleData(latestId);
+      var latestDate = new Date(calendarFactory.selectedDate.getTime());
+      latestDate.setHours(24);
+      var dataObjects = bloodsampledataservice.getData(new Date(0), latestDate);
+      if (dataObjects.length > 0) {
+        latestRegistration = dataObjects[dataObjects.length-1]
       }
       return latestRegistration;
     };
@@ -336,7 +353,7 @@ angular.module('starter.services', [])
     return bloodsampledataservice;
   })
 
-  .factory('MucositisDataService', function(IdGenerator, MucositisData, questionState){
+  .factory('MucositisDataService', function(IdGenerator, MucositisData, questionState, calendarFactory){
 
     var mucositisdataservice = {};
 
@@ -363,7 +380,6 @@ angular.module('starter.services', [])
         }
       });
     };
-
 
      mucositisdataservice.getAllMucositisData = function () {
       return MucositisData.getAll();
@@ -462,8 +478,11 @@ angular.module('starter.services', [])
 
     mucositisdataservice.getLatestMucositisRegistration = function () {
       var latestRegistration = undefined;
-      if(latestId !== undefined){
-        latestRegistration = this.getMucositisData(latestId);
+      var latestDate = new Date(calendarFactory.selectedDate.getTime());
+      latestDate.setHours(24);
+      var dataObjects = mucositisdataservice.getData(new Date(0), latestDate);
+      if (dataObjects.length > 0) {
+        latestRegistration = dataObjects[dataObjects.length-1]
       }
       return latestRegistration;
     };
