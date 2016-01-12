@@ -62,6 +62,7 @@ angular.module('starter.controllers')
             if (val) {
               $scope.startTimePickerObject.inputEpochTime = val;
               $scope.updateStartTimeStamp();
+              $scope.updateDataObjects();
             }
           }
         };
@@ -90,6 +91,7 @@ angular.module('starter.controllers')
               $scope.startDatepickerObject.inputDate = val;
             }
             $scope.updateStartTimeStamp();
+            $scope.updateDataObjects();
           },
           dateFormat: 'dd-MM-yyyy', //Optional
           closeOnSelect: false //Optional
@@ -119,6 +121,7 @@ angular.module('starter.controllers')
             if (val) {
               $scope.endTimePickerObject.inputEpochTime = val;
               $scope.updateEndTimeStamp();
+              $scope.updateDataObjects();
             }
           }
         };
@@ -147,6 +150,7 @@ angular.module('starter.controllers')
               $scope.endDatepickerObject.inputDate = val;
             }
             $scope.updateEndTimeStamp();
+            $scope.updateDataObjects();
           },
           dateFormat: 'dd-MM-yyyy', //Optional
           closeOnSelect: false //Optional
@@ -256,14 +260,15 @@ angular.module('starter.controllers')
     if ($scope.dataSeries===undefined || newDataTypeInController) {
       $scope.dataSeries = []; // Objects like {values: [{x:timeStap, y:value},...], color: ?, type: ?, key: ?, label: ?, visible: true}
     }
-    $scope.$watch($scope.startTimeStamp, function() {
-      $scope.updateDataObjects();
-    });
-    $scope.$watch($scope.endTimeStamp, function() {
-      $scope.updateDataObjects();
-    });
+    //$scope.$watch($scope.startTimeStamp, function() {
+    //  $scope.updateDataObjects();
+    //});
+    //$scope.$watch($scope.endTimeStamp, function() {
+    //  $scope.updateDataObjects();
+    //});
     $scope.updateDataObjects = function () {
 
+      console.log("update data objects is called")
       //create graph dataseries content
       var dataObjects = $scope.getDataService().getData($scope.startTimeStamp, $scope.endTimeStamp);
       var dataserieNumber = 0;
@@ -301,11 +306,16 @@ angular.module('starter.controllers')
       }
 
       //Remove all data out of period
+      function isDataOutOfPeriod(element, index, array) {
+        if (element.x < $scope.startTimeStamp || element.x > $scope.endTimeStamp)
+          return true;
+        return false;
+      }
       for (dataserie in $scope.dataSeries) {
         do {
-          var removeIndex = $scope.dataSeries[dataserie].values.findIndex(function(e){e.x<$scope.startTimeStamp || $scope.endTimeStamp< e.x});
+          var removeIndex = $scope.dataSeries[dataserie].values.findIndex(isDataOutOfPeriod);
           if (removeIndex>=0)
-            dataserie.values.splice(removeIndex, 1);
+            $scope.dataSeries[dataserie].values.splice(removeIndex, 1);
         } while (removeIndex>=0);
       }
 

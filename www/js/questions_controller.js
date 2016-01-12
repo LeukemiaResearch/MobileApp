@@ -42,7 +42,7 @@ angular.module('starter.controllers')
         setButtonType: 'button-positive',  //Optional
         todayButtonType: 'button-stable',  //Optional
         closeButtonType: 'button-stable',  //Optional
-        inputDate: (questionState.timeStamp ? questionState.timeStamp : new Date()),  //Optional
+        inputDate: new Date(),  //Optional
         mondayFirst: true,  //Optional
         //disabledDates: disabledDates, //Optional
         weekDaysList: ["Sø", "Ma", "Ti", "On", "To", "Fr", "Lø"], //Optional
@@ -60,7 +60,7 @@ angular.module('starter.controllers')
           $scope.updateQuestionStateTimeStamp();
         },
         dateFormat: 'dd-MM-yyyy', //Optional
-        closeOnSelect: false, //Optional
+        closeOnSelect: false //Optional
       };
 
     $scope.updateQuestionStateTimeStamp = function () {
