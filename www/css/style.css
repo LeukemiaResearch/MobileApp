@@ -50,6 +50,14 @@ flex-calendar {
   color: #afb8bc
 }
 
+/*
+Removes transparency of ionic popup background
+Default: background-color: rgba(255, 255, 255, 0.9) defined in ionic.css
+*/
+.popup-container .popup {
+  background-color: rgba(255, 255, 255, 1) !important;
+}
+
 .dataseriesflexparent {
   display: flex;
   flex-flow: row wrap;

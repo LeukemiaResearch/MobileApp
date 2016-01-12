@@ -75,7 +75,7 @@ angular.module('starter.controllers')
     $scope.questions = {
       "Blodprøve": {
         "Tid": "templates/questions/timestamp.html",
-        "Blodprøve": "templates/questions/blodsample.html"
+        "Blodprøve": "templates/questions/bloodsample.html"
       },
       "Medicin": {
         "Tid": "templates/questions/timestamp.html",

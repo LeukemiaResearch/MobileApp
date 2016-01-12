@@ -2,13 +2,15 @@
 
   <ion-view view-title="{{dataType}}">
 
-    <div style="width: 100%" class="centervertically" ng-controller="blodsampleController">
+    <div style="width: 100%" class="centervertically">
 
-      <ionic-timepicker input-obj="timePickerObject">
-        <button class="button button-block button-stable overflowShow">
-          <strong>{{timePickerObject.displayValue()}}</strong>
-        </button>
-      </ionic-timepicker>
+      <div ng-hide="dataType == 'Medicin' || dataType == 'Blodprøve'">
+        <ionic-timepicker input-obj="timePickerObject">
+          <button class="button button-block button-stable overflowShow">
+            <strong>{{timePickerObject.displayValue()}}</strong>
+          </button>
+        </ionic-timepicker>
+      </div>
 
       <ionic-datepicker input-obj="datepickerObject">
         <button class="button button-block button-stable">
