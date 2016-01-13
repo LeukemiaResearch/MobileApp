@@ -88,10 +88,10 @@ angular.module('starter.services', [])
 
     //Inject TestData
     /*PainData.inject([{id: 1, date: new Date(2015, 8, 27, 10, 0, 0, 0), painType:'stomach', painScore: 6, morphine:false, morphineType:'', morphineDose:'', morphineMeasureUnit:''},
-      {id: 2, date: new Date(2015, 8, 27, 17, 23, 22, 0), painType:'stomach', painScore: 8, morphine:true, morphineType:'oral', morphineDose:10.0, morphineMeasureUnit:'mg/dag'},
-      {id: 3, date: new Date(2015, 9, 16, 19, 7, 34, 0), painType:'stomach', painScore: 2, morphine:false, morphineType:'', morphineDose:'', morphineMeasureUnit:''},
-      {id: 4, date: new Date(2015, 10, 1, 18, 53, 17, 0), painType:'stomach', painScore: 4, morphine:false, morphineType:'', morphineDose:'', morphineMeasureUnit:''},
-      {id: 5, date: new Date(2015, 10, 1, 22, 18, 56, 0), painType:'stomach', painScore: 8, morphine:true, morphineType:'oral', morphineDose:7.5, morphineMeasureUnit:'mg/dag'}]);*/
+     {id: 2, date: new Date(2015, 8, 27, 17, 23, 22, 0), painType:'stomach', painScore: 8, morphine:true, morphineType:'oral', morphineDose:10.0, morphineMeasureUnit:'mg/dag'},
+     {id: 3, date: new Date(2015, 9, 16, 19, 7, 34, 0), painType:'stomach', painScore: 2, morphine:false, morphineType:'', morphineDose:'', morphineMeasureUnit:''},
+     {id: 4, date: new Date(2015, 10, 1, 18, 53, 17, 0), painType:'stomach', painScore: 4, morphine:false, morphineType:'', morphineDose:'', morphineMeasureUnit:''},
+     {id: 5, date: new Date(2015, 10, 1, 22, 18, 56, 0), painType:'stomach', painScore: 8, morphine:true, morphineType:'oral', morphineDose:7.5, morphineMeasureUnit:'mg/dag'}]);*/
 
     //Pain data functions
     paindataservice.createPainData = function (date, painType, painScore, morphine, morphineType, morphineDose, morphineMeasureUnit){
@@ -141,13 +141,27 @@ angular.module('starter.services', [])
         return questionState.timeStamp !== undefined;
       }
       else if (stepNumber==2) {
-        return true;
+        var isValidMorphine = true;
+        if (questionState.morphineType !== undefined) { //if there is a selected morphine type
+          // check there is valid dose
+          if (questionState.morphineDose === undefined || questionState.morphineDose == null || questionState.morphineDose < 0)
+            isValidMorphine = false;
+        } else { //if there is no selected morphine type
+          // check if there is valid dose
+          // to avoid confusion, if there is valid dose but no valid type do not validate until type is chosen or dose deleted
+          if (questionState.morphineDose !== undefined || questionState.morphineDose != null) {
+            isValidMorphine = false;
+          }
+        }
+        return isValidMorphine;
       }
       else if (stepNumber==3) {
         return questionState.painType !== undefined;
       }
       else if (stepNumber==4) {
-        return (questionState.flaccvalue !== undefined && questionState.flaccvalue[0] !== undefined && questionState.flaccvalue[1] !== undefined && questionState.flaccvalue[2] !== undefined) || questionState.selectedSmiley !==undefined;
+        return (questionState.flaccvalue !== undefined && questionState.flaccvalue[0] !== undefined && questionState.flaccvalue[1] !== undefined && questionState.flaccvalue[2] !== undefined
+          && questionState.flaccvalue[3] !== undefined && questionState.flaccvalue[4] !== undefined)
+          || questionState.selectedSmiley !==undefined;
       }
       else
         return false;
@@ -264,7 +278,7 @@ angular.module('starter.services', [])
 
     //BloodsampleData
     /*BloodsampleData.inject([{id: 1, date: new Date(2015, 9, 2, 15, 15, 0, 0), leucocytes: 4.5, neutrofile: 7.8, thrombocytes: 45.2, hemoglobin: 3.7, alat: 3465, crp: 453},
-      {id: 2, date: new Date(2015, 10, 7, 12, 2, 34, 0), leucocytes:78.5, neutrofile:12.3, thrombocytes:15.0, hemoglobin:4.1, alat:2635, crp:251}]);*/
+     {id: 2, date: new Date(2015, 10, 7, 12, 2, 34, 0), leucocytes:78.5, neutrofile:12.3, thrombocytes:15.0, hemoglobin:4.1, alat:2635, crp:251}]);*/
 
     bloodsampledataservice.createBloodsampleData = function (date, leucocytes, neutrofile, thrombocytes, hemoglobin, alat, crp){
       var id = IdGenerator.generateId();
@@ -315,11 +329,11 @@ angular.module('starter.services', [])
       }
       else if (stepNumber==2){
         return (questionState.Leukocytter !== undefined && 0.0<=parseFloat(questionState.Leukocytter) && parseFloat(questionState.Leukocytter)<=100.0) &&
-        (questionState.Neutrofile !== undefined && 0.0<=parseFloat(questionState.Neutrofile) && parseFloat(questionState.Neutrofile)<=20.0) &&
-        (questionState.Thombocytter !== undefined && 0.0<=parseFloat(questionState.Thombocytter) && parseFloat(questionState.Thombocytter)<=100.0) &&
-        (questionState.Hemoglobin !== undefined && 2.0<=parseFloat(questionState.Hemoglobin) && parseFloat(questionState.Hemoglobin)<=10.0) &&
-        (questionState.Alat !== undefined && 99<=parseInt(questionState.Alat) && parseInt(questionState.Alat)<=9999) &&
-        (questionState.CRP !== undefined && 1<=parseInt(questionState.CRP) && parseInt(questionState.CRP)<=999);
+          (questionState.Neutrofile !== undefined && 0.0<=parseFloat(questionState.Neutrofile) && parseFloat(questionState.Neutrofile)<=20.0) &&
+          (questionState.Thombocytter !== undefined && 0.0<=parseFloat(questionState.Thombocytter) && parseFloat(questionState.Thombocytter)<=100.0) &&
+          (questionState.Hemoglobin !== undefined && 2.0<=parseFloat(questionState.Hemoglobin) && parseFloat(questionState.Hemoglobin)<=10.0) &&
+          (questionState.Alat !== undefined && 99<=parseInt(questionState.Alat) && parseInt(questionState.Alat)<=9999) &&
+          (questionState.CRP !== undefined && 1<=parseInt(questionState.CRP) && parseInt(questionState.CRP)<=999);
       }
       else
         return false;
@@ -381,7 +395,7 @@ angular.module('starter.services', [])
       });
     };
 
-     mucositisdataservice.getAllMucositisData = function () {
+    mucositisdataservice.getAllMucositisData = function () {
       return MucositisData.getAll();
     };
 
@@ -418,61 +432,61 @@ angular.module('starter.services', [])
 
     mucositisdataservice.getLatestMucositisPain = function (){
       var message = undefined;
-        if(this.getLatestMucositisRegistration().pain === 0){
-          message = "Ingen smerter"
-        }
-        else if(this.getLatestMucositisRegistration().pain === 1){
-          message = "Lette smerter"
-        }
-        else if(this.getLatestMucositisRegistration().pain === 2){
-          message = "Moderate smerter"
-        }
-        else if(this.getLatestMucositisRegistration().pain === 3){
-          message = "Kraftige smerter"
-        }
-        else if(this.getLatestMucositisRegistration().pain === 4){
-          message = "Uudholdlige smerter"
-        }
+      if(this.getLatestMucositisRegistration().pain === 0){
+        message = "Ingen smerter"
+      }
+      else if(this.getLatestMucositisRegistration().pain === 1){
+        message = "Lette smerter"
+      }
+      else if(this.getLatestMucositisRegistration().pain === 2){
+        message = "Moderate smerter"
+      }
+      else if(this.getLatestMucositisRegistration().pain === 3){
+        message = "Kraftige smerter"
+      }
+      else if(this.getLatestMucositisRegistration().pain === 4){
+        message = "Uudholdlige smerter"
+      }
       return message;
     };
 
     mucositisdataservice.getLatestUlcers = function (){
       var message = undefined;
-        if(this.getLatestMucositisRegistration().ulcers === 0){
-          message = "Ingen sår"
-        }
-        else if(this.getLatestMucositisRegistration().ulcers === 1){
-          message = "Ingen sår, let rødmen"
-        }
-        else if(this.getLatestMucositisRegistration().ulcers === 2){
-          message = "Enkelte mindre sår"
-        }
-        else if(this.getLatestMucositisRegistration().ulcers === 3){
-          message = "Mange sår"
-        }
-        else if(this.getLatestMucositisRegistration().ulcers === 4){
-          message = "Udtalt rødmen + mange store sår"
-        }
+      if(this.getLatestMucositisRegistration().ulcers === 0){
+        message = "Ingen sår"
+      }
+      else if(this.getLatestMucositisRegistration().ulcers === 1){
+        message = "Ingen sår, let rødmen"
+      }
+      else if(this.getLatestMucositisRegistration().ulcers === 2){
+        message = "Enkelte mindre sår"
+      }
+      else if(this.getLatestMucositisRegistration().ulcers === 3){
+        message = "Mange sår"
+      }
+      else if(this.getLatestMucositisRegistration().ulcers === 4){
+        message = "Udtalt rødmen + mange store sår"
+      }
       return message;
     };
 
     mucositisdataservice.getLatestFoodIntake = function(){
       var message = undefined;
-        if(this.getLatestMucositisRegistration().food === 0){
-          message = "Ingen påvirkning"
-        }
-        else if(this.getLatestMucositisRegistration().food === 1){
-          message = "Spiser næsten normalt"
-        }
-        else if(this.getLatestMucositisRegistration().food === 2){
-          message = "Spiser lidt fast føde"
-        }
-        else if(this.getLatestMucositisRegistration().food === 3){
-          message = "Spiser flydende føde"
-        }
-        else if(this.getLatestMucositisRegistration().food === 4){
-          message = "Behov for sondemad"
-        }
+      if(this.getLatestMucositisRegistration().food === 0){
+        message = "Ingen påvirkning"
+      }
+      else if(this.getLatestMucositisRegistration().food === 1){
+        message = "Spiser næsten normalt"
+      }
+      else if(this.getLatestMucositisRegistration().food === 2){
+        message = "Spiser lidt fast føde"
+      }
+      else if(this.getLatestMucositisRegistration().food === 3){
+        message = "Spiser flydende føde"
+      }
+      else if(this.getLatestMucositisRegistration().food === 4){
+        message = "Behov for sondemad"
+      }
       return message;
     };
 
@@ -486,9 +500,9 @@ angular.module('starter.services', [])
       }
       return latestRegistration;
     };
-/*
-    mucositisdataservice.finishedStep = null;
-*/
+    /*
+     mucositisdataservice.finishedStep = null;
+     */
 
     mucositisdataservice.finishedWizard = null;
 
@@ -538,7 +552,7 @@ angular.module('starter.services', [])
       for (var i=0; i<obj.events.length; ++i)
       {
         if (obj.events[i]['date'].getTime() == obj.selectedDate.getTime()
-        && obj.events[i]['foo'] == foo) {
+          && obj.events[i]['foo'] == foo) {
           index = i;
           break;
         }
@@ -552,11 +566,11 @@ angular.module('starter.services', [])
       var dailyData = DailyDataService.getDailyDataOnDate(obj.selectedDate)[0];
       var note = "";
       if (dailyData !== undefined) {
-        var note = dailyData.note;
+        note = dailyData.note;
         console.log("Note for day: " + note);
       }
       return note;
-    }
+    };
 
     return obj;
   });

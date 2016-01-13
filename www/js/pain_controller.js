@@ -7,10 +7,10 @@ angular.module('starter.controllers')
 
     //values
     questionState.painType;
-    /*questionState.painScore;
     questionState.morphine;
     questionState.morphineType;
-    questionState.morphineDose;*/
+    questionState.morphineDose;
+    questionState.painScore = 0;
 
     //Initialize group values and classes
     if (questionState.flaccvalue === undefined)
@@ -18,8 +18,6 @@ angular.module('starter.controllers')
 
     if (questionState.morphineMeasureUnit === undefined)
       questionState.morphineMeasureUnit = 'mg/t';
-
-    questionState.painScore = 0;
 
     //used for switching between pain scales
     $scope.show = true;
@@ -77,15 +75,15 @@ angular.module('starter.controllers')
       questionState.selectedSmiley = undefined;
       questionState.flaccvalue = [undefined, undefined, undefined];
       questionState.smileyDescription = "";
-    }
+    };
 
     //Save Data
     PainDataService.finishedWizard = function () {
-      if (questionState.morphineType === undefined) {
+      if (questionState.morphineType === undefined || questionState.morphineDose == 0) {
         questionState.morphine = false;
-        questionState.morphineMeasureUnit = '';
-        questionState.morphineDose = '';
-        questionState.morphineType = '';
+        questionState.morphineMeasureUnit = false;
+        questionState.morphineDose = 0;
+        questionState.morphineType = false;
       } else questionState.morphine = true;
 
       if (questionState.morphineType == 'oral') {

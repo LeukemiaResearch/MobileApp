@@ -243,9 +243,10 @@ angular.module('starter.controllers')
       //using $timeout instead of $scope.$apply removes $digest already in progress error
       $timeout( function() {
         $scope.filteredDataSeries = $filter('filter')($scope.dataSeries, {visible:true});
+        console.log("Filtered DataSeries: ");
+        console.log($scope.filteredDataSeries);
         var chart = nv.models.multiChart();
         d3.select("graph svg").datum($scope.filteredDataSeries).call(chart);
-        console.log("Change");
         if (curr=="chart")
           $scope.displaytype = "table";
         else
@@ -277,7 +278,7 @@ angular.module('starter.controllers')
         //Insert all timeStamp data in data series
         var obj = dataObjects[objcount];
         for (dataSerieName in obj) {
-          if (!obj.hasOwnProperty(dataSerieName) || dataSerieName==="id" || dataSerieName==="timeStamp" || dataSerieName==="DSCreate")
+          if (!obj.hasOwnProperty(dataSerieName) || dataSerieName==="id" || dataSerieName==="timeStamp" || dataSerieName==="DSCreate" )
             continue;
 
           //Lookup dataserie for dataSerieName

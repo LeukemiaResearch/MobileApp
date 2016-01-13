@@ -121,7 +121,19 @@ angular.module('starter.controllers')
     };
 
     $scope.exitValidation = function(){
-      return $scope.getDataService().finishedStep(WizardHandler.wizard().currentStepNumber());
+      var validated = $scope.getDataService().finishedStep(WizardHandler.wizard().currentStepNumber());
+
+      //KNOWN BUGS: Morphine page validation triggers popup two times
+      //if (!validated) {
+      //  $ionicPopup.alert({
+      //    title: 'Error',
+      //    content: 'One or more fields has incomplete or invalid input!'
+      //  }).then(function (res) {
+      //    return validated;
+      //  });
+      //}
+
+      return validated;
     };
 
     /*$scope.exitValidation = function(){

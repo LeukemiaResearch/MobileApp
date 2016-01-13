@@ -15,8 +15,8 @@
     </label>
 
     <div class="item item-input">
-      <span class="input-label">Dosage:</span>
-      <input type="number" style="direction: rtl;" placeholder="0.0" ng-model="questionState.morphineDose">
+      <span class="input-label">Dosis:</span>
+      <input type="number" min="0" style="direction: rtl;" placeholder="0=<" onfocus="this.placeholder = ''" onblur="this.placeholder = '0=<'" ng-model="questionState.morphineDose">
 
       <span ng-if="questionState.morphineType == 'oral'">mg/dag</span>
       <select ng-if="questionState.morphineType == 'intravenous'" class="item item-input item-select"
