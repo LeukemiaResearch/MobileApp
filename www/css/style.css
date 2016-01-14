@@ -18,6 +18,7 @@
   align-content: center;
   align-items: center;
 }
+
 .scroll-content > .scroll {
   height: 100%;
 }
@@ -38,7 +39,7 @@ flex-calendar {
 
 .toogle-footer {
   width: 100%;
-  height: 75px!important;
+  height: 75px !important;
 }
 
 .calendar-date {
@@ -65,7 +66,7 @@ Default: background-color: rgba(255, 255, 255, 0.9) defined in ionic.css
 }
 
 .dataseriesflexchild {
-  flex:1 auto;
+  flex: 1 auto;
 }
 
 .mucositis-button {
@@ -78,18 +79,21 @@ Default: background-color: rgba(255, 255, 255, 0.9) defined in ionic.css
   min-height: 5.0em;
 }
 
-@media (max-width: 767px) { /* responsive-md */
-
+@media (max-width: 767px) {
+  /* responsive-md */
   .mucositis-button {
     min-height: 3.0em;
   }
+
   .col, .button.button-block {
-    margin: 0px 0px !important;
+    margin: 0 0 !important;
   }
+
   .smallScreentoprow {
     visibility: visible;
     /*flex: 1 0;*/
   }
+
   .bigScreentoprow {
     max-height: 0px;
     visibility: hidden;
@@ -108,6 +112,7 @@ Default: background-color: rgba(255, 255, 255, 0.9) defined in ionic.css
     max-height: 0px;
     visibility: hidden;
   }
+
   .bigScreen {
     visibility: visible;
     /*flex: 5 0;*/
@@ -131,7 +136,7 @@ Default: background-color: rgba(255, 255, 255, 0.9) defined in ionic.css
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
   position: absolute !important;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .centerhorizontal {
@@ -150,9 +155,19 @@ Default: background-color: rgba(255, 255, 255, 0.9) defined in ionic.css
   line-height: 40px !important;
 }
 
-.image{float:none; background-size:contain; background-repeat:no-repeat; background-position:left;}
+.image {
+  float: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left;
+}
 
-.responsive{height: 163px; width:213px; box-shadow: 0 0 0 5px white inset;}
+.responsive {
+  height: 163px;
+  width: 213px;
+  box-shadow: 0 0 0 5px white inset;
+}
+
 .error {
   padding: 5px 10px;
   font-family: "Arial Black", Gadget, sans-serif;
@@ -165,7 +180,7 @@ Default: background-color: rgba(255, 255, 255, 0.9) defined in ionic.css
   padding-right: 20px;
   margin: -10px -15px;
   float: left;
-  height:48px;
+  height: 48px;
 }
 
 .notes {
@@ -173,8 +188,8 @@ Default: background-color: rgba(255, 255, 255, 0.9) defined in ionic.css
   margin-top: 10px;
   min-width: 8em;
   min-height: 100%;
-  border:2px solid #d3d3d3 ;
-  border-radius:3px;
+  border: 2px solid #d3d3d3;
+  border-radius: 3px;
   background-color: #fbeed5;
   box-sizing: border-box;
 }

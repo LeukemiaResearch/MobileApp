@@ -6,10 +6,10 @@
   <title></title>
 
   <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="lib/angular-wizard/dist/angular-wizard.min.css">
   <link rel="stylesheet" href="js/flex-calendar/dist/flex-calendar.min.css">
   <link rel="stylesheet" href="lib/nvd3/build/nv.d3.min.css"/>
+  <link href="css/style.css" rel="stylesheet">
 
   <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
   <link href="css/ionic.app.css" rel="stylesheet">
@@ -56,22 +56,29 @@
   <script src="js/medicine_controller.js"></script>
   <script src="js/pain_controller.js"></script>
   <script src="js/services.js"></script>
+  <script src="js/settings_controller.js"></script>
 
 </head>
 <body ng-app="starter">
 <!--
   The nav bar that will be updated as we navigate between views.
 -->
-<ion-nav-bar class="bar-stable bar-royal">
+<ion-nav-bar class="bar-stable bar-royal" ng-controller="settingsController">
   <ion-nav-back-button>
   </ion-nav-back-button>
+  <ion-nav-buttons side="secondary">
+    <button class="button button-icon ion-android-settings" ng-click="openModal()"></button>
+  </ion-nav-buttons>
 </ion-nav-bar>
 
 
 <!--
   View content.
 -->
-<ion-nav-view></ion-nav-view>
+<ion-nav-view>
+  <ion-view>
+  </ion-view>
+</ion-nav-view>
 
 </body>
 </html>
