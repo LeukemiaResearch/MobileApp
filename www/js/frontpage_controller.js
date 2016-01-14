@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-  .controller('frontpageController', ['$scope', '$location', 'questionState', 'MucositisDataService', 'MedicineDataService', 'BloodsampleDataService', function($scope, $location, questionState, MucositisDataService, MedicineDataService, BloodsampleDataService) {
+  .controller('frontpageController', ['$scope', '$location', 'questionState', 'MucositisDataService', 'MedicineDataService', 'BloodsampleDataService','PainDataService', function($scope, $location, questionState, MucositisDataService, MedicineDataService, BloodsampleDataService, PainDataService) {
   $scope.openQuestionWizardPage = function(type){
     questionState.type = typeof(type)=="string"?type:undefined;
     $location.path("questionwizardpage");
@@ -68,6 +68,38 @@ angular.module('starter.controllers')
     return tmp;
   };
 
-
+    //Pain card data
+    $scope.getLatestPainRegistration = function (rowId){
+      var tmp = "";
+      if(PainDataService.getLatestPainRegistration() === undefined && rowId != 4){
+        if (rowId == 1) tmp = "-";
+        else tmp = "Ingen data";
+      }
+      else{
+        if(rowId===1){
+          tmp = PainDataService.getLatestPainType();
+          //Capitalize first letter
+          tmp = tmp.charAt(0).toUpperCase() + tmp.slice(1);
+        }
+        else if(rowId===2){
+          tmp = PainDataService.getLatestPainScore();
+        }
+        else if (rowId===3) {
+          var morphineAmount = PainDataService.getLatestMorphineAmount();
+          if (morphineAmount === undefined || morphineAmount == 0) {
+            tmp = "Ingen morfin"
+          } else {
+            tmp = morphineAmount;
+          }
+        }
+        else if (rowId === 4) {
+          var morphineMU = PainDataService.getLatestMorphineMeasureUnit();
+          if (morphineMU !== undefined && morphineMU != false ) {
+            tmp = morphineMU;
+          }
+        }
+      }
+      return tmp;
+    };
 
 }]);

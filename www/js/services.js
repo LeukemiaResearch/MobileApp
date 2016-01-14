@@ -178,6 +178,24 @@ angular.module('starter.services', [])
       return latestRegistration;
     };
 
+    paindataservice.getLatestPainType = function () {
+      return this.getLatestPainRegistration().painType;
+    };
+
+    paindataservice.getLatestPainScore = function () {
+      return this.getLatestPainRegistration().painScore;
+    };
+
+    paindataservice.getLatestMorphineAmount = function () {
+      return this.getLatestPainRegistration().morphineDose;
+    };
+
+    paindataservice.getLatestMorphineMeasureUnit = function () {
+      if (this.getLatestPainRegistration() !== undefined)
+        return this.getLatestPainRegistration().morphineMeasureUnit;
+      return undefined;
+    };
+
     paindataservice.finishedWizard = null;
 
     return paindataservice
