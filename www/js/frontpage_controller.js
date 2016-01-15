@@ -1,7 +1,11 @@
 angular.module('starter.controllers')
 
-  .controller('frontpageController', ['$scope', '$location', 'questionState', 'MucositisDataService', 'MedicineDataService', 'BloodsampleDataService','PainDataService', function($scope, $location, questionState, MucositisDataService, MedicineDataService, BloodsampleDataService, PainDataService) {
-  $scope.openQuestionWizardPage = function(type){
+  .controller('frontpageController', ['$scope', '$location', 'questionState', 'MucositisDataService', 'MedicineDataService', 'BloodsampleDataService','PainDataService', 'moduleManagementService',
+    function($scope, $location, questionState, MucositisDataService, MedicineDataService, BloodsampleDataService, PainDataService, moduleManagementService) {
+
+    $scope.modules = moduleManagementService.modules;
+
+    $scope.openQuestionWizardPage = function(type){
     questionState.type = typeof(type)=="string"?type:undefined;
     $location.path("questionwizardpage");
   };

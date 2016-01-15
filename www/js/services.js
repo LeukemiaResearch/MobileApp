@@ -591,4 +591,19 @@ angular.module('starter.services', [])
     };
 
     return obj;
+  })
+
+  .factory('moduleManagementService', function() {
+
+    var moduleManagementService = {};
+
+    moduleManagementService.modules = {
+      medicine: true,
+      bloodsample: true,
+      pain: true,
+      mucositis: true
+    };
+
+    return moduleManagementService;
   });
+

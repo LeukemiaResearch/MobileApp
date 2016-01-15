@@ -1,14 +1,8 @@
 angular.module('starter.controllers')
 
-  .controller('settingsController', ['$scope', '$ionicModal', function($scope, $ionicModal, $timeout) {
+  .controller('settingsController', ['$scope', '$ionicModal', 'moduleManagementService', function($scope, $ionicModal, moduleManagementService) {
 
-    //TODO: CREATE FACTORY FOR MODULES
-    $scope.modules = {
-      medicine: true,
-      bloodsample: true,
-      pain: true,
-      mucositis: true
-    };
+    $scope.modules = moduleManagementService.modules;
 
     $ionicModal.fromTemplateUrl("templates/settings.html", {
       scope: $scope,
