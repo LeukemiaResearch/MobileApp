@@ -79,6 +79,15 @@ Default: background-color: rgba(255, 255, 255, 0.9) defined in ionic.css
   min-height: 5.0em;
 }
 
+.flacc-row {
+  padding: 0;
+}
+
+.front-col {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 @media (max-width: 767px) {
   /* responsive-md */
   .mucositis-button {
@@ -100,13 +109,6 @@ Default: background-color: rgba(255, 255, 255, 0.9) defined in ionic.css
   }
 }
 
-/*
-.frontpagerow {
-  /!*min-height: 150px;*!/
-  flex: 1 0;
-}
-*/
-
 @media (min-width: 768px) {
   .smallScreentoprow {
     max-height: 0px;
@@ -125,6 +127,11 @@ Default: background-color: rgba(255, 255, 255, 0.9) defined in ionic.css
   .frontpagetopcomponent {
     min-height: 365px;
     height: 100%;
+  }
+
+  .flacc-title {
+    margin: 0;
+    line-height: 1.0;
   }
 }
 
@@ -153,6 +160,11 @@ Default: background-color: rgba(255, 255, 255, 0.9) defined in ionic.css
 .flex-calendar .days .day {
   min-height: 40px !important;
   line-height: 40px !important;
+}
+
+/* moves event marker on calendar date */
+.flex-calendar .days .day.event:before {
+  bottom: 5px !important;
 }
 
 .image {

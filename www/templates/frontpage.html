@@ -41,8 +41,8 @@
                 </div>
               </div>
             </div>
-            Notes:
-            <textarea rows="9" cols="1" class="notes" placeholder="Tap to enter text" data-ng-model="notes"></textarea>
+            Noter:
+            <textarea rows="9" cols="1" class="notes" placeholder="Tryk for at indtaste tekst" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tryk for at indtaste tekst'" data-ng-model="notes"></textarea>
           </div>
         </div>
       </div>
@@ -83,13 +83,13 @@
       </div>
     </div>
     <div class="row responsive-md frontpagerow">
-      <div class="col" ng-show="modules.medicine">
+      <div class="col front-col" ng-show="modules.medicine">
         <div class="card frontpagecomponent">
           <div class="item item-divider bar bar-calm">
             <span class="box-bar-icon smertetransparent"
                   ng-style="{'content':'url(img/medicintransparent.png)'}"></span>
             <strong>Medicin</strong>
-            <button style="float: right" class="button button-icon ion-plus-circled"
+            <button style="float: right" class="button button-icon ion-plus-round"
                     ng-click="openQuestionWizardPage('Medicin')"></button>
             <span style="padding-left: 50px; float: right;"></span>
             <button style="float: right" class="button button-icon ion-stats-bars"
@@ -107,7 +107,7 @@
           </div>
         </div>
       </div>
-      <div class="col" ng-show="modules.bloodsample">
+      <div class="col front-col" ng-show="modules.bloodsample">
         <div class="card frontpagecomponent">
           <div class="item item-divider bar bar-assertive">
             <span class="box-bar-icon smertetransparent" ng-style="{'content':'url(img/blodtransparent.png)'}"></span>
@@ -137,12 +137,12 @@
       </div>
     </div>
     <div class="row responsive-md frontpagerow">
-      <div class="col" ng-show="modules.pain">
+      <div class="col front-col" ng-show="modules.pain">
         <div class="card frontpagecomponent" ng-controller="painController">
           <div class="item item-divider bar bar-balanced">
             <span class="box-bar-icon smertetransparent" ng-style="{'content':'url(img/smertetransparent.png)'}"></span>
             <strong>Smerte</strong>
-            <button style="float: right" class="button button-icon ion-android-add-circle"
+            <button style="float: right" class="button button-icon ion-plus-round"
                     ng-click="openQuestionWizardPage('Smerte')"></button>
             <span style="padding-left: 50px; float: right;"></span>
             <button style="float: right" class="button button-icon ion-stats-bars"
@@ -164,13 +164,13 @@
           </div>
         </div>
       </div>
-      <div class="col" ng-show="modules.mucositis">
+      <div class="col front-col" ng-show="modules.mucositis">
         <div class="card frontpagecomponent">
           <div class="item item-divider bar bar-energized">
             <span class="box-bar-icon smertetransparent"
                   ng-style="{'content':'url(img/mucositistransparent.png)'}"></span>
             <strong>Mucositis</strong>
-            <button style="float: right" class="button button-icon ion-compose"
+            <button style="float: right" class="button button-icon ion-plus-round"
                     ng-click="openQuestionWizardPage('Mucositis')"></button>
             <span style="padding-left: 50px; float: right;"></span>
             <button style="float: right" class="button button-icon ion-stats-bars"

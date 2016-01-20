@@ -544,15 +544,15 @@ angular.module('starter.services', [])
     };
 
     obj.getSelectedMonth = function () {
-      var monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+      var monthNames = ["Januar", "Februar", "Marts", "April", "Maj", "Juni",
+        "Juli", "August", "September", "Oktober", "November", "December"
       ];
 
       return monthNames[obj.selectedDate.getMonth()];
     };
 
     obj.getSelectedDayOfTheWeek = function() {
-      var dayOfWeekNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+      var dayOfWeekNames = ["Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"
       ];
 
       return dayOfWeekNames[obj.selectedDate.getDay()];

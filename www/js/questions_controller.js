@@ -123,15 +123,15 @@ angular.module('starter.controllers')
     $scope.exitValidation = function(){
       var validated = $scope.getDataService().finishedStep(WizardHandler.wizard().currentStepNumber());
 
-      //KNOWN BUGS: Morphine page validation triggers popup two times
-      //if (!validated) {
-      //  $ionicPopup.alert({
-      //    title: 'Error',
-      //    content: 'One or more fields has incomplete or invalid input!'
-      //  }).then(function (res) {
-      //    return validated;
-      //  });
-      //}
+      if (!validated && $scope.errorPopup === undefined) {
+        $scope.errorPopup = $ionicPopup.alert({
+          title: 'Error',
+          content: 'Et eller flere felter er enten ikke udfyldt, eller ikke udfyldt korrekt!'
+        }).then(function (res) {
+          $scope.errorPopup = undefined;
+          return validated;
+        });
+      }
 
       return validated;
     };
